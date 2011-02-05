@@ -39,9 +39,25 @@ namespace pjsip4net.Tests
             var container = _fixture.CreateAnonymous<IContainer>();
 
             var sut = new DefaultSipUserAgent(basicApi, eventsProvider, registry.Object, container);
+            sut.SetManagers(_fixture.CreateAnonymous<IImManager>(), _fixture.CreateAnonymous<ICallManager>(),
+                            _fixture.CreateAnonymous<IAccountManager>(), _fixture.CreateAnonymous<IMediaManager>());
             sut.Destroy();
 
             tpt.Verify(x => x.InternalDispose(), Times.Exactly(2));
+        }
+        
+        [Test]
+        public void when_destroy_called__should_delegate_sip_stack_destroy_to_api()
+        {
+            var registry = _fixture.CreateAnonymous<Mock<ILocalRegistry>>();
+            var basicApi = _fixture.CreateAnonymous<Mock<IBasicApiProvider>>();
+            var eventsProvider = _fixture.CreateAnonymous<IEventsProvider>();
+            var container = _fixture.CreateAnonymous<IContainer>();
+
+            var sut = new DefaultSipUserAgent(basicApi.Object, eventsProvider, registry.Object, container);
+            sut.Destroy();
+
+            basicApi.Verify(x => x.Destroy(), Times.Once());
         }
     }
 }

@@ -13,18 +13,18 @@ namespace pjsip4net.Configuration
         public void Configure(IContainer container)
         {
             Helper.GuardNotNull(container);
-            container.RegisterAsSingleton<IObjectFactory, DefaultObjectFactory>()
-                .RegisterAsSingleton<ILocalRegistry, DefaultLocalRegistry>()
-                .RegisterAsSingleton(container.Get<ILocalRegistry>() as IConfigurationContext)
-                
-                .RegisterAsSingleton<IImManager, DefaultImManager>()
-                .RegisterAsSingleton(container.Get<IImManager>().As<IImManagerInternal>())
-                .Register<IMessageBuilder, DefaultMessageBuilder>()
-                .Register<IBuddyBuilder, DefaultBuddyBuilder>()
-                .Register<IBuddyInternal, Buddy>();
+            container.RegisterAsSingleton<IObjectFactory, DefaultObjectFactory>();
+            container.RegisterAsSingleton<ILocalRegistry, DefaultLocalRegistry>();
+            container.RegisterAsSingleton(container.Get<ILocalRegistry>() as IConfigurationContext);
 
-            container.RegisterAsSingleton<ISipUserAgent, DefaultSipUserAgent>()
-                .RegisterAsSingleton(container.Get<ISipUserAgent>() as ISipUserAgentInternal);
+            container.RegisterAsSingleton<IImManager, DefaultImManager>();
+            container.RegisterAsSingleton(container.Get<IImManager>().As<IImManagerInternal>());
+            container.Register<IMessageBuilder, DefaultMessageBuilder>();
+            container.Register<IBuddyBuilder, DefaultBuddyBuilder>();
+            container.Register<IBuddyInternal, Buddy>();
+
+            container.RegisterAsSingleton<ISipUserAgent, DefaultSipUserAgent>();
+            container.RegisterAsSingleton(container.Get<ISipUserAgent>() as ISipUserAgentInternal);
         }
 
         #endregion

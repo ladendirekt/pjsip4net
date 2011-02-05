@@ -11,9 +11,9 @@ namespace pjsip4net
 {
     internal class DefaultSipUserAgent : Resource, ISipUserAgentInternal
     {
-        private IBasicApiProvider _basicApi;
+        private readonly IBasicApiProvider _basicApi;
         private readonly IEventsProvider _eventsProvider;
-        private ILocalRegistry _localRegistry;
+        private readonly ILocalRegistry _localRegistry;
         private readonly IContainer _container;
 
         public DefaultSipUserAgent(IBasicApiProvider basicApi, IEventsProvider eventsProvider, 
@@ -91,11 +91,14 @@ namespace pjsip4net
         protected override void CleanUp()
         {
             base.CleanUp();
-            
-            CallManager.HangupAll();
-            var mgr = AccountManager.As<IAccountManagerInternal>();
-            if (mgr != null)
-                mgr.UnRegisterAllAccounts();
+
+            if (CallManager != null) CallManager.HangupAll();
+            if (AccountManager != null)
+            {
+                var mgr = AccountManager.As<IAccountManagerInternal>();
+                if (mgr != null)
+                    mgr.UnRegisterAllAccounts();
+            }
 
             _localRegistry.SipTransport.InternalDispose();
             _localRegistry.RtpTransport.InternalDispose();

@@ -32,17 +32,17 @@ namespace pjsip.Interop.Services
             Mapper.CreateMap<UaConfig, pjsua_config>()//.WithProfile("pjsip4net2pjsua")
                 .ForMember(x => x.cb, cx => cx.Ignore())
                 .ForMember(x => x.cred_info, cx => cx.MapFrom(x => x.Credentials
-                               .Select(c => c.ToPjsipCredentialsInfo()).GrowWithDefaultTo(8).ToArray()))
+                               .Select(c => c.ToPjsipCredentialsInfo()).GrowWithDefaultToTheSizeOf(8).ToArray()))
                 .ForMember(x => x.cred_count, cx => cx.MapFrom(x => (uint) x.Credentials.Where(x1 => !string.IsNullOrEmpty(x1.UserName)).Count()))
                 .ForMember(x => x.force_lr, cx => cx.MapFrom(x => Convert.ToInt32(x.ForceLooseRoute)))
                 .ForMember(x => x.hangup_forked_call, cx => cx.MapFrom(x => Convert.ToInt32(x.HangupForkedCall)))
                 .ForMember(x => x.max_calls, cx => cx.MapFrom(x => x.MaxCalls))
                 .ForMember(x => x.nameserver, cx => cx.MapFrom(x => x.DnsServers
-                    .Select(s => new pj_str_t(s)).GrowWithDefaultTo(4).ToArray()))
+                    .Select(s => new pj_str_t(s)).GrowWithDefaultToTheSizeOf(4).ToArray()))
                 .ForMember(x => x.nameserver_count, cx => cx.MapFrom(x => (uint) x.DnsServers.Where(x1 => !string.IsNullOrEmpty(x1)).Count()))
                 .ForMember(x => x.nat_type_in_sdp, cx => cx.MapFrom(x => Convert.ToInt32(x.NatInSdp)))
                 .ForMember(x => x.outbound_proxy, cx => cx.MapFrom(x => x.OutboundProxies
-                    .Select(s => new pj_str_t(s)).GrowWithDefaultTo(4).ToArray()))
+                    .Select(s => new pj_str_t(s)).GrowWithDefaultToTheSizeOf(4).ToArray()))
                 .ForMember(x => x.outbound_proxy_cnt, cx => cx.MapFrom(x => (uint) x.OutboundProxies.Where(x1 => !string.IsNullOrEmpty(x1)).Count()))
                 .ForMember(x => x.require_100rel, cx => cx.MapFrom(x => Convert.ToInt32(x.Require100Rel)))
                 .ForMember(x => x.require_timer, cx => cx.Ignore())
@@ -51,7 +51,7 @@ namespace pjsip.Interop.Services
                 .ForMember(x => x.stun_host, cx => cx.MapFrom(x => new pj_str_t(x.StunHost)))
                 .ForMember(x => x.stun_ignore_failure, cx => cx.MapFrom(x => Convert.ToInt32(x.StunIgnoreFailure)))
                 .ForMember(x => x.stun_srv, cx => cx.MapFrom(x => x.StunServers
-                    .Select(s => new pj_str_t(s)).GrowWithDefaultTo(8).ToArray()))
+                    .Select(s => new pj_str_t(s)).GrowWithDefaultToTheSizeOf(8).ToArray()))
                 .ForMember(x => x.stun_srv_cnt, cx => cx.MapFrom(x => (uint) x.StunServers.Count))
                 .ForMember(x => x.thread_cnt, cx => cx.MapFrom(x => x.ThreadCount))
                 .ForMember(x => x.timer_setting, cx => cx.Ignore())

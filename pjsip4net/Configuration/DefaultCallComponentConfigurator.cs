@@ -11,10 +11,10 @@ namespace pjsip4net.Configuration
         public void Configure(IContainer container)
         {
             Helper.GuardNotNull(container);
-            container.RegisterAsSingleton<ICallManager, DefaultCallManager>()
-                .RegisterAsSingleton(container.Get<ICallManager>() as ICallManagerInternal)
-                .Register<ICallBuilder, DefaultCallBuilder>()
-                .Register<ICallInternal, Call>();
+            container.RegisterAsSingleton<ICallManager, DefaultCallManager>();
+            container.RegisterAsSingleton(container.Get<ICallManager>() as ICallManagerInternal);
+            container.Register<ICallBuilder, DefaultCallBuilder>();
+            container.Register<ICallInternal, Call>();
         }
     }
 }

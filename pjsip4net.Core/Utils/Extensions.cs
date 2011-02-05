@@ -14,7 +14,7 @@ namespace pjsip4net.Core.Utils
             return collection;
         }
 
-        public static IEnumerable<T> GrowWithDefaultTo<T>(this IEnumerable<T> collection, int count) where T : new()
+        public static IEnumerable<T> GrowWithDefaultToTheSizeOf<T>(this IEnumerable<T> collection, int count) where T : new()
         {
             Helper.GuardInRange(-1, int.MaxValue, count - collection.Count());
 

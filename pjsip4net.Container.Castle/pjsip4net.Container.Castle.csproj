@@ -33,26 +33,23 @@
   <ItemGroup>
     <Reference Include="Castle.Core, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Castle.Windsor.2.5\bin-dotNet35\Castle.Core.dll</HintPath>
+      <HintPath>..\lib\Castle\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Castle.Windsor.2.5\bin-dotNet35\Castle.Windsor.dll</HintPath>
+      <HintPath>..\lib\Castle\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionVersion.cs">
+      <Link>SolutionVersion.cs</Link>
+    </Compile>
     <Compile Include="CastleContainer.cs" />
     <Compile Include="ConfigureCastleContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

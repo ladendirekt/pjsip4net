@@ -33,20 +33,14 @@
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\log4net\log4net.dll</HintPath>
+      <HintPath>..\..\..\lib\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Magnum, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\Magnum\Magnum.dll</HintPath>
+      <HintPath>..\..\..\lib\Magnum\Magnum.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
@@ -65,6 +59,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\lib\pjsip\libeay32.dll">
+      <Link>libeay32.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\lib\pjsip\pjsua.dll">
+      <Link>pjsua.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\lib\pjsip\ssleay32.dll">
+      <Link>ssleay32.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\pjsip.Interop\pjsip.Interop.csproj">
       <Project>{0AEA8B23-5E46-4923-81B5-7755BA914750}</Project>
       <Name>pjsip.Interop</Name>
@@ -77,20 +85,6 @@
       <Project>{77160365-9A80-4F6A-9BD7-4F0532BE0EB0}</Project>
       <Name>pjsip4net</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\Dependencies\pjsip\libeay32.dll">
-      <Link>libeay32.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\..\Dependencies\pjsip\pjsua.dll">
-      <Link>pjsua.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\..\Dependencies\pjsip\ssleay32.dll">
-      <Link>ssleay32.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

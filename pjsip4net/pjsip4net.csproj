@@ -39,6 +39,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionVersion.cs">
+      <Link>SolutionVersion.cs</Link>
+    </Compile>
     <Compile Include="Accounts\Account.cs" />
     <Compile Include="Accounts\Dsl\DefaultAccountBuilder.cs" />
     <Compile Include="Accounts\DefaultAccountManager.cs" />

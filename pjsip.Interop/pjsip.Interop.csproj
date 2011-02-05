@@ -33,11 +33,11 @@
   <ItemGroup>
     <Reference Include="AutoMapper, Version=1.1.0.188, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\AutoMapper\AutoMapper.dll</HintPath>
+      <HintPath>..\lib\AutoMapper\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Magnum, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Magnum\Magnum.dll</HintPath>
+      <HintPath>..\lib\Magnum\Magnum.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

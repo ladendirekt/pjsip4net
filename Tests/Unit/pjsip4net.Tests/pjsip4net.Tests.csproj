@@ -33,32 +33,26 @@
   <ItemGroup>
     <Reference Include="AutoMapper, Version=1.1.0.188, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\AutoMapper\AutoMapper.dll</HintPath>
+      <HintPath>..\..\..\lib\AutoMapper\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\Moq\NET35\Moq.dll</HintPath>
+      <HintPath>..\..\..\lib\Moq\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\NUnit\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\lib\NUnit\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=2.0.0.2, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\AutoFixture\Ploeh.AutoFixture.dll</HintPath>
+      <HintPath>..\..\..\lib\AutoFixture\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=2.0.0.2, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dependencies\AutoFixture\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
+      <HintPath>..\..\..\lib\AutoFixture\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
