@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<report version="1.0">
+  <metadata>
+    <definitions>Mono 2.6</definitions>
+    <momaversion>2.0.0.0</momaversion>
+    <date>2011-02-06 02:55:39Z</date>
+    <name />
+    <email />
+    <homepage />
+    <organization />
+    <comments />
+    <apptype />
+  </metadata>
+  <assemblies>
+    <assembly name="pjsip.Interop.dll" version="1.4.4054.5258" runtime="2.0" todo="0" niex="0" miss="0" pinv="81">
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>AccountConfig GetDefaultConfig()</caller>
+        <method>void pjsua_acc_config_default(pjsua_acc_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_config_default(pjsip.Interop.pjsua_acc_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>void SetDefaultAccount(int)</caller>
+        <method>int pjsua_acc_set_default(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_set_default(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>int GetDefaultAccountId()</caller>
+        <method>int pjsua_acc_get_default()</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_get_default()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>int AddAccountAndGetId(AccountConfig, bool)</caller>
+        <method>void pjsua_acc_config_default(pjsua_acc_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_config_default(pjsip.Interop.pjsua_acc_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>int AddAccountAndGetId(AccountConfig, bool)</caller>
+        <method>int pjsua_acc_add(pjsua_acc_config, int, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_add(pjsip.Interop.pjsua_acc_config,System.Int32,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>int AddLocalAccountAndGetId(int, bool)</caller>
+        <method>int pjsua_acc_add_local(int, int, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_add_local(System.Int32,System.Int32,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>void DeleteAccount(int)</caller>
+        <method>int pjsua_acc_del(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_del(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>void SetAccountOnlineStatus(int, bool)</caller>
+        <method>int pjsua_acc_set_online_status(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_set_online_status(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>void SetAccountOnlineStatus(int, bool, RpidElement)</caller>
+        <method>int pjsua_acc_set_online_status2(int, int, pjrpid_element&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_set_online_status2(System.Int32,System.Int32,pjsip.Interop.pjrpid_element&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>void SetAccountRegistration(int, bool)</caller>
+        <method>int pjsua_acc_set_registration(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_set_registration(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>AccountInfo GetInfo(int)</caller>
+        <method>int pjsua_acc_get_info(int, pjsua_acc_info&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_get_info(System.Int32,pjsip.Interop.pjsua_acc_info&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>int GetBestSuitingAccountIdForUrl(string)</caller>
+        <method>int pjsua_acc_find_for_outgoing(pj_str_t&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_find_for_outgoing(pjsip.Interop.pj_str_t&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>AccountApiProvider_1_4</class>
+        <caller>void SetTransport(int, int)</caller>
+        <method>int pjsua_acc_set_transport(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_set_transport(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>UaConfig GetDefaultUaConfig()</caller>
+        <method>void pjsua_config_default(pjsua_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Basic::pjsua_config_default(pjsip.Interop.pjsua_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>LoggingConfig GetDefaultLoggingConfig()</caller>
+        <method>void pjsua_logging_config_default(pjsua_logging_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Basic::pjsua_logging_config_default(pjsip.Interop.pjsua_logging_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>void InitPjsua(UaConfig, LoggingConfig, MediaConfig)</caller>
+        <method>void pjsua_media_config_default(pjsua_media_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Media::pjsua_media_config_default(pjsip.Interop.pjsua_media_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>void InitPjsua(UaConfig, LoggingConfig, MediaConfig)</caller>
+        <method>int pjsua_init(pjsua_config, pjsua_logging_config, pjsua_media_config)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Basic::pjsua_init(pjsip.Interop.pjsua_config,pjsip.Interop.pjsua_logging_config,pjsip.Interop.pjsua_media_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>void CreatePjsua()</caller>
+        <method>int pjsua_create()</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Basic::pjsua_create()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>void Start()</caller>
+        <method>int pjsua_start()</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Basic::pjsua_start()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>void Destroy()</caller>
+        <method>int pjsua_destroy()</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Basic::pjsua_destroy()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>BasicApiProvider_1_4</class>
+        <caller>void Dump(bool)</caller>
+        <method>void pjsua_dump(bool)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Basic::pjsua_dump(System.Boolean)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>uint GetMaxAllowedCalls()</caller>
+        <method>uint pjsua_call_get_max_count()</method>
+        <raw>System.UInt32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_get_max_count()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>int MakeCallAndGetId(int, string, uint)</caller>
+        <method>int pjsua_call_make_call(int, pj_str_t&amp;, uint, IntPtr, pjsua_msg_data, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_make_call(System.Int32,pjsip.Interop.pj_str_t&amp;,System.UInt32,System.IntPtr,pjsip.Interop.pjsua_msg_data,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>int GetConfPort(int)</caller>
+        <method>int pjsua_call_get_conf_port(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_get_conf_port(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>CallInfo GetInfo(int)</caller>
+        <method>int pjsua_call_get_info(int, pjsua_call_info&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_get_info(System.Int32,pjsip.Interop.pjsua_call_info&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void AnswerCall(int, SipStatusCode, string)</caller>
+        <method>int pjsua_call_answer(int, uint, pj_str_t&amp;, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_answer(System.Int32,System.UInt32,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void HangupCall(int, SipStatusCode, string)</caller>
+        <method>int pjsua_call_hangup(int, uint, pj_str_t&amp;, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_hangup(System.Int32,System.UInt32,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void ProcessCallRedirect(int, RedirectOption)</caller>
+        <method>int pjsua_call_process_redirect(int, pjsip_redirect_op)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_process_redirect(System.Int32,pjsip.Interop.pjsip_redirect_op)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void PutCallOnHold(int)</caller>
+        <method>int pjsua_call_set_hold(int, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_set_hold(System.Int32,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void ReinviteCall(int, bool)</caller>
+        <method>int pjsua_call_reinvite(int, int, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_reinvite(System.Int32,System.Int32,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void DialDtmf(int, string)</caller>
+        <method>int pjsua_call_dial_dtmf(int, pj_str_t&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_dial_dtmf(System.Int32,pjsip.Interop.pj_str_t&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void SendIm(int, string, string)</caller>
+        <method>int pjsua_call_send_im(int, pj_str_t&amp;, pj_str_t&amp;, pjsua_msg_data, IntPtr)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_send_im(System.Int32,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pjsua_msg_data,System.IntPtr)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void SendTypingInd(int, bool)</caller>
+        <method>int pjsua_call_send_typing_ind(int, int, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_send_typing_ind(System.Int32,System.Int32,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>void HangupAll()</caller>
+        <method>void pjsua_call_hangup_all()</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_hangup_all()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>CallApiProvider_1_4</class>
+        <caller>string Dump(int, bool, uint, string)</caller>
+        <method>int pjsua_call_dump(int, int, IntPtr, uint, string)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_dump(System.Int32,System.Int32,System.IntPtr,System.UInt32,System.String)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>BuddyConfig GetDefaultConfig()</caller>
+        <method>void pjsua_buddy_config_default(pjsua_buddy_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_config_default(pjsip.Interop.pjsua_buddy_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>BuddyInfo GetInfo(int)</caller>
+        <method>int pjsua_buddy_get_info(int, pjsua_buddy_info&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_get_info(System.Int32,pjsip.Interop.pjsua_buddy_info&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>int AddBuddyAndGetId(BuddyConfig)</caller>
+        <method>int pjsua_buddy_add(pjsua_buddy_config, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_add(pjsip.Interop.pjsua_buddy_config,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void DeleteBuddy(int)</caller>
+        <method>int pjsua_buddy_del(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_del(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void SubscribeBuddyPresence(int)</caller>
+        <method>int pjsua_buddy_subscribe_pres(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_subscribe_pres(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void UnsubscribeBuddyPresence(int)</caller>
+        <method>int pjsua_buddy_subscribe_pres(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_subscribe_pres(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void UpdatePresence(int)</caller>
+        <method>int pjsua_buddy_update_pres(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_update_pres(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void DumpPresence(bool)</caller>
+        <method>void pjsua_pres_dump(int)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/IM::pjsua_pres_dump(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void SendIm(int, string, string, string)</caller>
+        <method>int pjsua_im_send(int, pj_str_t&amp;, pj_str_t&amp;, pj_str_t&amp;, pjsua_msg_data, IntPtr)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_im_send(System.Int32,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pj_str_t&amp;,pjsip.Interop.pjsua_msg_data,System.IntPtr)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void SendIsTyping(int, string)</caller>
+        <method>int pjsua_im_typing(int, pj_str_t&amp;, int, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_im_typing(System.Int32,pjsip.Interop.pj_str_t&amp;,System.Int32,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>ImApiProvider_1_4</class>
+        <caller>void SendIsNotTyping(int, string)</caller>
+        <method>int pjsua_im_typing(int, pj_str_t&amp;, int, pjsua_msg_data)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_im_typing(System.Int32,pjsip.Interop.pj_str_t&amp;,System.Int32,pjsip.Interop.pjsua_msg_data)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>MediaConfig GetDefaultConfig()</caller>
+        <method>void pjsua_media_config_default(pjsua_media_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Media::pjsua_media_config_default(pjsip.Interop.pjsua_media_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>uint GetMaxConferencePorts()</caller>
+        <method>uint pjsua_conf_get_max_ports()</method>
+        <raw>System.UInt32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_get_max_ports()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>uint GetActivePortsCount()</caller>
+        <method>uint pjsua_conf_get_active_ports()</method>
+        <raw>System.UInt32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_get_active_ports()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>ConferencePortInfo GetPortInfo(int)</caller>
+        <method>int pjsua_conf_get_port_info(int, pjsua_conf_port_info&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_get_port_info(System.Int32,pjsip.Interop.pjsua_conf_port_info&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void Connect(int, int)</caller>
+        <method>int pjsua_conf_connect(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_connect(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void Disconnect(int, int)</caller>
+        <method>int pjsua_conf_disconnect(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_disconnect(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void AdjustTxLevel(int, Single)</caller>
+        <method>int pjsua_conf_adjust_tx_level(int, Single)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_adjust_tx_level(System.Int32,System.Single)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void AdjustRxLevel(int, Single)</caller>
+        <method>int pjsua_conf_adjust_rx_level(int, Single)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_adjust_rx_level(System.Int32,System.Single)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>SignalLevel GetSignalLevel(int)</caller>
+        <method>int pjsua_conf_get_signal_level(int, UInt32&amp;, UInt32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_conf_get_signal_level(System.Int32,System.UInt32&amp;,System.UInt32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>int CreatePlayerAndGetId(string, uint)</caller>
+        <method>int pjsua_player_create(pj_str_t&amp;, uint, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_player_create(pjsip.Interop.pj_str_t&amp;,System.UInt32,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>int CreatePlaylistAndGetId(string, uint, string, uint)</caller>
+        <method>int pjsua_playlist_create(pj_str_t&amp;, uint, pj_str_t&amp;, uint, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_playlist_create(pjsip.Interop.pj_str_t&amp;,System.UInt32,pjsip.Interop.pj_str_t&amp;,System.UInt32,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>int GetPlayerConfPort(int)</caller>
+        <method>int pjsua_player_get_conf_port(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_player_get_conf_port(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void SetPlayerPosition(int, uint)</caller>
+        <method>int pjsua_player_set_pos(int, uint)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_player_set_pos(System.Int32,System.UInt32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void DestroyPlayer(int)</caller>
+        <method>int pjsua_player_destroy(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_player_destroy(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>int CreateRecorderAndGetId(string, uint, IntPtr, int, uint)</caller>
+        <method>int pjsua_recorder_create(pj_str_t&amp;, uint, IntPtr, int, uint, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_recorder_create(pjsip.Interop.pj_str_t&amp;,System.UInt32,System.IntPtr,System.Int32,System.UInt32,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>int GetRecorderConfPort(int)</caller>
+        <method>int pjsua_recorder_get_conf_port(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_recorder_get_conf_port(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void DestroyRecorder(int)</caller>
+        <method>int pjsua_recorder_destroy(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_recorder_destroy(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>SoundDeviceInfo&gt; EnumerateSoundDevices()</caller>
+        <method>int pjsua_enum_snd_devs(pjmedia_snd_dev_info[], UInt32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_enum_snd_devs(pjsip.Interop.pjmedia_snd_dev_info[],System.UInt32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>Int32&gt; GetCurrentSoundDevices()</caller>
+        <method>int pjsua_get_snd_dev(Int32&amp;, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_get_snd_dev(System.Int32&amp;,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void SetCurrentSoundDevices(Int32&gt;)</caller>
+        <method>int pjsua_set_snd_dev(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_set_snd_dev(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void SetCurrentSoundDevicesToNull()</caller>
+        <method>int pjsua_set_null_snd_dev()</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_set_null_snd_dev()</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void SetEc(uint, uint)</caller>
+        <method>int pjsua_set_ec(uint, uint)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_set_ec(System.UInt32,System.UInt32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>uint GetEcTail()</caller>
+        <method>int pjsua_get_ec_tail(UInt32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_get_ec_tail(System.UInt32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>CodecInfo&gt; EnumerateCodecs()</caller>
+        <method>int pjsua_enum_codecs(pjsua_codec_info[], UInt32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_enum_codecs(pjsip.Interop.pjsua_codec_info[],System.UInt32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void SetCodecPriority(string, byte)</caller>
+        <method>int pjsua_codec_set_priority(pj_str_t&amp;, byte)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_codec_set_priority(pjsip.Interop.pj_str_t&amp;,System.Byte)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>MediaApiProvider_1_4</class>
+        <caller>void CreateMediaTransport(TransportConfig)</caller>
+        <method>int pjsua_media_transports_create(pjsua_transport_config)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Media::pjsua_media_transports_create(pjsip.Interop.pjsua_transport_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>TransportApiProvider_1_4</class>
+        <caller>TransportConfig GetDefaultConfig()</caller>
+        <method>void pjsua_transport_config_default(pjsua_transport_config)</method>
+        <raw>System.Void pjsip.Interop.PJSUA_DLL/Transport::pjsua_transport_config_default(pjsip.Interop.pjsua_transport_config)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>TransportApiProvider_1_4</class>
+        <caller>int CreateTransportAndGetId(TransportType, TransportConfig)</caller>
+        <method>int pjsua_transport_create(pjsip_transport_type_e, pjsua_transport_config, Int32&amp;)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Transport::pjsua_transport_create(pjsip.Interop.pjsip_transport_type_e,pjsip.Interop.pjsua_transport_config,System.Int32&amp;)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>TransportApiProvider_1_4</class>
+        <caller>TransportInfo GetTransportInfo(int)</caller>
+        <method>int pjsua_transport_get_info(int, pjsua_transport_info)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Transport::pjsua_transport_get_info(System.Int32,pjsip.Interop.pjsua_transport_info)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>TransportApiProvider_1_4</class>
+        <caller>void CloseTransport(int)</caller>
+        <method>int pjsua_transport_close(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Transport::pjsua_transport_close(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>TransportApiProvider_1_4</class>
+        <caller>void ForceCloseTransport(int)</caller>
+        <method>int pjsua_transport_close(int, int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Transport::pjsua_transport_close(System.Int32,System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>PJSUA_DLL/Accounts</class>
+        <caller>bool pjsua_acc_is_valid(int)</caller>
+        <method>int pjsua_acc_is_valid1(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Accounts::pjsua_acc_is_valid1(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>PJSUA_DLL/Calls</class>
+        <caller>bool pjsua_call_is_active(int)</caller>
+        <method>int pjsua_call_is_active1(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_is_active1(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>PJSUA_DLL/Calls</class>
+        <caller>bool pjsua_call_has_media(int)</caller>
+        <method>int pjsua_call_has_media1(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/Calls::pjsua_call_has_media1(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+      <issue type="pinv">
+        <class>PJSUA_DLL/IM</class>
+        <caller>bool pjsua_buddy_is_valid(int)</caller>
+        <method>int pjsua_buddy_is_valid1(int)</method>
+        <raw>System.Int32 pjsip.Interop.PJSUA_DLL/IM::pjsua_buddy_is_valid1(System.Int32)</raw>
+        <data>pjsua.dll</data>
+      </issue>
+    </assembly>
+    <assembly name="pjsip4net.Console.exe" version="0.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip4net.Container.Castle.dll" version="0.1.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip4net.Core.dll" version="0.1.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip4net.dll" version="0.1.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+  </assemblies>
+</report>
