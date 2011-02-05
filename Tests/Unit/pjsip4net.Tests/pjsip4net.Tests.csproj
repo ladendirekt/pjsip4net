@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3DB8BE38-55D9-4B8F-961F-6D89CEA0FE65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pjsip4net.Tests</RootNamespace>
+    <AssemblyName>pjsip4net.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.1.0.188, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Dependencies\AutoMapper\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Dependencies\Moq\NET35\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Dependencies\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=2.0.0.2, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Dependencies\AutoFixture\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=2.0.0.2, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Dependencies\AutoFixture\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountBuilderTests.cs" />
+    <Compile Include="Accounts\given_an_account_builder.cs" />
+    <Compile Include="AccountTests.cs" />
+    <Compile Include="_base.cs" />
+    <Compile Include="CallBuilderTests.cs" />
+    <Compile Include="given_a_sip_ua.cs" />
+    <Compile Include="given_a_valueWrapper.cs" />
+    <Compile Include="given_bcl_extensions.cs" />
+    <Compile Include="given_equals_template_for_IIdentifiable.cs" />
+    <Compile Include="given_a_castle_container.cs" />
+    <Compile Include="given_a_component_configurator.cs" />
+    <Compile Include="given_a_configure.cs" />
+    <Compile Include="given_a_default_call_configurator.cs" />
+    <Compile Include="given_a_default_component_configurator.cs" />
+    <Compile Include="given_a_default_account_component_configurator.cs" />
+    <Compile Include="given_a_default_media_configurator.cs" />
+    <Compile Include="given_a_default_transport_configurator.cs" />
+    <Compile Include="given_a_simple_container.cs" />
+    <Compile Include="given_a_mapper.cs" />
+    <Compile Include="MessageBuilderTest.cs" />
+    <Compile Include="given_a_mruCache.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="given_a_sip_uri_parser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\pjsip.Interop\pjsip.Interop.csproj">
+      <Project>{0AEA8B23-5E46-4923-81B5-7755BA914750}</Project>
+      <Name>pjsip.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\pjsip4net.Container.Castle\pjsip4net.Container.Castle.csproj">
+      <Project>{3502E166-26B1-4A7B-AB50-5CC8BAF0019E}</Project>
+      <Name>pjsip4net.Container.Castle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\pjsip4net.Core\pjsip4net.Core.csproj">
+      <Project>{DAB611F8-F9B2-49AE-8496-BA98F99BA337}</Project>
+      <Name>pjsip4net.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\pjsip4net\pjsip4net.csproj">
+      <Project>{77160365-9A80-4F6A-9BD7-4F0532BE0EB0}</Project>
+      <Name>pjsip4net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

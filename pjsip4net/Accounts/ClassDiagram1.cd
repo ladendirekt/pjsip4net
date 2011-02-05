@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="DoxWox.SIPUserAgent.Accounts.AccountManager">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <Members>
+      <Method Name="AccountManager" Hidden="true" />
+      <Method Name="OnRegistrationState" Hidden="true" />
+      <Method Name="RaiseStateChanged" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAwAAAAQQAAgAAAAAAQAgAAAAAiAAAAEAAIAAAA=</HashCode>
+      <FileName>Accounts\AccountManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Accounts" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.Account">
+    <Position X="3.5" Y="3.5" Width="3" />
+    <Members>
+      <Method Name="Account" Hidden="true" />
+      <Method Name="BeginInit" Hidden="true" />
+      <Method Name="EndInit" Hidden="true" />
+      <Method Name="GetAccountInfo" Hidden="true" />
+      <Method Name="HandleStateChanged" Hidden="true" />
+      <Method Name="OnRegistrationStateChanged" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DoxWox.SIPUserAgent.Accounts.Account.AccountLock">
+        <TypeIdentifier>
+          <NewMemberFileName>Accounts\Account.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABaAQAaACAABQhmggAIIAQAEAKBgAApKQGEBNJAQAI=</HashCode>
+      <FileName>Accounts\Account.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_session" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.21" />
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Initializable">
+    <Position X="3.75" Y="0.5" Width="2.75" />
+    <Members>
+      <Method Name="GuardInitialized" Hidden="true" />
+      <Method Name="GuardNotInitialized" Hidden="true" />
+      <Method Name="GuardNotInitializing" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DoxWox.SIPUserAgent.Initializable.Initializer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Initializable.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAEAAACQACAAAAAAAAAAAAQBAAAAAAQAAAAABAAAQAA=</HashCode>
+      <FileName>Initializable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.RegistrationSession">
+    <Position X="7.25" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAAEAAAAAAEA=</HashCode>
+      <FileName>Accounts\RegistrationSession.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Utils.StateMachine">
+    <Position X="7.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAABAAAAAAACAAAAAAAAAAAAAAAAABAACA=</HashCode>
+      <FileName>Utils\StateMachine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_state" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Utils.AbstractState">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Utils\AbstractState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Utils.AbstractState&lt;T&gt;">
+    <Position X="11" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\AbstractState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.InitializingAccountState" Collapsed="true">
+    <Position X="9.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Accounts\AccountState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.RegisteringAccountState" Collapsed="true">
+    <Position X="13.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Accounts\AccountState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.RegisteredAccountState" Collapsed="true">
+    <Position X="10.25" Y="7" Width="1.5" />
+    <InheritanceLine Type="DoxWox.SIPUserAgent.Utils.AbstractState&lt;T&gt;" ManuallyRouted="true">
+      <Path>
+        <Point X="11.75" Y="3.764" />
+        <Point X="11.75" Y="5.375" />
+        <Point X="11" Y="5.375" />
+        <Point X="11" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Accounts\AccountState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.TimedOutAccountRegistrationState" Collapsed="true">
+    <Position X="11.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Accounts\AccountState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoxWox.SIPUserAgent.Accounts.UnknownStatusState" Collapsed="true">
+    <Position X="12.75" Y="7" Width="1.5" />
+    <InheritanceLine Type="DoxWox.SIPUserAgent.Utils.AbstractState&lt;T&gt;" ManuallyRouted="true">
+      <Path>
+        <Point X="11.75" Y="3.764" />
+        <Point X="11.75" Y="5.375" />
+        <Point X="13.5" Y="5.375" />
+        <Point X="13.5" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAIAAAAAAAACA=</HashCode>
+      <FileName>Accounts\AccountState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

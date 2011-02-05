@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DAB611F8-F9B2-49AE-8496-BA98F99BA337}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pjsip4net.Core</RootNamespace>
+    <AssemblyName>pjsip4net.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Magnum, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Magnum\Magnum.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Configure.cs" />
+    <Compile Include="Configuration\ConfigureContainer.cs" />
+    <Compile Include="Container\ContainerException.cs" />
+    <Compile Include="Container\SimpleContainer.cs" />
+    <Compile Include="Data\AccountConfig.cs" />
+    <Compile Include="Data\BuddyActivity.cs" />
+    <Compile Include="Data\BuddyConfig.cs" />
+    <Compile Include="Data\CodecInfo.cs" />
+    <Compile Include="Data\Events\BuddyStateChanged.cs" />
+    <Compile Include="Data\Events\CallMediaStateChanged.cs" />
+    <Compile Include="Data\Events\CallRedirected.cs" />
+    <Compile Include="Data\Events\CallStateChanged.cs" />
+    <Compile Include="Data\Events\CallTransferRequested.cs" />
+    <Compile Include="Data\Events\CallTransferStatusChanged.cs" />
+    <Compile Include="Data\Events\DtmfRecieved.cs" />
+    <Compile Include="Data\Events\ImStatusChanged.cs" />
+    <Compile Include="Data\Events\IncomingCallRecieved.cs" />
+    <Compile Include="Data\Events\IncomingImRecieved.cs" />
+    <Compile Include="Data\Events\IncomingSubscribeRecieved.cs" />
+    <Compile Include="Data\Events\IncomingTypingRecieved.cs" />
+    <Compile Include="Data\Events\LogRequested.cs" />
+    <Compile Include="Data\Events\NatDetected.cs" />
+    <Compile Include="Data\Events\RegistrationStateChanged.cs" />
+    <Compile Include="Data\Events\StateChanged.cs" />
+    <Compile Include="Data\Events\StreamDestroyed.cs" />
+    <Compile Include="Data\LoggingConfig.cs" />
+    <Compile Include="Data\MediaConfig.cs" />
+    <Compile Include="Data\NatType.cs" />
+    <Compile Include="Data\TlsConfig.cs" />
+    <Compile Include="Data\TransportConfig.cs" />
+    <Compile Include="Data\AccountInfo.cs" />
+    <Compile Include="Data\BuddyInfo.cs" />
+    <Compile Include="Data\BuddyStatus.cs" />
+    <Compile Include="Data\CallInfo.cs" />
+    <Compile Include="Data\ConferencePortInfo.cs" />
+    <Compile Include="Data\InviteState.cs" />
+    <Compile Include="Data\CallMediaState.cs" />
+    <Compile Include="Data\MediaDirection.cs" />
+    <Compile Include="Data\RedirectOption.cs" />
+    <Compile Include="Data\RpidElement.cs" />
+    <Compile Include="Data\SignalLevel.cs" />
+    <Compile Include="Data\SipRole.cs" />
+    <Compile Include="Data\SipStatusCode.cs" />
+    <Compile Include="Data\SoundDeviceInfo.cs" />
+    <Compile Include="Data\SrtpRequirement.cs" />
+    <Compile Include="Data\SubscriptionState.cs" />
+    <Compile Include="Data\TransportFlags.cs" />
+    <Compile Include="Data\TransportInfo.cs" />
+    <Compile Include="Initializable.cs" />
+    <Compile Include="Interfaces\ApiProviders\IAccountApiProvider.cs" />
+    <Compile Include="Interfaces\ApiProviders\IApiFactory.cs" />
+    <Compile Include="Interfaces\ApiProviders\IBasicApiProvider.cs" />
+    <Compile Include="Interfaces\ApiProviders\ICallApiProvider.cs" />
+    <Compile Include="Interfaces\ApiProviders\IEventsProvider.cs" />
+    <Compile Include="Interfaces\ApiProviders\IIMApiProvider.cs" />
+    <Compile Include="Interfaces\ApiProviders\IMediaApiProvider.cs" />
+    <Compile Include="Interfaces\ApiProviders\ITransportApiProvider.cs" />
+    <Compile Include="Interfaces\IConfigurationContext.cs" />
+    <Compile Include="Interfaces\IConfigurationProvider.cs" />
+    <Compile Include="Interfaces\IConfigureComponents.cs" />
+    <Compile Include="Interfaces\IContainer.cs" />
+    <Compile Include="Interfaces\IIdentifiable.cs" />
+    <Compile Include="Interfaces\IInitializable.cs" />
+    <Compile Include="Interfaces\IResource.cs" />
+    <Compile Include="PjsipErrorException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="TransportType.cs" />
+    <Compile Include="Data\UaConfig.cs" />
+    <Compile Include="Utils\AbstractState.cs" />
+    <Compile Include="Utils\EqualsTemplate.cs" />
+    <Compile Include="Utils\EventArgs.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Utils\MruCache.cs" />
+    <Compile Include="Utils\Nfa.cs" />
+    <Compile Include="Utils\NfaState.cs" />
+    <Compile Include="Utils\NfaWithBackTracking.cs" />
+    <Compile Include="Utils\NfaWithLambda.cs" />
+    <Compile Include="Utils\RangeChecker.cs" />
+    <Compile Include="Utils\SingletonHolder.cs" />
+    <Compile Include="Utils\SipUriBuilder.cs" />
+    <Compile Include="Utils\SipUriParser.cs" />
+    <Compile Include="Utils\StateMachine.cs" />
+    <Compile Include="Utils\StringBuilderExtension.cs" />
+    <Compile Include="Utils\TransitionFunction.cs" />
+    <Compile Include="Utils\Tuple.cs" />
+    <Compile Include="Utils\ValueWrapper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
