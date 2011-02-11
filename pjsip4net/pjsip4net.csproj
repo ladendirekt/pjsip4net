@@ -108,6 +108,7 @@
     <Compile Include="Interfaces\ITlsTransport.cs" />
     <Compile Include="Interfaces\IVoIPTransport.cs" />
     <Compile Include="Interfaces\IVoIPTransportFactory.cs" />
+    <Compile Include="Interfaces\IWavPlayer.cs" />
     <Compile Include="LogEventArgs.cs" />
     <Compile Include="Media\DefaultConferenceBridge.cs" />
     <Compile Include="Interfaces\IMediaManager.cs" />

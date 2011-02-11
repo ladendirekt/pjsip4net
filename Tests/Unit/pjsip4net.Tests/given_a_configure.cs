@@ -37,14 +37,14 @@ namespace pjsip4net.Tests
             Assert.That(_sut.Container, Is.InstanceOf(typeof(SimpleContainer)));
         }
 
-        [Ignore]
+        [Test]
         public void when_build_called_then_it_should_register_container_in_container()
         {
-            _container.Setup(x => x.RegisterAsSingleton(It.Is<IContainer>(x1 => x1.Equals(_container))));
             ConfigureContainer.Set(_container.Object, _sut);
             _sut.Build();
-            _container.VerifyAll();// .Verify(x => x.RegisterAsSingleton(It.Is<IContainer>(x1 => _container.Object.Equals(_sut.Container))),
-                              //Times.Exactly(1));
+            _container.Verify(
+                x => x.RegisterAsSingleton(It.Is<IContainer>(x1 => _container.Object.Equals(_sut.Container))),
+                Times.Once());
         }
 
         public void when_build_called__then_it_should_register_and_call_all_default_component_configurators()

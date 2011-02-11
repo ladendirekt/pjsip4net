@@ -2,6 +2,9 @@
 
 namespace pjsip4net.Core.Interfaces.ApiProviders
 {
+    /// <summary>
+    /// An abstraction of service enabling access to pjsua basic API <seealso cref="http://www.pjsip.org/pjsip/docs/html/group__PJSUA__LIB__BASE.htm"/>
+    /// </summary>
     public interface IBasicApiProvider
     {
         UaConfig GetDefaultUaConfig();

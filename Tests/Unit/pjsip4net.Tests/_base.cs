@@ -9,13 +9,13 @@ namespace pjsip4net.Tests
         protected IFixture _fixture;
 
         [SetUp]
-        public void Setup()
+        public virtual void Setup()
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
         }
 
         [TearDown]
-        public void Teardown()
+        public virtual void Teardown()
         {
             _fixture = null;
         }

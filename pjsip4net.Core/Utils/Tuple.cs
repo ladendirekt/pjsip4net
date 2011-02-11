@@ -2,6 +2,9 @@
 {
     public class Tuple<T1, T2>
     {
+        public Tuple()
+        { }
+
         public Tuple(T1 part1, T2 part2)
         {
             Part1 = part1;

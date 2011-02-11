@@ -1,9 +1,10 @@
-﻿using System;
-using pjsip4net.Core.Data;
-using pjsip4net.Core.Data.Events;
+﻿using pjsip4net.Core.Data;
 
 namespace pjsip4net.Core.Interfaces.ApiProviders
 {
+    /// <summary>
+    /// An abstraction of service enabling access to pjsua account API <seealso cref="http://www.pjsip.org/pjsip/docs/html/group__PJSUA__LIB__ACC.htm"/>
+    /// </summary>
     public interface IAccountApiProvider
     {
         AccountConfig GetDefaultConfig();

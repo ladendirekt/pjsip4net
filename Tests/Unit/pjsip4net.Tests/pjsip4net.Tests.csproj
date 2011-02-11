@@ -59,11 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountBuilderTests.cs" />
+    <Compile Include="Accounts\given_an_account.cs" />
     <Compile Include="Accounts\given_an_account_builder.cs" />
-    <Compile Include="AccountTests.cs" />
     <Compile Include="_base.cs" />
-    <Compile Include="CallBuilderTests.cs" />
     <Compile Include="given_a_sip_ua.cs" />
     <Compile Include="given_a_valueWrapper.cs" />
     <Compile Include="given_bcl_extensions.cs" />
@@ -78,7 +76,6 @@
     <Compile Include="given_a_default_transport_configurator.cs" />
     <Compile Include="given_a_simple_container.cs" />
     <Compile Include="given_a_mapper.cs" />
-    <Compile Include="MessageBuilderTest.cs" />
     <Compile Include="given_a_mruCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="given_a_sip_uri_parser.cs" />

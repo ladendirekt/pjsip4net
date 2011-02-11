@@ -2,6 +2,9 @@
 
 namespace pjsip4net.Core.Interfaces.ApiProviders
 {
+    /// <summary>
+    /// An abstraction of service enabling access to pjsua transport API <seealso cref="http://www.pjsip.org/pjsip/docs/html/group__PJSUA__LIB__TRANSPORT.htm"/>
+    /// </summary>
     public interface ITransportApiProvider
     {
         //void pjsua_transport_config_default(pjsua_transport_config cfg);

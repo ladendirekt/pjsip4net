@@ -5,6 +5,9 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Core.Interfaces.ApiProviders
 {
+    /// <summary>
+    /// An abstraction of service enabling access to pjsua media API <seealso cref="http://www.pjsip.org/pjsip/docs/html/group__PJSUA__LIB__MEDIA.htm"/>
+    /// </summary>
     public interface IMediaApiProvider
     {
         MediaConfig GetDefaultConfig();

@@ -2,6 +2,9 @@ using System;
 
 namespace pjsip4net.Core.Container
 {
+    /// <summary>
+    /// Exception that is thrown by dependency injection container.
+    /// </summary>
     public class ContainerException : Exception
     {
         public ContainerException()

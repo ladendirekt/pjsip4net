@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,9 +46,15 @@ namespace pjsip4net.Media
         private ReadOnlyCollection<CodecInfo> _codecs;
 
         private ReadOnlyCollection<SoundDeviceInfo> _sndDevs;
-        public WavPlayer Ringer { get; set; }
-        public WavPlayer CallbackRinger { get; set; }
-        public WavPlayer BusyRinger { get; set; }
+        public IWavPlayer Ringer { get; set; }
+        public IWavPlayer CallbackRinger { get; set; }
+        public IWavPlayer BusyRinger { get; set; }
+        
+        public IMediaApiProvider Provider
+        {
+            get { return _mediaApi; }
+        }
+
         public IConferenceBridge ConferenceBridge
         {
             get { return _conferenceBridge; }

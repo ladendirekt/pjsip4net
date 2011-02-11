@@ -29,7 +29,7 @@ namespace pjsip4net.Tests
         public void when_configure_is_called__should_register_wavPlayer_as_transient()
         {
             when_configure_called();
-            _container.Verify(x => x.Register<WavPlayer, WavPlayer>());
+            _container.Verify(x => x.Register<IWavPlayer, WavPlayer>());
         }
 
         [Test]

@@ -148,6 +148,12 @@ namespace pjsip4net.Accounts
                 }
         }
 
+        public IAccount Register(Func<IAccountBuilder, IAccount> builder)
+        {
+            Helper.GuardNotNull(builder);
+            return builder(_localRegistry.Container.Get<IAccountBuilder>());
+        }
+
         public IAccount GetAccountById(int id)
         {
             lock (_lock)

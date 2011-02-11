@@ -3,6 +3,7 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Core.Data
 {
+    //todo: refactor into two separate classes ICodec & CodecInfo. This one should be a data container solely.
     public class CodecInfo : Initializable
     {
         private IMediaApiProvider _mediaApi;
@@ -12,6 +13,7 @@ namespace pjsip4net.Core.Data
         public string CodecId { get; protected set; }
 
         private byte _priority;
+        
         public byte Priority
         {
             get { return _priority; }

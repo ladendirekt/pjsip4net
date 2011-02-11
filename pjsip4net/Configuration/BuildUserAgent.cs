@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using pjsip4net.Accounts;
 using pjsip4net.Core;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Container;
@@ -15,7 +14,7 @@ namespace pjsip4net.Configuration
     public static class BuildUserAgent
     {
         /// <summary>
-        /// 
+        /// Builds and initializes most of voip services.
         /// </summary>
         /// <exception cref="InvalidOperationException"/>
         /// <exception cref="PjsipErrorException"/>
@@ -30,13 +29,14 @@ namespace pjsip4net.Configuration
             {
             }
 
-            cfg.AddComponentConfigurator(new DefaultComponentConfigurator())
-                .AddComponentConfigurator(new DefaultTransportComponentConfigurator())
-                .AddComponentConfigurator(new DefaultAccountComponentConfigurator())
-                .AddComponentConfigurator(new DefaultCallComponentConfigurator())
-                .AddComponentConfigurator(new DefaultMediaComponentConfigurator()).RunConfigurators();
+            cfg.With(new DefaultComponentConfigurator())
+                .With(new DefaultTransportComponentConfigurator())
+                .With(new DefaultAccountComponentConfigurator())
+                .With(new DefaultCallComponentConfigurator())
+                .With(new DefaultMediaComponentConfigurator()).RunConfigurators();
 
             var localRegistry = cfg.Container.Get<ILocalRegistry>();
+            localRegistry.Container = cfg.Container;
 
             var basicApiProvider = cfg.Container.Get<IBasicApiProvider>();
             if (basicApiProvider == null)
@@ -94,6 +94,11 @@ namespace pjsip4net.Configuration
             return cfg;
         }
 
+        /// <summary>
+        /// Starts user agent instance.
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
         public static ISipUserAgent Start(this Configure cfg)
         {
             var localRegistry = cfg.Container.Get<ILocalRegistry>();

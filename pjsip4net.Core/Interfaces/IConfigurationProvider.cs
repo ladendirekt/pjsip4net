@@ -1,10 +1,10 @@
-﻿using pjsip4net.Core.Data;
-
-namespace pjsip4net.Core.Interfaces
+﻿namespace pjsip4net.Core.Interfaces
 {
+    /// <summary>
+    /// An abstraction for external configuration provider.
+    /// </summary>
     public interface IConfigurationProvider
     {
         void Configure(IConfigurationContext context);
-        //void Store(UaConfig config, MediaConfig mediaConfig, LoggingConfig loggingConfig);
     }
 }

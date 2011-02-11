@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
@@ -10,6 +11,8 @@ namespace pjsip4net
     internal class DefaultLocalRegistry : ILocalRegistry, IConfigurationContext
     {
         #region Implementation of ILocalRegistry
+
+        public IContainer Container { get; set; }
 
         public IVoIPTransportInternal SipTransport { get; set; }
         public IVoIPTransportInternal RtpTransport { get; set; }

@@ -205,6 +205,12 @@ namespace pjsip4net.IM
             }
         }
 
+        public void SendMessage(Action<IMessageBuilder> builder)
+        {
+            Helper.GuardNotNull(builder);
+            builder(_localRegistry.Container.Get<IMessageBuilder>());
+        }
+
         public void SendTyping(IAccount account, string to, bool isTyping)
         {
             _imApi.SendIsTyping(account.Id, to);

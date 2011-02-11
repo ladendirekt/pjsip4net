@@ -4,6 +4,9 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Core.Interfaces
 {
+    /// <summary>
+    /// Contextual data for external configuration provider.
+    /// </summary>
     public interface IConfigurationContext
     {
         UaConfig Config { get; }

@@ -3,6 +3,9 @@ using pjsip4net.Core.Data;
 
 namespace pjsip4net.Core.Interfaces.ApiProviders
 {
+    /// <summary>
+    /// An abstraction of service enabling access to pjsua im API <seealso cref="http://www.pjsip.org/pjsip/docs/html/group__PJSUA__LIB__BUDDY.htm"/>
+    /// </summary>
     public interface IIMApiProvider
     {
         BuddyConfig GetDefaultConfig();

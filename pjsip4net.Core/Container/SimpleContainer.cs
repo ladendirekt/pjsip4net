@@ -8,6 +8,12 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Core.Container
 {
+    /// <summary>
+    /// Simple implementation of dependency injection container.
+    /// </summary>
+    /// <remarks>
+    /// Supports only two tenets of DI: composition & poor lifetime management.
+    /// </remarks>
     public class SimpleContainer : IContainer
     {
         private IDictionary<string, object> _namedRegistry = new Dictionary<string, object>();

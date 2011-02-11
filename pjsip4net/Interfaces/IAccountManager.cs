@@ -7,12 +7,16 @@ using pjsip4net.Core.Interfaces.ApiProviders;
 
 namespace pjsip4net.Interfaces
 {
+    /// <summary>
+    /// Provides access to accounts registered with user agent.
+    /// </summary>
     public interface IAccountManager
     {
         ReadOnlyCollection<IAccount> Accounts { get; }
         IAccount DefaultAccount { get; set; }
         event EventHandler<AccountStateChangedEventArgs> AccountStateChanged;
-        
+
+        IAccount Register(Func<IAccountBuilder, IAccount> builder);
         IAccount GetAccountById(int id);
     }
 

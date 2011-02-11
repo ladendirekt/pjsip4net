@@ -20,6 +20,7 @@ namespace pjsip4net.Interfaces
         event EventHandler<CallRedirectedEventArgs> CallRedirected;
         ICall MakeCall(string destinationUri);
         ICall MakeCall(IAccount account, string destinationUri);
+        ICall MakeCall(Func<ICallBuilder, ICall> builder);
         void HangupAll();
         ICall GetCallById(int id);
     }

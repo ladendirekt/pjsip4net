@@ -17,6 +17,7 @@ namespace pjsip4net.Interfaces
         IBuddy GetBuddyById(int id);
         void SendMessage(IAccount account, string body, string to);
         void SendMessageInDialog(ICall dialog, string body);
+        void SendMessage(Action<IMessageBuilder> builder);
         void SendTyping(IAccount account, string to, bool isTyping);
         void SendTypingInDialog(ICall dialog, bool isTyping);
         void DumpSubscription(bool verbose);

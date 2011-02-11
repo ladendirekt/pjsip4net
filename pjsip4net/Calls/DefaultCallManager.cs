@@ -135,6 +135,12 @@ namespace pjsip4net.Calls
             }
         }
 
+        public ICall MakeCall(Func<ICallBuilder, ICall> builder)
+        {
+            Helper.GuardNotNull(builder);
+            return builder(_localRegistry.Container.Get<ICallBuilder>());
+        }
+
         public void HangupAll()
         {
             foreach (Call call in Calls)

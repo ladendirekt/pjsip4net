@@ -7,6 +7,9 @@ using pjsip4net.Core.Interfaces;
 
 namespace pjsip4net.Interfaces
 {
+    /// <summary>
+    /// Provides methods to connect to SIP servers & properties reflecting registration state.
+    /// </summary>
     public interface IAccount : IInitializable
     {
         int Id { get; }

@@ -15,13 +15,12 @@ namespace pjsip4net.Tests
         [Test]
         public void when_ctor_called__should_subscribe_to_log_event()
         {
-            var registry = _fixture.CreateAnonymous<ILocalRegistry>();
-            var basicApi = _fixture.CreateAnonymous<IBasicApiProvider>();
-            var eventsProvider = _fixture.CreateAnonymous<Mock<IEventsProvider>>();
-            eventsProvider.Setup(x => x.Subscribe(It.IsAny<Action<LogRequested>>()));
-            var container = _fixture.CreateAnonymous<IContainer>();
+            _fixture.Freeze<ILocalRegistry>();
+            _fixture.Freeze<IBasicApiProvider>();
+            _fixture.Freeze<IContainer>();
+            var eventsProvider = _fixture.Freeze<Mock<IEventsProvider>>();
 
-            var sut = new DefaultSipUserAgent(basicApi, eventsProvider.Object, registry, container);
+            var sut = _fixture.CreateAnonymous<DefaultSipUserAgent>();
 
             eventsProvider.Verify(x => x.Subscribe(It.IsAny<Action<LogRequested>>()), Times.Once());
         }
@@ -30,15 +29,14 @@ namespace pjsip4net.Tests
         public void when_destroy_called__should_destroy_sip_and_rtp_transports()
         {
             var tpt = _fixture.Freeze<Mock<IVoIPTransportInternal>>();
-            var registry = _fixture.CreateAnonymous<Mock<ILocalRegistry>>();
-            registry.Setup(x => x.SipTransport).Returns(tpt.Object);
-            registry.Setup(x => x.RtpTransport).Returns(tpt.Object);
-            var basicApi = _fixture.CreateAnonymous<IBasicApiProvider>();
-            var eventsProvider = _fixture.CreateAnonymous<IEventsProvider>();
-            tpt.Setup(x => x.InternalDispose());
-            var container = _fixture.CreateAnonymous<IContainer>();
+            var registry = _fixture.Freeze<Mock<ILocalRegistry>>();
+            registry.SetupGet(x => x.SipTransport).Returns(tpt.Object);
+            registry.SetupGet(x => x.RtpTransport).Returns(tpt.Object);
+            _fixture.Freeze<IBasicApiProvider>();
+            _fixture.Freeze<IEventsProvider>();
+            _fixture.Freeze<IContainer>();
 
-            var sut = new DefaultSipUserAgent(basicApi, eventsProvider, registry.Object, container);
+            var sut = _fixture.CreateAnonymous<DefaultSipUserAgent>();
             sut.SetManagers(_fixture.CreateAnonymous<IImManager>(), _fixture.CreateAnonymous<ICallManager>(),
                             _fixture.CreateAnonymous<IAccountManager>(), _fixture.CreateAnonymous<IMediaManager>());
             sut.Destroy();

@@ -5,10 +5,11 @@ using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
+using pjsip4net.Interfaces;
 
 namespace pjsip4net.Media
 {
-    public class WavPlayer : Resource, IIdentifiable<WavPlayer>, IDisposable
+    public class WavPlayer : Resource, IWavPlayer, IIdentifiable<IWavPlayer>, IDisposable
     {
         #region Private Data
 
@@ -88,14 +89,14 @@ namespace pjsip4net.Media
 
         #region Implementation of IEquatable<IIdentifiable<WavPlayer>>
 
-        public bool Equals(IIdentifiable<WavPlayer> other)
+        public bool Equals(IIdentifiable<IWavPlayer> other)
         {
             return EqualsTemplate.Equals(this, other);
         }
 
-        bool IIdentifiable<WavPlayer>.DataEquals(WavPlayer other)
+        bool IIdentifiable<IWavPlayer>.DataEquals(IWavPlayer other)
         {
-            return true;
+            return File.Equals(other.File) && ConferenceSlot.Equals(other.ConferenceSlot);
         }
 
         #endregion

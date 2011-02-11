@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
-using pjsip4net.Media;
+using pjsip4net.Core.Interfaces.ApiProviders;
 
 namespace pjsip4net.Interfaces
 {
     public interface IMediaManager
     {
+        IMediaApiProvider Provider { get; }
+
         IConferenceBridge ConferenceBridge { get; }
         ReadOnlyCollection<CodecInfo> Codecs { get; }
         ReadOnlyCollection<SoundDeviceInfo> SoundDevices { get; }
