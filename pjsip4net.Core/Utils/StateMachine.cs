@@ -6,6 +6,11 @@ namespace pjsip4net.Core.Utils
     {
         protected AbstractState _state;
 
+        public AbstractState CurrentState
+        {
+            get { return _state; }
+        }
+        
         public event EventHandler StateChanged = delegate { };
 
         protected virtual void OnStateChanged()
@@ -13,13 +18,13 @@ namespace pjsip4net.Core.Utils
             StateChanged(this, EventArgs.Empty);
         }
 
-        public void HandleStateChanged()
+        public virtual void HandleStateChanged()
         {
             if (_state != null)
                 _state.StateChanged();
         }
 
-        public void ChangeState(AbstractState newState)
+        public virtual void ChangeState(AbstractState newState)
         {
             Helper.GuardNotNull(newState);
             _state = newState;

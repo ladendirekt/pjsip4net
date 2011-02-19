@@ -11,6 +11,7 @@ using Ploeh.AutoFixture.AutoMoq;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_mapper
     {
@@ -60,4 +61,5 @@ namespace pjsip4net.Tests
             Assert.That(x, Is.Not.Null);
         }
     }
+    // ReSharper restore InconsistentNaming
 }

@@ -40,8 +40,9 @@ namespace pjsip4net.Core.Utils
             if (code != 0)
             {
                 var frame = new StackFrame(1);
-                Debug.WriteLine("PJSIP error code = " + code + " " + LastError + " in " + frame.GetMethod().Name);
-                throw new PjsipErrorException(code, LastError);
+                throw new PjsipErrorException(code,
+                                              string.Format("PJSIP error code = {0} in {1}", LastError,
+                                                            frame.GetMethod().Name));
             }
         }
 

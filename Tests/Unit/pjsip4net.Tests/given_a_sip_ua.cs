@@ -9,6 +9,7 @@ using Ploeh.AutoFixture;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_sip_ua : _base
     {
@@ -20,7 +21,7 @@ namespace pjsip4net.Tests
             _fixture.Freeze<IContainer>();
             var eventsProvider = _fixture.Freeze<Mock<IEventsProvider>>();
 
-            var sut = _fixture.CreateAnonymous<DefaultSipUserAgent>();
+            _fixture.CreateAnonymous<DefaultSipUserAgent>();
 
             eventsProvider.Verify(x => x.Subscribe(It.IsAny<Action<LogRequested>>()), Times.Once());
         }
@@ -58,4 +59,5 @@ namespace pjsip4net.Tests
             basicApi.Verify(x => x.Destroy(), Times.Once());
         }
     }
+    // ReSharper restore InconsistentNaming
 }

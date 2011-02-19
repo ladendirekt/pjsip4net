@@ -7,6 +7,7 @@ namespace pjsip4net.Tests
     /// <summary>
     /// Summary description for EqualsTemplateIdentifiableTests
     /// </summary>
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_equals_template_for_IIdentifiable
     {
@@ -59,4 +60,5 @@ namespace pjsip4net.Tests
             Assert.IsFalse(sut1.Equals(sut2));
         }
     }
+    // ReSharper restore InconsistentNaming
 }

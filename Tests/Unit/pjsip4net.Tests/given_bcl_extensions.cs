@@ -5,6 +5,7 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_bcl_extensions
     {
@@ -36,4 +37,5 @@ namespace pjsip4net.Tests
             Assert.That(result.First(), Is.EqualTo(2));
         }
     }
+    // ReSharper restore InconsistentNaming
 }

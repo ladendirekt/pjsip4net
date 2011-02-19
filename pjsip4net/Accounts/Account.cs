@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using Common.Logging;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
@@ -14,14 +15,12 @@ namespace pjsip4net.Accounts
     {
         private bool _isLocal;
         private readonly object _lock = new object();
-        //private readonly PjstrArrayWrapper _proxies;
         private readonly RegistrationSession _session;
-        internal AccountConfig _config;
+        private AccountConfig _config;
         private uint _lockCount;
         private IVoIPTransport _transport;
-        
-        //private IBasicApiProvider _basicApiProvider;
-        //private IAccountApiProvider _accountApiProvider;
+        private ILog _logger = LogManager.GetLogger<IAccount>();
+
         private IAccountManagerInternal _manager;
 
         #region Properties
@@ -61,8 +60,6 @@ namespace pjsip4net.Accounts
                         _config.Credentials[0] = value;
                 }
                 else _config.Credentials.Clear();
-                //if (modify)
-                //    Modify();
             }
         }
 
@@ -119,19 +116,8 @@ namespace pjsip4net.Accounts
             set
             {
                 GuardDisposed();
-                //bool modify = false;
-                //try
-                //{
                 GuardNotInitializing();
-                //}
-                //catch (InvalidOperationException)
-                //{
-                //    modify = true;
-                //}
-
                 _config.Priority = value;
-                //if (modify)
-                //    Modify();
             }
         }
 
@@ -145,15 +131,7 @@ namespace pjsip4net.Accounts
             set
             {
                 GuardDisposed();
-                //bool modify = false;
-                //try
-                //{
                 GuardNotInitializing();
-                //}
-                //catch (InvalidOperationException)
-                //{
-                //    modify = true;
-                //}
                 var parser = new SipUriParser(value);
                 Helper.GuardIsTrue(parser.IsValid);
 
@@ -161,8 +139,6 @@ namespace pjsip4net.Accounts
 
                 RegistrarDomain = parser.Domain;
                 RegistrarPort = parser.Port;
-                //if (modify)
-                //    Modify();
             }
         }
 
@@ -176,9 +152,7 @@ namespace pjsip4net.Accounts
             set
             {
                 GuardDisposed();
-                //GuardNotInitializing();
                 _transport = value;
-                //_config.transport_id = _transport.Id;
             }
         }
 
@@ -192,19 +166,8 @@ namespace pjsip4net.Accounts
             set
             {
                 GuardDisposed();
-                //bool modify = false;
-                //try
-                //{
                 GuardNotInitializing();
-                //}
-                //catch (InvalidOperationException)
-                //{
-                //    modify = true;
-                //}
-
                 _config.IsPublishEnabled = value;
-                //if (modify)
-                //    Modify();
             }
         }
 
@@ -227,19 +190,8 @@ namespace pjsip4net.Accounts
             set
             {
                 GuardDisposed();
-                //bool modify = false;
-                //try
-                //{
                 GuardNotInitializing();
-                //}
-                //catch (InvalidOperationException)
-                //{
-                //    modify = true;
-                //}
-
                 _config.RegTimeout = value;
-                //if (modify)
-                //    Modify();
             }
         }
 
@@ -253,19 +205,8 @@ namespace pjsip4net.Accounts
             set
             {
                 GuardDisposed();
-                //bool modify = false;
-                //try
-                //{
                 GuardNotInitializing();
-                //}
-                //catch (InvalidOperationException)
-                //{
-                //    modify = true;
-                //}
-
                 _config.KaInterval = value;
-                //if (modify)
-                //    Modify();
             }
         }
 
@@ -387,11 +328,6 @@ namespace pjsip4net.Accounts
             _session.StateChanged += delegate { OnRegistrationStateChanged(); }; 
         }
 
-        //public static IAccountBuilder New()
-        //{
-        //    return /*new WithAccountBuilderExpression(*/new AccountBuilder();//);
-        //}
-
         public override void BeginInit()
         {
             base.BeginInit();
@@ -441,26 +377,10 @@ namespace pjsip4net.Accounts
 
         public void Unregister()
         {
+            GuardDisposed();
+            GuardNotInitialized();
             _manager.UnregisterAccount(this);
         }
-
-        //public void SetRemoteRegisteration()
-        //{
-        //    GuardNotInitialized();
-        //    if (!_isLocal && !IsRegistered)
-        //    {
-        //        Helper.GuardError(PJSUA_DLL.Accounts.pjsua_acc_set_registration(Id, true));
-        //        _session.ChangeState(new RegisteringAccountState(_session));//there won't be any callback triggers here
-        //    }
-        //}
-
-        //public void Unregister()
-        //{
-        //    GuardNotInitialized();
-        //    if (!_isLocal && HasRegistration.HasValue && HasRegistration.Value && IsRegistered)
-        //        //should be a callback trigger after to switch states
-        //        Helper.GuardError(PJSUA_DLL.Accounts.pjsua_acc_set_registration(Id, false));
-        //}
 
         public void HandleStateChanged()
         {
@@ -499,11 +419,6 @@ namespace pjsip4net.Accounts
             }
         }
 
-        //protected virtual void Modify()
-        //{
-        //    Helper.GuardError(SipUserAgent.Instance.ApiFactory.GetAccountApi().pjsua_acc_modify(Id, _config));
-        //}
-
         public AccountStateChangedEventArgs GetEventArgs()
         {
             var info = GetAccountInfo() ?? new AccountInfo();
@@ -535,7 +450,7 @@ namespace pjsip4net.Accounts
 
         protected override void CleanUp()
         {
-            Debug.WriteLine("Account " + Id + " diposed");
+            _logger.Debug("Account " + Id + " diposed");
             _session.Dispose();
         }
 

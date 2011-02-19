@@ -7,6 +7,7 @@ using pjsip4net.Media;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_default_media_configurator : given_a_component_configurator<DefaultMediaComponentConfigurator>
     {
@@ -39,4 +40,5 @@ namespace pjsip4net.Tests
             _container.Verify(x => x.Register<CodecInfo, CodecInfo>());
         }
     }
+    // ReSharper restore InconsistentNaming
 }

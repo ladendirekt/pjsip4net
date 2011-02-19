@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2011-02-11 03:09:18Z</date>
+    <date>2011-02-19 18:36:59Z</date>
     <name />
     <email />
     <homepage />
@@ -12,7 +12,8 @@
     <apptype />
   </metadata>
   <assemblies>
-    <assembly name="pjsip.Interop.dll" version="1.4.4059.5669" runtime="2.0" todo="0" niex="0" miss="0" pinv="81">
+    <assembly name="Common.Logging.dll" version="2.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip.Interop.dll" version="1.4.4067.33501" runtime="2.0" todo="0" niex="0" miss="0" pinv="81">
       <issue type="pinv">
         <class>AccountApiProvider_1_4</class>
         <caller>AccountConfig GetDefaultConfig()</caller>

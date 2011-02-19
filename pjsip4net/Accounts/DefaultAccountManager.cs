@@ -13,27 +13,9 @@ namespace pjsip4net.Accounts
 {
     internal class DefaultAccountManager : Initializable, IAccountManagerInternal
     {
-        //#region Singleton
 
         private static readonly object _lock = new object();
-        //private static AccountManager _instance;
-
-        //internal static AccountManager Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //            lock (_lock)
-        //                if (_instance == null)
-        //                    _instance = new AccountManager();
-        //        return _instance;
-        //    }
-        //}
-
-        //#endregion
-
         private readonly SortedDictionary<int, IAccountInternal> _accounts;
-        //private SynchronizationContext _syncContext;
         private Queue<Account> _deleting;
         private ILocalRegistry _localRegistry;
         private IAccountApiProvider _provider;
@@ -48,7 +30,9 @@ namespace pjsip4net.Accounts
             get
             {
                 lock (_lock)
-                    return new ReadOnlyCollection<IAccount>(_accounts.Values.Where(t => !t.IsLocal).Cast<IAccount>().ToList());
+                    return
+                        new ReadOnlyCollection<IAccount>(
+                            _accounts.Values.Where(t => !t.IsLocal).Cast<IAccount>().ToList());
             }
         }
 
@@ -58,7 +42,8 @@ namespace pjsip4net.Accounts
             {
                 try
                 {
-                    return _accounts[_provider.GetDefaultAccountId()];
+                    lock (_lock) 
+                        return _accounts[_provider.GetDefaultAccountId()];
                 }
                 catch (Exception)
                 {
@@ -94,17 +79,7 @@ namespace pjsip4net.Accounts
 
         public void RaiseStateChanged(IAccountInternal account)
         {
-            //try
-            //{
-            //    if (_syncContext != null)
-            //        _syncContext.Post(delegate { AccountStateChanged(this, account.GetEventArgs()); }, null);
-            //    else
-            //        AccountStateChanged(this, account.GetEventArgs());
-            //}
-            //catch (InvalidOperationException)
-            //{
             AccountStateChanged(this, account.GetEventArgs());
-            //}
         }
 
         public void RegisterAccount(IAccountInternal account, bool @default)

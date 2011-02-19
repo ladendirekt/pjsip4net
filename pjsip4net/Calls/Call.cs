@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Common.Logging;
 using pjsip4net.Accounts;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
@@ -19,6 +20,7 @@ namespace pjsip4net.Calls
         private IAccountInternal _account;
         private IDisposable _accountLock;
         private readonly InviteSession _inviteSession;
+        private ILog _logger = LogManager.GetLogger<ICall>();
 
         #endregion
 
@@ -417,7 +419,7 @@ namespace pjsip4net.Calls
 
         protected override void CleanUp()
         {
-            Debug.WriteLine("Call " + Id + " disposed");
+            _logger.Debug("Call " + Id + " disposed");
             _accountLock.Dispose();
             _account = null;
             _accountLock = null;

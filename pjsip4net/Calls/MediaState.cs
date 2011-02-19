@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Common.Logging;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
@@ -10,7 +11,8 @@ namespace pjsip4net.Calls
         public NoneMediaState(MediaSession owner)
             : base(owner)
         {
-            Debug.WriteLine("Call " + _owner.Call.Id + " NoneMediaState");
+            LogManager.GetLogger<NoneMediaState>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             _owner.IsActive = false;
             _owner.IsHeld = false;
             _owner.MediaState = CallMediaState.None;
@@ -40,7 +42,8 @@ namespace pjsip4net.Calls
             : base(owner)
         {
             _owner.IsHeld = false;
-            Debug.WriteLine("Call " + _owner.Call.Id + " ActiveMediaState");
+            LogManager.GetLogger<ActiveMediaState>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             //connect call's media to sound device
             if (!_owner.IsActive)
             {
@@ -80,7 +83,8 @@ namespace pjsip4net.Calls
         public DisconnectedMediaState(MediaSession owner)
             : base(owner)
         {
-            Debug.WriteLine("Call " + _owner.Call.Id + " DisconnectedMediaState");
+            LogManager.GetLogger<DisconnectedMediaState>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             _owner.IsActive = false;
             _owner.IsHeld = false;
             _owner.MediaState = CallMediaState.Disconnected;
@@ -98,7 +102,8 @@ namespace pjsip4net.Calls
             : base(owner)
         {
             _owner.IsHeld = true;
-            Debug.WriteLine("Call " + _owner.Call.Id + " RemoteHoldMediaState");
+            LogManager.GetLogger<RemoteHoldMediaState>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             _owner.MediaState = CallMediaState.RemoteHold;
             //connect media if not connected
             if (!_owner.IsActive)
@@ -135,7 +140,8 @@ namespace pjsip4net.Calls
             : base(owner)
         {
             _owner.IsHeld = true;
-            Debug.WriteLine("Call " + _owner.Call.Id + " LocalHoldMediaState");
+            LogManager.GetLogger<LocalHoldMediaState>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             _owner.MediaState = CallMediaState.LocalHold;
             //disconnect call's media from sound device if connected
             if (_owner.IsActive)
@@ -172,7 +178,8 @@ namespace pjsip4net.Calls
             : base(owner)
         {
             _owner.IsHeld = false;
-            Debug.WriteLine("Call " + _owner.Call.Id + " ErrorMediaState");
+            LogManager.GetLogger<ErrorMediaState>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             _owner.MediaState = CallMediaState.Error;
             //disconnect call's media from sound device if connected
             if (_owner.IsActive)
@@ -201,7 +208,8 @@ namespace pjsip4net.Calls
         {
             Helper.GuardNotNull(inner);
             _inner = inner;
-            Debug.WriteLine("Call " + _owner.Call.Id + " ConferenceMediaStateDecorator");
+            LogManager.GetLogger<ConferenceMediaStateDecorator>()
+                .DebugFormat("Call {0} {1}", _owner.Call.Id, GetType().Name);
             _owner.ConferenceBridge.ConnectCall(_owner.Call);
             _owner.IsInConference = true;
         }

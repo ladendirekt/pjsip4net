@@ -7,6 +7,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_default_call_configurator : given_a_component_configurator<DefaultCallComponentConfigurator>
     {
@@ -27,4 +28,5 @@ namespace pjsip4net.Tests
             _container.Verify(x => x.Register<ICallBuilder, DefaultCallBuilder>());
         }
     }
+    // ReSharper restore InconsistentNaming
 }

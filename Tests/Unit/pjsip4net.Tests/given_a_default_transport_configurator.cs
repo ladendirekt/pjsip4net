@@ -7,6 +7,8 @@ using pjsip4net.Transport;
 
 namespace pjsip4net.Tests
 {
+// ReSharper disable InconsistentNaming
+    [TestFixture]
     public class given_a_default_transport_configurator : 
         given_a_component_configurator<DefaultTransportComponentConfigurator>
     {
@@ -36,4 +38,5 @@ namespace pjsip4net.Tests
                 Times.Exactly(1));
         }
     }
+    // ReSharper restore InconsistentNaming
 }

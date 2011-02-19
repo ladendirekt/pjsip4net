@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Common.Logging;
 using pjsip4net.Calls;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
@@ -15,6 +16,7 @@ namespace pjsip4net.Media
         private readonly List<ICall> _calls = new List<ICall>();
         private readonly object _lock = new object();
         private readonly IMediaApiProvider _mediaApi;
+        private readonly ILog _logger = LogManager.GetLogger<IConferenceBridge>();
 
         #endregion
 
@@ -102,7 +104,7 @@ namespace pjsip4net.Media
                     Interconnect(call.ConferenceSlotId, c.ConferenceSlotId);
                 _calls.Add(call);
 
-                Debug.WriteLine("Conference connected call id = " + call.Id);
+                _logger.DebugFormat("Conference connected call id = {0}", call.Id);
             }
         }
 
@@ -119,7 +121,7 @@ namespace pjsip4net.Media
                 //foreach (var c in _calls)
                 //    Disconnect(call.ConferenceSlotId, c.ConferenceSlotId);
 
-                Debug.WriteLine("Conference disconnected call id = " + call.Id);
+                _logger.DebugFormat("Conference disconnected call id = {0}", call.Id);
             }
         }
 

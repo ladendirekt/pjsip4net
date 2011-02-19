@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Common.Logging;
 using pjsip4net.Core;
 using pjsip4net.Core.Data.Events;
 using pjsip4net.Core.Interfaces.ApiProviders;
@@ -16,7 +17,6 @@ namespace pjsip4net.IM
     {
         #region Private Data
 
-        private readonly IBasicApiProvider _basicApi;
         private readonly IIMApiProvider _imApi;
         private readonly ICallApiProvider _callApi;
         private readonly IEventsProvider _eventsProvider;
@@ -25,22 +25,19 @@ namespace pjsip4net.IM
         private readonly SortedDictionary<int, IBuddyInternal> _buddies = new SortedDictionary<int, IBuddyInternal>();
         private readonly object _instLock = new object();
         private IBuddyInternal _pendingBuddy;
-        //private IVoIPTransport _rtpTransport;
-        //private IVoIPTransport _sipTransport; //move to build
+        private readonly ILog _logger = LogManager.GetLogger<IImManager>();
 
         #endregion
 
-        public DefaultImManager(ILocalRegistry localRegistry, IBasicApiProvider basicApi,
-                           IIMApiProvider imApi, ICallApiProvider callApi, IEventsProvider eventsProvider)
+        public DefaultImManager(ILocalRegistry localRegistry, IIMApiProvider imApi, 
+            ICallApiProvider callApi, IEventsProvider eventsProvider)
         {
             Helper.GuardNotNull(localRegistry);
-            Helper.GuardNotNull(basicApi);
             Helper.GuardNotNull(imApi);
             Helper.GuardNotNull(callApi);
             Helper.GuardNotNull(eventsProvider);
             _imApi = imApi;
             _callApi = callApi;
-            _basicApi = basicApi;
             _eventsProvider = eventsProvider;
             _localRegistry = localRegistry; 
         }
@@ -143,7 +140,7 @@ namespace pjsip4net.IM
 
         private void OnPagerStatus(ImStatusChanged e)
         {
-            Debug.WriteLine("pager " + e.Status);
+            _logger.DebugFormat("pager {0}", e.Status);
         }
 
         private void OnTyping(IncomingTypingRecieved e)
@@ -154,9 +151,8 @@ namespace pjsip4net.IM
 
         private void OnIncomingSubscribe(IncomingSubscribeRecieved e)
         {
-            Debug.WriteLine("Incoming SUBSCRIBE");
+            _logger.Debug("Incoming SUBSCRIBE");
         }
-
 
         public void RegisterBuddy(IBuddyInternal buddy)
         {

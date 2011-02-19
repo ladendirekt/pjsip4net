@@ -6,6 +6,7 @@ namespace pjsip4net.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_mruCache
     {
@@ -58,4 +59,5 @@ namespace pjsip4net.Tests
         //    Assert.AreEqual(res, added1);
         //}
     }
+    // ReSharper restore InconsistentNaming
 }

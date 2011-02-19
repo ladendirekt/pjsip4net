@@ -4,6 +4,7 @@ using pjsip4net.Core.Container;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_castle_container
     {
@@ -16,4 +17,5 @@ namespace pjsip4net.Tests
             Assert.Fail("Should have thrown an exception");
         }
     }
+    // ReSharper restore InconsistentNaming
 }

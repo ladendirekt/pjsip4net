@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Accounts\given_an_account.cs" />
     <Compile Include="Accounts\given_an_account_builder.cs" />
+    <Compile Include="Accounts\given_an_initializingState.cs" />
     <Compile Include="_base.cs" />
     <Compile Include="given_a_sip_ua.cs" />
     <Compile Include="given_a_valueWrapper.cs" />

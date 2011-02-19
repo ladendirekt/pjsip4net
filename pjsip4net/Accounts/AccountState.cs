@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Common.Logging;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
 
@@ -12,7 +13,8 @@ namespace pjsip4net.Accounts
         public InitializingAccountState(RegistrationSession owner)
             : base(owner)
         {
-            Debug.WriteLine("Account " + _owner.Account.Id + " InitializingAccountState");
+            LogManager.GetLogger<InitializingAccountState>()
+                .Debug("Account " + _owner.Account.Id + " InitializingAccountState");
             _owner.IsRegistered = false;
         }
 
@@ -40,7 +42,8 @@ namespace pjsip4net.Accounts
         public RegisteringAccountState(RegistrationSession owner)
             : base(owner)
         {
-            Debug.WriteLine("Account " + _owner.Account.Id + " RegisteringAccountState");
+            LogManager.GetLogger<RegisteringAccountState>()
+                .Debug("Account " + _owner.Account.Id + " RegisteringAccountState");
             _owner.IsRegistered = false;
         }
 
@@ -68,7 +71,8 @@ namespace pjsip4net.Accounts
         public RegisteredAccountState(RegistrationSession owner)
             : base(owner)
         {
-            Debug.WriteLine("Account " + _owner.Account.Id + " RegisteredAccountState");
+            LogManager.GetLogger<RegisteredAccountState>()
+                .Debug("Account " + _owner.Account.Id + " RegisteredAccountState");
             _owner.IsRegistered = true;
             //if (_owner.Account.PublishPresence)
             //    _owner.Account.IsOnline = true;
@@ -106,7 +110,8 @@ namespace pjsip4net.Accounts
         public TimedOutAccountRegistrationState(RegistrationSession owner)
             : base(owner)
         {
-            Debug.WriteLine("Account " + _owner.Account.Id + " TimedOutAccountRegistrationState");
+            LogManager.GetLogger<TimedOutAccountRegistrationState>()
+                .Debug("Account " + _owner.Account.Id + " TimedOutAccountRegistrationState");
             _owner.IsRegistered = false;
             //_owner.Account.Dispose();//account can be re-registered - no need to dispose and delete
         }
@@ -138,8 +143,9 @@ namespace pjsip4net.Accounts
             _owner.IsRegistered = false;
             StatusCode = code;
             StatusText = statusText;
-            Debug.WriteLine("Account " + _owner.Account.Id + " UnknownStatusState");
-            Debug.WriteLine(StatusText);
+            var logger = LogManager.GetLogger<TimedOutAccountRegistrationState>();
+            logger.Debug("Account " + _owner.Account.Id + " UnknownStatusState");
+            logger.Debug(StatusText);
         }
 
         public SipStatusCode StatusCode { get; private set; }

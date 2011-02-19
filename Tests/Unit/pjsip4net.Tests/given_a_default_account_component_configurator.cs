@@ -7,6 +7,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_default_account_component_configurator : 
         given_a_component_configurator<DefaultAccountComponentConfigurator>
@@ -32,4 +33,5 @@ namespace pjsip4net.Tests
                 x => x.Register<IAccountBuilder, DefaultAccountBuilder>(), Times.Exactly(1));
         }
     }
+    // ReSharper restore InconsistentNaming
 }

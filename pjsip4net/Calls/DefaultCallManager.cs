@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Common.Logging;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Data.Events;
@@ -15,10 +16,8 @@ namespace pjsip4net.Calls
 {
     internal class DefaultCallManager : Initializable, ICallManagerInternal
     {
-        //#region Singleton
-
+        private readonly ILog _logger = LogManager.GetLogger<ICallManager>();
         private static readonly object _lock = new object();
-        //private static CallManager _instance;
 
         public DefaultCallManager(IObjectFactory objectFactory, ICallApiProvider callApi, ILocalRegistry localRegistry, 
             IBasicApiProvider basicApi, IMediaApiProvider mediaApi, IEventsProvider eventsProvider, IAccountManagerInternal accMgr)
@@ -256,7 +255,7 @@ namespace pjsip4net.Calls
             if (account == null) // || !account.IsRegistered)
                 account = _accMgr.GetAccount(_accMgr.DefaultAccount.Id);
 
-            Debug.WriteLine("incoming call for account " + account.AccountId);
+            _logger.DebugFormat("incoming call for account {0}", account.AccountId);
 
             if (account != null)
             {

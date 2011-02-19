@@ -7,16 +7,10 @@ namespace pjsip4net.Tests
     /// <summary>
     /// Summary description for SipUriParserTests
     /// </summary>
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_sip_uri_parser
     {
-        public given_a_sip_uri_parser()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         [Test]
         public void when_parse_called_with_valid_sip_uri_with_domain_as_IP__should_fill_valid_properties()
         {
@@ -112,4 +106,5 @@ namespace pjsip4net.Tests
         }
 
     }
+    // ReSharper restore InconsistentNaming
 }

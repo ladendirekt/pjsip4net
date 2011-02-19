@@ -3,6 +3,7 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_valueWrapper
     {
@@ -22,4 +23,5 @@ namespace pjsip4net.Tests
         }
 
     }
+    // ReSharper restore InconsistentNaming
 }

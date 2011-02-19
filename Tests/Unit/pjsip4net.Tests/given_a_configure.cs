@@ -9,6 +9,7 @@ using Ploeh.AutoFixture.AutoMoq;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_configure
     {
@@ -53,4 +54,5 @@ namespace pjsip4net.Tests
 
         }
     }
+    // ReSharper restore InconsistentNaming
 }

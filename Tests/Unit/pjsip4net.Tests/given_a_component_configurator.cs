@@ -1,14 +1,13 @@
 using System;
-using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using pjsip4net.Core.Interfaces;
-using pjsip4net.Core.Utils;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public abstract class given_a_component_configurator<T> where T : IConfigureComponents
     {
@@ -43,4 +42,5 @@ namespace pjsip4net.Tests
             _sut.Configure(_container.Object);
         }
     }
+    // ReSharper restore InconsistentNaming
 }

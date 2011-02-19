@@ -3,6 +3,7 @@ using pjsip4net.Core.Container;
 
 namespace pjsip4net.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class given_a_simple_container
     {
@@ -35,7 +36,7 @@ namespace pjsip4net.Tests
             _sut = null;
         }
 
-       //todo: write tests for equal interfaces registered being registered in different combinations 
+       //todo: write tests for equal interfaces being registered in different combinations 
         //(unnamed transients[throws], unnamed singletons[throws], unnamed transient & singleton [throws], 
         //reversed [throws], one named & the other is not [does not throw in different combinations]
         
@@ -87,4 +88,5 @@ namespace pjsip4net.Tests
             Assert.That(_sut.Get<Interfaze1>(), Is.InstanceOf(typeof(Clazz1)));
         }
     }
+    // ReSharper restore InconsistentNaming
 }
