@@ -13,7 +13,6 @@ namespace pjsip4net.Accounts
 {
     internal class DefaultAccountManager : Initializable, IAccountManagerInternal
     {
-
         private static readonly object _lock = new object();
         private readonly SortedDictionary<int, IAccountInternal> _accounts;
         private Queue<Account> _deleting;
@@ -139,7 +138,7 @@ namespace pjsip4net.Accounts
 
         public void UnRegisterAllAccounts()
         {
-            foreach (Account account in _accounts.Values.ToList())
+            foreach (var account in _accounts.Values.ToList())
                 UnregisterAccount(account);
             Thread.Sleep(1000);
         }

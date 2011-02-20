@@ -14,7 +14,7 @@ namespace pjsip4net.Accounts
             : base(owner)
         {
             LogManager.GetLogger<InitializingAccountState>()
-                .Debug("Account " + _owner.Account.Id + " InitializingAccountState");
+                .DebugFormat("Account {0} InitializingAccountState", _owner.Account.Id);
             _owner.IsRegistered = false;
         }
 
@@ -43,7 +43,7 @@ namespace pjsip4net.Accounts
             : base(owner)
         {
             LogManager.GetLogger<RegisteringAccountState>()
-                .Debug("Account " + _owner.Account.Id + " RegisteringAccountState");
+                .DebugFormat("Account {0} RegisteringAccountState", _owner.Account.Id);
             _owner.IsRegistered = false;
         }
 
@@ -72,7 +72,7 @@ namespace pjsip4net.Accounts
             : base(owner)
         {
             LogManager.GetLogger<RegisteredAccountState>()
-                .Debug("Account " + _owner.Account.Id + " RegisteredAccountState");
+                .DebugFormat("Account {0} RegisteredAccountState", _owner.Account.Id);
             _owner.IsRegistered = true;
             //if (_owner.Account.PublishPresence)
             //    _owner.Account.IsOnline = true;
@@ -111,7 +111,7 @@ namespace pjsip4net.Accounts
             : base(owner)
         {
             LogManager.GetLogger<TimedOutAccountRegistrationState>()
-                .Debug("Account " + _owner.Account.Id + " TimedOutAccountRegistrationState");
+                .DebugFormat("Account {0} TimedOutAccountRegistrationState", _owner.Account.Id);
             _owner.IsRegistered = false;
             //_owner.Account.Dispose();//account can be re-registered - no need to dispose and delete
         }
@@ -144,7 +144,7 @@ namespace pjsip4net.Accounts
             StatusCode = code;
             StatusText = statusText;
             var logger = LogManager.GetLogger<TimedOutAccountRegistrationState>();
-            logger.Debug("Account " + _owner.Account.Id + " UnknownStatusState");
+            logger.DebugFormat("Account {0} UnknownStatusState", _owner.Account.Id);
             logger.Debug(StatusText);
         }
 

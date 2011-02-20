@@ -25,7 +25,7 @@ namespace pjsip4net.Accounts
             }
         }
 
-        public bool IsRegistered { get; set; }
+        public virtual bool IsRegistered { get; set; }
 
         #region IDisposable Members
 
