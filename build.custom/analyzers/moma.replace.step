@@ -75,6 +75,7 @@
           <exclude name="${dirs.build.code}${path.separator}**${path.separator}Ploeh.AutoFixture.AutoMoq.dll" />
           <exclude name="${dirs.build.code}${path.separator}**${path.separator}System.Core.dll" />
           <exclude name="${dirs.build.code}${path.separator}**${path.separator}Moq.dll" />
+          <exclude name="${dirs.build.code}${path.separator}**${path.separator}Common.Logging.dll" />
           <include name="${dirs.build.code}${path.separator}**${path.separator}*.dll" />
           <include name="${dirs.build.code}${path.separator}**${path.separator}*.exe" />
         </items>
