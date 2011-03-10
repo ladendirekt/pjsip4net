@@ -75,6 +75,8 @@
     <Compile Include="Accounts\given_a_registeredState.cs" />
     <Compile Include="Accounts\given_a_registeringState.cs" />
     <Compile Include="Accounts\given_a_timedoutState.cs" />
+    <Compile Include="Calls\given_a_callingInviteState.cs" />
+    <Compile Include="Calls\given_a_nullInviteState.cs" />
     <Compile Include="_base.cs" />
     <Compile Include="given_a_sip_ua.cs" />
     <Compile Include="given_a_valueWrapper.cs" />
