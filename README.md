@@ -1,4 +1,4 @@
 pjsip4net
 =========
 
-a .Net wrapper around pjsip user agent
+a pjsip (http://www.pjsip.org/) user agent .Net wrapper.
