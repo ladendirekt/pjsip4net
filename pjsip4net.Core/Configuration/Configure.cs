@@ -19,8 +19,8 @@ namespace pjsip4net.Core.Configuration
         private Func<ITransportApiProvider, Tuple<TransportType, TransportConfig>> _tptConfigurator;
         private Func<IAccountApiProvider, IEnumerable<AccountConfig>> _accConfigurator;
 
-        private List<Action<UaConfig, LoggingConfig, MediaConfig>> _codeConfigurators =
-            new List<Action<UaConfig, LoggingConfig, MediaConfig>>();
+        private List<Action<IConfigurationContext>> _codeConfigurators =
+            new List<Action<IConfigurationContext>>();
         
         private List<IConfigurationProvider> _configProviders = 
             new List<IConfigurationProvider>();
@@ -48,7 +48,7 @@ namespace pjsip4net.Core.Configuration
         /// </summary>
         /// <param name="codeConfigurator">Code block that modifies configuration data.</param>
         /// <returns></returns>
-        public Configure With(Action<UaConfig, LoggingConfig, MediaConfig> codeConfigurator)
+        public Configure With(Action<IConfigurationContext> codeConfigurator)
         {
             Helper.GuardNotNull(codeConfigurator);
             _codeConfigurators.Add(codeConfigurator);
@@ -111,7 +111,7 @@ namespace pjsip4net.Core.Configuration
         internal Configure RunConfigurationProviders()
         {
             var ctx = Container.Get<IConfigurationContext>();
-            _codeConfigurators.Each(a => a(ctx.Config, ctx.LoggingConfig, ctx.MediaConfig));
+            _codeConfigurators.Each(a => a(ctx));
             _configProviders.Each(p => p.Configure(ctx));
             return this;
         }
