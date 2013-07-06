@@ -9,9 +9,6 @@ namespace pjsip4net.Core.Data
         private IList<string> _outboundProxies = new List<string>();
         private IList<string> _stunServers = new List<string>();
         private IList<NetworkCredential> _credentials = new List<NetworkCredential>();
-        //private readonly List<IVoIPTransport> _transports = new List<IVoIPTransport>();
-        //private List<Account> _accounts = new List<Account>();
-        //internal pjsua_config _config = new pjsua_config();
         public bool AutoAnswer { get; set; }
         public bool AutoConference { get; set; }
         public uint MaxCalls { get; set; }
@@ -28,8 +25,6 @@ namespace pjsip4net.Core.Data
         public int SecureSignalling { get; set; }
         public uint ThreadCount { get; set; }
         public bool StunIgnoreFailure { get; set; }
-        //public int require_timer;
-        //public pjsip_timer_setting timer_setting;
         public string UserAgent { get; set; }
         public bool HangupForkedCall { get; set; }
 
@@ -56,40 +51,5 @@ namespace pjsip4net.Core.Data
             get { return _credentials; }
             protected set { _credentials = value; }
         }
-        //public IList<IVoIPTransport> Transports
-        //{
-        //    get { return _transports.AsReadOnly(); }
-        //}
-
-        //public void RegisterTransport(IVoIPTransport transport)
-        //{
-        //    GuardNotInitializing();
-        //    Helper.GuardNotNull(transport);
-
-        //    if (_transports.Exists(t => t.Equals(transport)))
-        //        throw new InvalidOperationException("Transport with the same settings already specified");
-
-        //    _transports.Add(transport);
-        //}
-
-        //public void UnregisterTransport(VoIPTransport transport)
-        //{
-        //    Helper.GuardNotNull(transport);
-        //    if (_transports.Contains(transport))
-        //        _transports.Remove(transport);
-        //}
-
-        //public void SetPreConfiguredAccounts(IEnumerable<Account> accounts)
-        //{
-        //    GuardNotInitializing();
-        //    Helper.GuardNotNull(accounts);
-
-        //    _accounts = new List<Account>(accounts);
-        //}
-
-        //public IList<Account> GetPreConfiguredAccounts()
-        //{
-        //    return _accounts.AsReadOnly();
-        //}
     }
 }
