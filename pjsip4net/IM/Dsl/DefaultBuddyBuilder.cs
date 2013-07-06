@@ -6,10 +6,7 @@ namespace pjsip4net.IM.Dsl
 {
     internal class DefaultBuddyBuilder : IBuddyBuilder
     {
-        private string _name;
-        private string _port;
-        private string _domain;
-        private TransportType _transport;
+        private readonly SipUriBuilder _uriBuilder = new SipUriBuilder();
         private bool _subscribe;
         private IImManagerInternal _imManager;
         private IObjectFactory _objectFactory;
@@ -20,34 +17,29 @@ namespace pjsip4net.IM.Dsl
             Helper.GuardNotNull(objectFactory);
             _imManager = imManager;
             _objectFactory = objectFactory;
-            _transport = TransportType.Udp;
         }
 
         public IBuddyBuilder WithName(string name)
         {
-            Helper.GuardNotNullStr(name);
-            _name = name;
+            _uriBuilder.AppendExtension(name);
             return this;
         }
 
         public IBuddyBuilder Through(string port)
         {
-            Helper.GuardNotNullStr(port);
-            Helper.GuardPositiveInt(int.Parse(port));
-            _port = port;
+            _uriBuilder.AppendPort(port);
             return this;
         }
 
         public IBuddyBuilder At(string domain)
         {
-            Helper.GuardNotNullStr(domain);
-            _domain = domain;
+            _uriBuilder.AppendDomain(domain);
             return this;
         }
 
         public IBuddyBuilder Via(TransportType transport)
         {
-            _transport = transport;
+            _uriBuilder.AppendTransportSuffix(transport);
             return this;
         }
 
@@ -59,15 +51,10 @@ namespace pjsip4net.IM.Dsl
 
         public IBuddy Register()
         {
-            Helper.GuardNotNullStr(_name);
-            //Helper.GuardNotNullStr(_domain);
             var buddy = CreateBuddy();
             using (buddy.InitializationScope())
             {
-                var uriBuilder = new SipUriBuilder().AppendExtension(_name).AppendDomain(_domain)
-                .AppendPort(string.IsNullOrEmpty(_port) ? "5060" : _port).AppendTransportSuffix(
-                _transport);
-                buddy.Uri = uriBuilder.ToString();
+                buddy.Uri = _uriBuilder.ToString();
                 buddy.Subscribe = _subscribe;
             }
 
@@ -75,7 +62,7 @@ namespace pjsip4net.IM.Dsl
             return buddy;
         }
 
-        protected virtual IBuddyInternal CreateBuddy()
+        protected IBuddyInternal CreateBuddy()
         {
             return _objectFactory.Create<IBuddyInternal>();
         }

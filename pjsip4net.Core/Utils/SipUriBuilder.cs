@@ -12,6 +12,7 @@ namespace pjsip4net.Core.Utils
 
         public SipUriBuilder AppendExtension(string extension)
         {
+            Helper.GuardNotNullStr(extension); 
             _extension = extension;
             return this;
         }
@@ -19,13 +20,14 @@ namespace pjsip4net.Core.Utils
         public SipUriBuilder AppendDomain(string domain)
         {
             Helper.GuardNotNullStr(domain);
-
             _domain = domain;
             return this;
         }
 
         public SipUriBuilder AppendPort(string port)
         {
+            Helper.GuardNotNullStr(port);
+            Helper.GuardPositiveInt(int.Parse(port));
             _port = port;
             return this;
         }

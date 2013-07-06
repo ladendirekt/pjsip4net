@@ -20,6 +20,8 @@ namespace pjsip4net.Accounts.Dsl
         private readonly IObjectFactory _objectFactory;
         private readonly IAccountManagerInternal _accountManager;
         private readonly ILocalRegistry _localRegistry;
+        private IAccountInternal _account;
+        private IDisposable _accountScope;
 
         public DefaultAccountBuilder(IObjectFactory objectFactory, IAccountManagerInternal accountManager, ILocalRegistry localRegistry)
         {
@@ -29,6 +31,8 @@ namespace pjsip4net.Accounts.Dsl
             _objectFactory = objectFactory;
             _accountManager = accountManager;
             _localRegistry = localRegistry;
+            _account = CreateAccount();
+            _accountScope = _account.InitializationScope();
         }
 
         public IAccountBuilder WithExtension(string login)
@@ -79,15 +83,21 @@ namespace pjsip4net.Accounts.Dsl
             return this;
         }
 
+        public IAccountBuilder ExposeAccount(Action<IAccount> editAccount)
+        {
+            if (editAccount != null)
+                editAccount(_account);
+            return this;
+        }
+
         public IAccount Register()
         {
             if (string.IsNullOrEmpty(_registrarDomain))
                 throw new ArgumentNullException("domain");
 
-            IAccountInternal account = CreateAccount();
-            using (account.InitializationScope())
+            using (_accountScope)
             {
-                account.Credential = new NetworkCredential(_login, _password, "*");
+                _account.Credential = new NetworkCredential(_login, _password, "*");
 
                 var sb = new SipUriBuilder();
                 sb.AppendExtension(_login).AppendDomain(_registrarDomain);
@@ -98,7 +108,7 @@ namespace pjsip4net.Accounts.Dsl
                     sb.AppendTransportSuffix(TransportType.Tcp);
                 else if (_transport is TlsTransport)
                     sb.AppendTransportSuffix(TransportType.Tls);
-                account.AccountId = sb.ToString();
+                _account.AccountId = sb.ToString();
 
                 sb.Clear();
 
@@ -110,18 +120,18 @@ namespace pjsip4net.Accounts.Dsl
                 else if (_transport is TlsTransport)
                     sb.AppendTransportSuffix(TransportType.Tls);
 
-                account.RegistrarUri = sb.ToString();
-                account.SetTransport(_transport);
-                account.PublishPresence = _publish;
+                _account.RegistrarUri = sb.ToString();
+                _account.SetTransport(_transport);
+                _account.PublishPresence = _publish;
                 if (_regTimeout != default(int))
-                    account.RegistrationTimeout = _regTimeout;
+                    _account.RegistrationTimeout = _regTimeout;
             }
 
-            InternalRegister(account);
-            return account;
+            InternalRegister(_account);
+            return _account;
         }
 
-        internal virtual IAccountInternal CreateAccount()
+        internal IAccountInternal CreateAccount()
         {
             var account = _objectFactory.Create<IAccountInternal>();
             account.IsLocal = false;
@@ -133,92 +143,4 @@ namespace pjsip4net.Accounts.Dsl
             _accountManager.RegisterAccount(account, _default);
         }
     }
-
-    //public class WithAccountBuilderExpression
-    //{
-    //    private readonly AccountBuilder _builder;
-
-    //    internal WithAccountBuilderExpression(AccountBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public AtAccountBuilderExpression With(string login, string password)
-    //    {
-    //        return
-    //            new AtAccountBuilderExpression(_builder.SetLogin(login).SetPassword(password));
-    //    }
-
-    //    public AtAccountBuilderExpression With(string login, string password, uint registrationTimeout)
-    //    {
-    //        return
-    //            new AtAccountBuilderExpression(
-    //                _builder.SetLogin(login).SetPassword(password).SetRegistrationTimeout(registrationTimeout));
-    //    }
-    //}
-
-    //public class AtAccountBuilderExpression
-    //{
-    //    private readonly AccountBuilder _builder;
-
-    //    internal AtAccountBuilderExpression(AccountBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public ThroughAccountBuilderExpression At(string domain)
-    //    {
-    //        return new ThroughAccountBuilderExpression(_builder.SetDomain(domain));
-    //    }
-    //}
-
-    //public class ThroughAccountBuilderExpression
-    //{
-    //    private readonly AccountBuilder _builder;
-
-    //    internal ThroughAccountBuilderExpression(AccountBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public OverAccountBuilderExpression Through(string port)
-    //    {
-    //        return new OverAccountBuilderExpression(_builder.SetPort(port));
-    //    }
-    //}
-
-    //public class OverAccountBuilderExpression
-    //{
-    //    private readonly AccountBuilder _builder;
-
-    //    internal OverAccountBuilderExpression(AccountBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public GoAccountBuilderExpression Over(VoIPTransport transport)
-    //    {
-    //        return new GoAccountBuilderExpression(_builder.SetTransport(transport));
-    //    }
-    //}
-
-    //public class GoAccountBuilderExpression
-    //{
-    //    private readonly AccountBuilder _builder;
-
-    //    internal GoAccountBuilderExpression(AccountBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public Account Go(bool isDefault, bool publishPresence)
-    //    {
-    //        return _builder.SetDefault(isDefault).SetPublish(publishPresence).Register();
-    //    }
-    //}
 }

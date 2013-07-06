@@ -1,3 +1,5 @@
+using System;
+
 namespace pjsip4net.Interfaces
 {
     /// <summary>
@@ -40,6 +42,12 @@ namespace pjsip4net.Interfaces
         /// </summary>
         /// <param name="registrationTimeout"></param>
         IAccountBuilder WithRegistrationTimeout(uint registrationTimeout);
+        /// <summary>
+        /// Exposes account before its initialization finished.
+        /// </summary>
+        /// <param name="initializeAction"></param>
+        /// <returns></returns>
+        IAccountBuilder ExposeAccount(Action<IAccount> initializeAction);
         /// <summary>
         /// Go-go gadget account.
         /// </summary>

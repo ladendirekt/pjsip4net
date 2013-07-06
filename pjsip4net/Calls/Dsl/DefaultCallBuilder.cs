@@ -51,89 +51,9 @@ namespace pjsip4net.Calls.Dsl
             return InternalCall();
         }
 
-        protected virtual ICall InternalCall()
+        protected ICall InternalCall()
         {
             return _callManager.MakeCall(_account, _sb.ToString());
         }
     }
-
-    //public class ToCallBuilderExpression
-    //{
-    //    private readonly CallBuilder _builder;
-
-    //    public ToCallBuilderExpression(CallBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public AtCallBuilderExpression To(string extension)
-    //    {
-    //        return new AtCallBuilderExpression(_builder.SetExtension(extension));
-    //    }
-    //}
-
-    //public class AtCallBuilderExpression
-    //{
-    //    private readonly CallBuilder _builder;
-
-    //    public AtCallBuilderExpression(CallBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public ThroughCallBuilderExpression At(string domain)
-    //    {
-    //        return new ThroughCallBuilderExpression(_builder.SetDomain(domain));
-    //    }
-    //}
-
-    //public class ThroughCallBuilderExpression
-    //{
-    //    private readonly CallBuilder _builder;
-
-    //    public ThroughCallBuilderExpression(CallBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public FromCallBuilderExpression Through(string port)
-    //    {
-    //        return new FromCallBuilderExpression(_builder.SetPort(port));
-    //    }
-    //}
-
-    //public class FromCallBuilderExpression
-    //{
-    //    private readonly CallBuilder _builder;
-
-    //    public FromCallBuilderExpression(CallBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public GoCallBuilderExpression From(Account account)
-    //    {
-    //        return new GoCallBuilderExpression(_builder.SetAccount(account));
-    //    }
-    //}
-
-    //public class GoCallBuilderExpression
-    //{
-    //    private readonly CallBuilder _builder;
-
-    //    public GoCallBuilderExpression(CallBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public Call Go()
-    //    {
-    //        return _builder.Call();
-    //    }
-    //}
 }
