@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2011-03-10 08:58:29Z</date>
+    <date>2013-07-07 13:21:16Z</date>
     <name />
     <email />
     <homepage />
@@ -12,7 +12,7 @@
     <apptype />
   </metadata>
   <assemblies>
-    <assembly name="pjsip.Interop.dll" version="1.4.4068.26621" runtime="2.0" todo="0" niex="0" miss="0" pinv="81">
+    <assembly name="pjsip.Interop.dll" version="1.4.4936.334" runtime="2.0" todo="0" niex="0" miss="0" pinv="81">
       <issue type="pinv">
         <class>AccountApiProvider_1_4</class>
         <caller>AccountConfig GetDefaultConfig()</caller>
@@ -582,8 +582,8 @@
       </issue>
     </assembly>
     <assembly name="pjsip4net.Console.exe" version="0.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="pjsip4net.Container.Castle.dll" version="0.1.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="pjsip4net.Core.dll" version="0.1.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="pjsip4net.dll" version="0.1.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip4net.Container.Castle.dll" version="0.2.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip4net.Core.dll" version="0.2.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="pjsip4net.dll" version="0.2.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
   </assemblies>
 </report>
