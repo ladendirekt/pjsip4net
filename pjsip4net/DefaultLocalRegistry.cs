@@ -20,12 +20,12 @@ namespace pjsip4net
         public UaConfig Config { get; set; }
         public MediaConfig MediaConfig { get; set; }
         public LoggingConfig LoggingConfig { get; set; }
-        public Tuple<TransportType, TransportConfig> TransportConfig { get; set; }
+        public Core.Utils.Tuple<TransportType, TransportConfig> TransportConfig { get; set; }
         public IEnumerable<AccountConfig> AccountConfigs { get; set; }
 
         #endregion
 
-        public void RegisterTransport(Tuple<TransportType, TransportConfig> sipTransportConfig)
+        public void RegisterTransport(Core.Utils.Tuple<TransportType, TransportConfig> sipTransportConfig)
         {
             Helper.GuardNotNull(sipTransportConfig);
             TransportConfig = sipTransportConfig;

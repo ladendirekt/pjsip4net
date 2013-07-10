@@ -27,7 +27,7 @@ namespace pjsip4net.Configuration
                 if (_section != null)
                 {
                     context.RegisterTransport(
-                        new Tuple<TransportType, TransportConfig>(
+                        new Core.Utils.Tuple<TransportType, TransportConfig>(
                             (TransportType) Enum.Parse(typeof (TransportType), _section.Transport.TransportType, true),
                             new TransportConfig(){Port = (uint) _section.Transport.Port}));
 

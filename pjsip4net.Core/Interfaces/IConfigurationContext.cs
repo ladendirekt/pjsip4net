@@ -12,7 +12,7 @@ namespace pjsip4net.Core.Interfaces
         UaConfig Config { get; }
         LoggingConfig LoggingConfig { get; }
         MediaConfig MediaConfig { get; }
-        void RegisterTransport(Tuple<TransportType, TransportConfig> sipTransportConfig);
+        void RegisterTransport(Utils.Tuple<TransportType, TransportConfig> sipTransportConfig);
         void RegisterAccounts(IEnumerable<AccountConfig> accountConfigs);
     }
 }

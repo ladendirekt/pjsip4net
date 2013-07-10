@@ -34,8 +34,8 @@ namespace pjsip4net.Core.Interfaces.ApiProviders
         //int pjsua_recorder_get_port(int id, ref IntPtr p_port);
         void DestroyRecorder(int id);
         IEnumerable<SoundDeviceInfo> EnumerateSoundDevices();
-        Tuple<int, int> GetCurrentSoundDevices();
-        void SetCurrentSoundDevices(Tuple<int, int> deviceIds);
+        Utils.Tuple<int, int> GetCurrentSoundDevices();
+        void SetCurrentSoundDevices(Utils.Tuple<int, int> deviceIds);
         void SetCurrentSoundDevicesToNull();
         //IntPtr pjsua_set_no_snd_dev();
         void SetEc(uint tailMs, uint options);

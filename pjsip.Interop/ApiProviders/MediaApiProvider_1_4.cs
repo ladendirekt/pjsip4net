@@ -149,14 +149,14 @@ namespace pjsip.Interop.ApiProviders
                                                                                                 });
         }
 
-        public Tuple<int, int> GetCurrentSoundDevices()
+        public pjsip4net.Core.Utils.Tuple<int, int> GetCurrentSoundDevices()
         {
             int capId = NativeConstants.PJSUA_INVALID_ID, plbckId = NativeConstants.PJSUA_INVALID_ID;
             Helper.GuardError(PJSUA_DLL.Media.pjsua_get_snd_dev(ref capId, ref plbckId));
-            return new Tuple<int, int>(capId, plbckId);
+            return new pjsip4net.Core.Utils.Tuple<int, int>(capId, plbckId);
         }
 
-        public void SetCurrentSoundDevices(Tuple<int, int> deviceIds)
+        public void SetCurrentSoundDevices(pjsip4net.Core.Utils.Tuple<int, int> deviceIds)
         {
             Helper.GuardPositiveInt(deviceIds.Part1);
             Helper.GuardPositiveInt(deviceIds.Part2);
