@@ -12604,51 +12604,51 @@ namespace pjsip.Interop
         {
             /// Return Type: void
             ///cfg: pjsua_logging_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_logging_config_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_logging_config_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_logging_config_default([In][Out] pjsua_logging_config cfg);
 
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_config_default")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_config_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_config_default([In][Out] pjsua_config cfg);
 
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_init")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_init", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_init([In][Out] pjsua_config ua_cfg,
                                                 [In][Out] pjsua_logging_config log_cfg,
                                                 [In][Out] pjsua_media_config media_cfg);
 
             /// Return Type: pj_status_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_create")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_create", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_create();
 
 
             /// Return Type: pj_status_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_start")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_start", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_start();
 
 
             /// Return Type: pj_status_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_destroy")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_destroy", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_destroy();
 
 
             /// Return Type: int
             ///msec_timeout: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_handle_events")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_handle_events", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_handle_events(uint msec_timeout);
 
             /// Return Type: pj_status_t->int
             ///c: pjsua_logging_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_reconfigure_logging")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_reconfigure_logging", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_reconfigure_logging([In][Out] pjsua_logging_config c);
 
 
             /// Return Type: pj_status_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_detect_nat_type")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_detect_nat_type", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_detect_nat_type();
 
 
             /// Return Type: pj_status_t->int
             ///type: pj_stun_nat_type*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_nat_type")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_nat_type", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_get_nat_type([In][Out] ref pj_stun_nat_type type);
 
 
@@ -12658,20 +12658,20 @@ namespace pjsip.Interop
             ///wait: pj_bool_t->int
             ///token: void*
             ///cb: pj_stun_resolve_cb
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_resolve_stun_servers")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_resolve_stun_servers", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_resolve_stun_servers(uint count, ref pj_str_t srv, int wait, System.IntPtr token, pj_stun_resolve_cb cb);
 
 
             /// Return Type: pj_status_t->int
             ///token: void*
             ///notify_cb: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_cancel_stun_resolution")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_cancel_stun_resolution", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_cancel_stun_resolution(System.IntPtr token, int notify_cb);
 
 
             /// Return Type: pj_status_t->int
             ///url: char*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_verify_sip_url")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_verify_sip_url", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_verify_sip_url([System.Runtime.InteropServices.InAttribute()] [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.LPStr)] string url);
 
 
@@ -12679,13 +12679,13 @@ namespace pjsip.Interop
             ///sender: char*
             ///title: char*
             ///status: pj_status_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_perror")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_perror", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_perror([System.Runtime.InteropServices.InAttribute()] [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.LPStr)] string sender, [System.Runtime.InteropServices.InAttribute()] [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.LPStr)] string title, int status);
 
 
             /// Return Type: void
             ///detail: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_dump")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_dump", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_dump([MarshalAs(UnmanagedType.I4)]bool detail);
         }
 
@@ -12694,7 +12694,7 @@ namespace pjsip.Interop
 
             /// Return Type: void
             ///cfg: pjsua_transport_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_config_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_config_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_transport_config_default([In][Out] pjsua_transport_config cfg);
 
 
@@ -12702,35 +12702,35 @@ namespace pjsip.Interop
             ///type: pjsip_transport_type_e
             ///cfg: pjsua_transport_config*
             ///p_id: pjsua_transport_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_create")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_create", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_transport_create(pjsip_transport_type_e type, [In][Out] pjsua_transport_config cfg, ref int p_id);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_transport_id*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_transports")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_transports", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_transports([Out] int[] id, ref uint count);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_transport_id->int
             ///info: pjsua_transport_info*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_get_info")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_get_info", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_transport_get_info(int id, [In][Out] pjsua_transport_info info);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_transport_id->int
             ///enabled: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_set_enable")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_set_enable", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_transport_set_enable(int id, int enabled);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_transport_id->int
             ///force: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_close")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_transport_close", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_transport_close(int id, int force);
         }
 
@@ -12739,18 +12739,18 @@ namespace pjsip.Interop
 
             /// Return Type: void
             ///cfg: pjsua_acc_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_config_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_config_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_acc_config_default([In][Out] pjsua_acc_config cfg);
 
 
             /// Return Type: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_count")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_count", CallingConvention = CallingConvention.Cdecl)]
             public static extern uint pjsua_acc_get_count();
 
 
             /// Return Type: pj_bool_t->int
             ///acc_id: pjsua_acc_id->int
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_acc_is_valid")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_acc_is_valid", CallingConvention = CallingConvention.Cdecl)]
             private static extern int pjsua_acc_is_valid1(int acc_id);
 
             public static bool pjsua_acc_is_valid(int acc_id)
@@ -12760,12 +12760,12 @@ namespace pjsip.Interop
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_set_default(int acc_id);
 
 
             /// Return Type: pjsua_acc_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_get_default();
 
 
@@ -12773,7 +12773,7 @@ namespace pjsip.Interop
             ///acc_cfg: pjsua_acc_config*
             ///is_default: pj_bool_t->int
             ///p_acc_id: pjsua_acc_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_add")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_add", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_add([In][Out] pjsua_acc_config acc_cfg, int is_default, ref int p_acc_id);
 
 
@@ -12781,40 +12781,40 @@ namespace pjsip.Interop
             ///tid: pjsua_transport_id->int
             ///is_default: pj_bool_t->int
             ///p_acc_id: pjsua_acc_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_add_local")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_add_local", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_add_local(int tid, int is_default, ref int p_acc_id);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
             ///user_data: void*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_user_data")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_user_data", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_set_user_data(int acc_id, System.IntPtr user_data);
 
 
             /// Return Type: void*
             ///acc_id: pjsua_acc_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_user_data")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_user_data", CallingConvention = CallingConvention.Cdecl)]
             public static extern System.IntPtr pjsua_acc_get_user_data(int acc_id);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_del")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_del", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_del(int acc_id);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
             ///acc_cfg: pjsua_acc_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_modify")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_modify", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_modify(int acc_id, [In][Out] pjsua_acc_config acc_cfg);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
             ///is_online: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_online_status")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_online_status", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_set_online_status(int acc_id, int is_online);
 
 
@@ -12822,41 +12822,41 @@ namespace pjsip.Interop
             ///acc_id: pjsua_acc_id->int
             ///is_online: pj_bool_t->int
             ///pr: pjrpid_element*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_online_status2")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_online_status2", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_set_online_status2(int acc_id, int is_online, ref pjrpid_element pr);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
             ///renew: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_registration")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_registration", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_set_registration(int acc_id, int renew);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
             ///info: pjsua_acc_info*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_info")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_get_info", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_get_info(int acc_id, ref pjsua_acc_info info);
 
 
             /// Return Type: pj_status_t->int
             ///ids: pjsua_acc_id*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_accs")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_accs", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_accs([Out] int[] ids, ref uint count);
 
 
             /// Return Type: pj_status_t->int
             ///info: pjsua_acc_info*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_enum_info")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_enum_info", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_enum_info([Out] pjsua_acc_info[] info, ref uint count);
 
 
             /// Return Type: pjsua_acc_id->int
             ///url: pj_str_t*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_find_for_outgoing")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_find_for_outgoing", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_find_for_outgoing(ref pj_str_t url);
 
 
@@ -12865,14 +12865,14 @@ namespace pjsip.Interop
             ///contact: pj_str_t*
             ///acc_id: pjsua_acc_id->int
             ///uri: pj_str_t*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_create_uac_contact")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_create_uac_contact", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_create_uac_contact(ref pj_pool_t pool, ref pj_str_t contact, int acc_id, ref pj_str_t uri);
 
 
             /// Return Type: pj_status_t->int
             ///acc_id: pjsua_acc_id->int
             ///tp_id: pjsua_transport_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_transport")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_acc_set_transport", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_acc_set_transport(int acc_id, int tp_id);
         }
 
@@ -12880,19 +12880,19 @@ namespace pjsip.Interop
         {
 
             /// Return Type: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_max_count")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_max_count", CallingConvention = CallingConvention.Cdecl)]
             public static extern uint pjsua_call_get_max_count();
 
 
             /// Return Type: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_count")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_count", CallingConvention = CallingConvention.Cdecl)]
             public static extern uint pjsua_call_get_count();
 
 
             /// Return Type: pj_status_t->int
             ///ids: pjsua_call_id*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_calls")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_calls", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_calls([Out] int[] ids, ref uint count);
 
 
@@ -12903,13 +12903,13 @@ namespace pjsip.Interop
             ///user_data: void*
             ///msg_data: pjsua_msg_data*
             ///p_call_id: pjsua_call_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_make_call")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_make_call", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_make_call(int acc_id, ref pj_str_t dst_uri, uint options, System.IntPtr user_data, pjsua_msg_data msg_data, ref int p_call_id);
 
 
             /// Return Type: pj_bool_t->int
             ///call_id: pjsua_call_id->int
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_call_is_active")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_call_is_active", CallingConvention = CallingConvention.Cdecl)]
             private static extern int pjsua_call_is_active1(int call_id);
 
             public static bool pjsua_call_is_active(int call_id)
@@ -12919,7 +12919,7 @@ namespace pjsip.Interop
 
             /// Return Type: pj_bool_t->int
             ///call_id: pjsua_call_id->int
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_call_has_media")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_call_has_media", CallingConvention = CallingConvention.Cdecl)]
             private static extern int pjsua_call_has_media1(int call_id);
 
             public static bool pjsua_call_has_media(int call_id)
@@ -12929,40 +12929,40 @@ namespace pjsip.Interop
 
             /// Return Type: pjmedia_transport*
             ///cid: pjsua_call_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_media_transport")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_media_transport", CallingConvention = CallingConvention.Cdecl)]
             public static extern System.IntPtr pjsua_call_get_media_transport(int cid);
 
 
             /// Return Type: pjsua_conf_port_id->int
             ///call_id: pjsua_call_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_conf_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_conf_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_get_conf_port(int call_id);
 
 
             /// Return Type: pj_status_t->int
             ///call_id: pjsua_call_id->int
             ///info: pjsua_call_info*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_info")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_info", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_get_info(int call_id, ref pjsua_call_info info);
 
 
             /// Return Type: pj_status_t->int
             ///call_id: pjsua_call_id->int
             ///user_data: void*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_set_user_data")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_set_user_data", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_set_user_data(int call_id, System.IntPtr user_data);
 
 
             /// Return Type: void*
             ///call_id: pjsua_call_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_user_data")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_user_data", CallingConvention = CallingConvention.Cdecl)]
             public static extern System.IntPtr pjsua_call_get_user_data(int call_id);
 
 
             /// Return Type: pj_status_t->int
             ///call_id: pjsua_call_id->int
             ///p_type: pj_stun_nat_type*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_rem_nat_type")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_get_rem_nat_type", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_get_rem_nat_type(int call_id, ref pj_stun_nat_type p_type);
 
 
@@ -12971,7 +12971,7 @@ namespace pjsip.Interop
             ///code: unsigned int
             ///reason: pj_str_t*
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_answer")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_answer", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_answer(int call_id, uint code, ref pj_str_t reason, pjsua_msg_data msg_data);
 
 
@@ -12980,21 +12980,21 @@ namespace pjsip.Interop
             ///code: unsigned int
             ///reason: pj_str_t*
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_hangup")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_hangup", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_hangup(int call_id, uint code, ref pj_str_t reason, pjsua_msg_data msg_data);
 
 
             /// Return Type: pj_status_t->int
             ///call_id: pjsua_call_id->int
             ///cmd: pjsip_redirect_op
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_process_redirect")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_process_redirect", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_process_redirect(int call_id, pjsip_redirect_op cmd);
 
 
             /// Return Type: pj_status_t->int
             ///call_id: pjsua_call_id->int
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_set_hold")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_set_hold", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_set_hold(int call_id, pjsua_msg_data msg_data);
 
 
@@ -13002,7 +13002,7 @@ namespace pjsip.Interop
             ///call_id: pjsua_call_id->int
             ///unhold: pj_bool_t->int
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_reinvite")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_reinvite", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_reinvite(int call_id, int unhold, pjsua_msg_data msg_data);
 
 
@@ -13010,7 +13010,7 @@ namespace pjsip.Interop
             ///call_id: pjsua_call_id->int
             ///options: unsigned int
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_update")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_update", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_update(int call_id, uint options, pjsua_msg_data msg_data);
 
 
@@ -13018,7 +13018,7 @@ namespace pjsip.Interop
             ///call_id: pjsua_call_id->int
             ///dest: pj_str_t*
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_xfer")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_xfer", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_xfer(int call_id, ref pj_str_t dest, pjsua_msg_data msg_data);
 
 
@@ -13027,14 +13027,14 @@ namespace pjsip.Interop
             ///dest_call_id: pjsua_call_id->int
             ///options: unsigned int
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_xfer_replaces")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_xfer_replaces", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_xfer_replaces(int call_id, int dest_call_id, uint options, pjsua_msg_data msg_data);
 
 
             /// Return Type: pj_status_t->int
             ///call_id: pjsua_call_id->int
             ///digits: pj_str_t*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_dial_dtmf")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_dial_dtmf", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_dial_dtmf(int call_id, ref pj_str_t digits);
 
 
@@ -13044,7 +13044,7 @@ namespace pjsip.Interop
             ///content: pj_str_t*
             ///msg_data: pjsua_msg_data*
             ///user_data: void*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_send_im")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_send_im", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_send_im(int call_id, ref pj_str_t mime_type, ref pj_str_t content, pjsua_msg_data msg_data, System.IntPtr user_data);
 
 
@@ -13052,7 +13052,7 @@ namespace pjsip.Interop
             ///call_id: pjsua_call_id->int
             ///is_typing: pj_bool_t->int
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_send_typing_ind")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_send_typing_ind", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_send_typing_ind(int call_id, int is_typing, pjsua_msg_data msg_data);
 
 
@@ -13060,12 +13060,12 @@ namespace pjsip.Interop
             ///call_id: pjsua_call_id->int
             ///method: pj_str_t*
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_send_request")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_send_request", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_send_request(int call_id, ref pj_str_t method, pjsua_msg_data msg_data);
 
 
             /// Return Type: void
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_hangup_all")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_hangup_all", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_call_hangup_all();
 
 
@@ -13075,7 +13075,7 @@ namespace pjsip.Interop
             ///buffer: char*
             ///maxlen: unsigned int
             ///indent: char*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_dump")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_call_dump", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_call_dump(int call_id, int with_media, System.IntPtr buffer, uint maxlen, [System.Runtime.InteropServices.InAttribute()] [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.LPStr)] string indent);
         }
 
@@ -13084,18 +13084,18 @@ namespace pjsip.Interop
 
             /// Return Type: void
             ///cfg: pjsua_buddy_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_config_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_config_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_buddy_config_default([In][Out] pjsua_buddy_config cfg);
 
 
             /// Return Type: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_buddy_count")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_buddy_count", CallingConvention = CallingConvention.Cdecl)]
             public static extern uint pjsua_get_buddy_count();
 
 
             /// Return Type: pj_bool_t->int
             ///buddy_id: pjsua_buddy_id->int
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_buddy_is_valid")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_buddy_is_valid", CallingConvention = CallingConvention.Cdecl)]
             private static extern int pjsua_buddy_is_valid1(int buddy_id);
 
             public static bool pjsua_buddy_is_valid(int buddy_id)
@@ -13106,68 +13106,68 @@ namespace pjsip.Interop
             /// Return Type: pj_status_t->int
             ///ids: pjsua_buddy_id*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_buddies")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_buddies", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_buddies([Out] int[] ids, ref uint count);
 
 
             /// Return Type: pjsua_buddy_id->int
             ///uri: pj_str_t*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_find")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_find", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_find(ref pj_str_t uri);
 
 
             /// Return Type: pj_status_t->int
             ///buddy_id: pjsua_buddy_id->int
             ///info: pjsua_buddy_info*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_get_info")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_get_info", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_get_info(int buddy_id, ref pjsua_buddy_info info);
 
 
             /// Return Type: pj_status_t->int
             ///buddy_id: pjsua_buddy_id->int
             ///user_data: void*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_set_user_data")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_set_user_data", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_set_user_data(int buddy_id, System.IntPtr user_data);
 
 
             /// Return Type: void*
             ///buddy_id: pjsua_buddy_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_get_user_data")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_get_user_data", CallingConvention = CallingConvention.Cdecl)]
             public static extern System.IntPtr pjsua_buddy_get_user_data(int buddy_id);
 
 
             /// Return Type: pj_status_t->int
             ///buddy_cfg: pjsua_buddy_config*
             ///p_buddy_id: pjsua_buddy_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_add")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_add", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_add([In][Out] pjsua_buddy_config buddy_cfg, ref int p_buddy_id);
 
 
             /// Return Type: pj_status_t->int
             ///buddy_id: pjsua_buddy_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_del")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_del", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_del(int buddy_id);
 
 
             /// Return Type: pj_status_t->int
             ///buddy_id: pjsua_buddy_id->int
             ///subscribe: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_subscribe_pres")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_subscribe_pres", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_subscribe_pres(int buddy_id, int subscribe);
 
 
             /// Return Type: pj_status_t->int
             ///buddy_id: pjsua_buddy_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_update_pres")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_buddy_update_pres", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_buddy_update_pres(int buddy_id);
 
 
             /// Return Type: void
             ///verbose: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_pres_dump")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_pres_dump", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_pres_dump(int verbose);
 
-            [DllImport("pjsua.dll", EntryPoint = "pjsua_pres_notify")]
+            [DllImport("pjsua.dll", EntryPoint = "pjsua_pres_notify", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_pres_notify(int acc_id, IntPtr srv_pres, pjsip_evsub_state state,
                 ref pj_str_t state_str, ref pj_str_t reason, int with_body, [In] pjsua_msg_data msg_data);
 
@@ -13179,7 +13179,7 @@ namespace pjsip.Interop
             ///content: pj_str_t*
             ///msg_data: pjsua_msg_data*
             ///user_data: void*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_im_send")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_im_send", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_im_send(int acc_id, ref pj_str_t to, ref pj_str_t mime_type, ref pj_str_t content, pjsua_msg_data msg_data, System.IntPtr user_data);
 
 
@@ -13188,7 +13188,7 @@ namespace pjsip.Interop
             ///to: pj_str_t*
             ///is_typing: pj_bool_t->int
             ///msg_data: pjsua_msg_data*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_im_typing")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_im_typing", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_im_typing(int acc_id, ref pj_str_t to, int is_typing, pjsua_msg_data msg_data);
 
         }
@@ -13198,31 +13198,31 @@ namespace pjsip.Interop
 
             /// Return Type: void
             ///cfg: pjsua_media_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_media_config_default")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_media_config_default", CallingConvention = CallingConvention.Cdecl)]
             public static extern void pjsua_media_config_default([In][Out] pjsua_media_config cfg);
 
 
             /// Return Type: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_max_ports")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_max_ports", CallingConvention = CallingConvention.Cdecl)]
             public static extern uint pjsua_conf_get_max_ports();
 
 
             /// Return Type: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_active_ports")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_active_ports", CallingConvention = CallingConvention.Cdecl)]
             public static extern uint pjsua_conf_get_active_ports();
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_conf_port_id*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_conf_ports")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_conf_ports", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_conf_ports([Out] int[] id, ref uint count);
 
 
             /// Return Type: pj_status_t->int
             ///port_id: pjsua_conf_port_id->int
             ///info: pjsua_conf_port_info*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_port_info")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_port_info", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_get_port_info([In]int port_id, ref pjsua_conf_port_info info);
 
 
@@ -13230,41 +13230,41 @@ namespace pjsip.Interop
             ///pool: pj_pool_t*
             ///port: pjmedia_port*
             ///p_id: pjsua_conf_port_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_add_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_add_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_add_port(ref pj_pool_t pool, ref pjmedia_port port, ref int p_id);
 
 
             /// Return Type: pj_status_t->int
             ///port_id: pjsua_conf_port_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_remove_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_remove_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_remove_port([In]int port_id);
 
 
             /// Return Type: pj_status_t->int
             ///source: pjsua_conf_port_id->int
             ///sink: pjsua_conf_port_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_connect")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_connect", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_connect([In]int source, [In]int sink);
 
 
             /// Return Type: pj_status_t->int
             ///source: pjsua_conf_port_id->int
             ///sink: pjsua_conf_port_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_disconnect")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_disconnect", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_disconnect([In]int source, [In]int sink);
 
 
             /// Return Type: pj_status_t->int
             ///slot: pjsua_conf_port_id->int
             ///level: float
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_adjust_tx_level")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_adjust_tx_level", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_adjust_tx_level([In]int slot, [In]float level);
 
 
             /// Return Type: pj_status_t->int
             ///slot: pjsua_conf_port_id->int
             ///level: float
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_adjust_rx_level")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_adjust_rx_level", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_adjust_rx_level([In]int slot, [In]float level);
 
 
@@ -13272,7 +13272,7 @@ namespace pjsip.Interop
             ///slot: pjsua_conf_port_id->int
             ///tx_level: unsigned int*
             ///rx_level: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_signal_level")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_conf_get_signal_level", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_conf_get_signal_level([In]int slot, ref uint tx_level, ref uint rx_level);
 
 
@@ -13280,7 +13280,7 @@ namespace pjsip.Interop
             ///filename: pj_str_t*
             ///options: unsigned int
             ///p_id: pjsua_player_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_create")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_create", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_player_create(ref pj_str_t filename, [In]uint options, ref int p_id);
 
 
@@ -13290,33 +13290,33 @@ namespace pjsip.Interop
             ///label: pj_str_t*
             ///options: unsigned int
             ///p_id: pjsua_player_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_playlist_create")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_playlist_create", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_playlist_create(ref pj_str_t file_names, [In]uint file_count, ref pj_str_t label, [In]uint options, ref int p_id);
 
 
             /// Return Type: pjsua_conf_port_id->int
             ///id: pjsua_player_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_get_conf_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_get_conf_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_player_get_conf_port([In]int id);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_player_id->int
             ///p_port: pjmedia_port**
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_get_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_get_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_player_get_port([In]int id, ref System.IntPtr p_port);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_player_id->int
             ///samples: pj_uint32_t->unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_set_pos")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_set_pos", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_player_set_pos([In]int id, [In]uint samples);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_player_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_destroy")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_player_destroy", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_player_destroy([In]int id);
 
 
@@ -13327,82 +13327,82 @@ namespace pjsip.Interop
             ///max_size: pj_ssize_t->int
             ///options: unsigned int
             ///p_id: pjsua_recorder_id*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_create")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_create", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_recorder_create(ref pj_str_t filename, [In]uint enc_type, System.IntPtr enc_param, [In]int max_size, [In]uint options, ref int p_id);
 
 
             /// Return Type: pjsua_conf_port_id->int
             ///id: pjsua_recorder_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_get_conf_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_get_conf_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_recorder_get_conf_port([In]int id);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_recorder_id->int
             ///p_port: pjmedia_port**
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_get_port")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_get_port", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_recorder_get_port([In]int id, ref System.IntPtr p_port);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_recorder_id->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_destroy")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_recorder_destroy", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_recorder_destroy([In]int id);
 
 
             /// Return Type: pj_status_t->int
             ///info: pjmedia_aud_dev_info*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_aud_devs")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_aud_devs", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_aud_devs([Out] pjmedia_aud_dev_info[] info, ref uint count);
 
 
             /// Return Type: pj_status_t->int
             ///info: pjmedia_snd_dev_info*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_snd_devs")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_snd_devs", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_snd_devs([Out] pjmedia_snd_dev_info[] info, ref uint count);
 
 
             /// Return Type: pj_status_t->int
             ///capture_dev: int*
             ///playback_dev: int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_snd_dev")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_snd_dev", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_get_snd_dev(ref int capture_dev, ref int playback_dev);
 
 
             /// Return Type: pj_status_t->int
             ///capture_dev: int
             ///playback_dev: int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_snd_dev")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_snd_dev", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_set_snd_dev([In]int capture_dev, [In]int playback_dev);
 
 
             /// Return Type: pj_status_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_null_snd_dev")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_null_snd_dev", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_set_null_snd_dev();
 
 
             /// Return Type: pjmedia_port*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_no_snd_dev")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_no_snd_dev", CallingConvention = CallingConvention.Cdecl)]
             public static extern System.IntPtr pjsua_set_no_snd_dev();
 
 
             /// Return Type: pj_status_t->int
             ///tail_ms: unsigned int
             ///options: unsigned int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_ec")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_set_ec", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_set_ec([In]uint tail_ms, [In]uint options);
 
 
             /// Return Type: pj_status_t->int
             ///p_tail_ms: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_ec_tail")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_get_ec_tail", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_get_ec_tail(ref uint p_tail_ms);
 
 
             /// Return Type: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_snd_is_active")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_snd_is_active", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_snd_is_active();
 
 
@@ -13410,48 +13410,48 @@ namespace pjsip.Interop
             ///cap: pjmedia_aud_dev_cap
             ///pval: void*
             ///keep: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_snd_set_setting")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_snd_set_setting", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_snd_set_setting(pjmedia_aud_dev_cap cap, System.IntPtr pval, [In]int keep);
 
 
             /// Return Type: pj_status_t->int
             ///cap: pjmedia_aud_dev_cap
             ///pval: void*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_snd_get_setting")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_snd_get_setting", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_snd_get_setting(pjmedia_aud_dev_cap cap, System.IntPtr pval);
 
 
             /// Return Type: pj_status_t->int
             ///id: pjsua_codec_info*
             ///count: unsigned int*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_codecs")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_enum_codecs", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_enum_codecs([Out] pjsua_codec_info[] id, ref uint count);
 
 
             /// Return Type: pj_status_t->int
             ///codec_id: pj_str_t*
             ///priority: pj_uint8_t->unsigned char
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_codec_set_priority")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_codec_set_priority", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_codec_set_priority([In]ref pj_str_t codec_id, [In]byte priority);
 
 
             /// Return Type: pj_status_t->int
             ///codec_id: pj_str_t*
             ///param: pjmedia_codec_param*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_codec_get_param")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_codec_get_param", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_codec_get_param([In]ref pj_str_t codec_id, [In][Out] ref pjmedia_codec_param param);
 
 
             /// Return Type: pj_status_t->int
             ///codec_id: pj_str_t*
             ///param: pjmedia_codec_param*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_codec_set_param")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_codec_set_param", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_codec_set_param([In]ref pj_str_t codec_id, [In][Out] ref pjmedia_codec_param param);
 
 
             /// Return Type: pj_status_t->int
             ///cfg: pjsua_transport_config*
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_media_transports_create")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_media_transports_create", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_media_transports_create([In][Out] pjsua_transport_config cfg);
 
 
@@ -13459,7 +13459,7 @@ namespace pjsip.Interop
             ///tp: pjsua_media_transport*
             ///count: unsigned int
             ///auto_delete: pj_bool_t->int
-            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_media_transports_attach")]
+            [System.Runtime.InteropServices.DllImportAttribute("pjsua.dll", EntryPoint = "pjsua_media_transports_attach", CallingConvention = CallingConvention.Cdecl)]
             public static extern int pjsua_media_transports_attach(ref pjsua_media_transport tp, [In]uint count, [In]int auto_delete);
         }
 
