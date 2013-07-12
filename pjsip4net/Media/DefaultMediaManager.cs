@@ -241,19 +241,5 @@ namespace pjsip4net.Media
         }
 
         #endregion
-
-        //internal static MediaManager Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //            lock(_lock)
-        //                if (_instance == null)
-        //                    _instance = new MediaManager();
-        //        return _instance;
-        //    }
-        //}
-
-        //#endregion
     }
 }

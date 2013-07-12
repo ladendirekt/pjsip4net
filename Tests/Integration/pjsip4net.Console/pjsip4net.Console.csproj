@@ -87,6 +87,7 @@
     <Compile Include="CommandFactory.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandFactory.cs" />
+    <Compile Include="PrintUsageCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestArguments.cs" />
   </ItemGroup>

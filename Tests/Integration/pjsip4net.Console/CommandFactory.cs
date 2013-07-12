@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Magnum.CommandLine;
+using Magnum.CommandLineParser;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
 
@@ -9,73 +9,102 @@ namespace pjsip4net.Console
     public class CommandFactory : ICommandFactory
     {
         private readonly ISipUserAgent _userAgent;
-        private readonly CommandLineParser _parser = new CommandLineParser();
+        private readonly ICommandLineParser _parser = new MonadicCommandLineParser();
 
         public CommandFactory(ISipUserAgent userAgent)
         {
             _userAgent = userAgent;
-            _parser.RegisterArgumentsForCommand<RegisterAccountArguments>("register");
-            _parser.RegisterArgumentsForCommand<IdArguments>("unregister");
-            _parser.RegisterArgumentsForCommand<NullArguments>("accounts");
-            _parser.RegisterArgumentsForCommand<NullArguments>("codecs");
-            _parser.RegisterArgumentsForCommand<CodecArguments>("setcodec");
-            _parser.RegisterArgumentsForCommand<DeviceArguments>("setdevice");
-            _parser.RegisterArgumentsForCommand<NullArguments>("devices");
-            _parser.RegisterArgumentsForCommand<NullArguments>("calls");
-            _parser.RegisterArgumentsForCommand<CallArguments>("makecall");
-            _parser.RegisterArgumentsForCommand<DtmfArguments>("dtmf");
-            _parser.RegisterArgumentsForCommand<IdArguments>("hangupcall");
-            _parser.RegisterArgumentsForCommand<NullArguments>("buddies");
-            _parser.RegisterArgumentsForCommand<RegisterBuddyArguments>("registerbuddy");
-            _parser.RegisterArgumentsForCommand<IdArguments>("unregisterbuddy");
-            _parser.RegisterArgumentsForCommand<DumpSubscriptionArguments>("dumpsub");
-            _parser.RegisterArgumentsForCommand<ImArguments>("im");
-            _parser.RegisterArgumentsForCommand<NullArguments>("?");
-            _parser.RegisterArgumentsForCommand<NullArguments>("print");
-            _parser.RegisterArgumentsForCommand<NullArguments>("help");
-            //System.Console.WriteLine(_parser.WhatsRegistered());
         }
 
         #region Implementation of ICommandFactory
 
         public ICommand Create(string cmd)
         {
-            var output = _parser.Parse(cmd.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries));
-            switch (output.CommandName)
+            var cmdElements = _parser.Parse(cmd);
+            var argument = cmdElements.OfType<ArgumentElement>().First();
+            var definitions = cmdElements.OfType<DefinitionElement>().ToArray();
+            switch (argument.Id)
             {
                 case "register":
-                    return new RegisterAccountCommand(_userAgent, output.ParsedArguments.As<RegisterAccountArguments>());
+                    return new RegisterAccountCommand(_userAgent, new RegisterAccountArguments
+                    {
+                        Domain = definitions.First(x => x.Key == "d").Value,
+                        Extension = definitions.First(x => x.Key == "e").Value,
+                        Password = definitions.First(x => x.Key == "p").Value,
+                        Port = definitions.First(x => x.Key == "Port").Value,
+                        Transport = definitions.First(x => x.Key == "t").Value
+                    });
                 case "accounts":
                     return new ShowAccountsCommand(_userAgent);
                 case "unregister":
-                    return new UnregisterAccountCommand(_userAgent, output.ParsedArguments.As<IdArguments>());
+                    return new UnregisterAccountCommand(_userAgent,
+                        new IdArguments {Id = definitions.First(x => x.Key == "i").Value});
                 case "codecs":
                     return new ShowCodecsCommand(_userAgent);
                 case "setcodec":
-                    return new SetCodecCommand(_userAgent,output.ParsedArguments.As<CodecArguments>());
+                    return new SetCodecCommand(_userAgent, new CodecArguments
+                    {
+                        Channels = definitions.First(x => x.Key == "Channels").Value,
+                        CodecId = definitions.First(x => x.Key == "c").Value,
+                        Frequency = definitions.First(x => x.Key == "f").Value,
+                        Priority = definitions.First(x => x.Key == "p").Value,
+                    });
                 case "devices":
                     return new ShowDevicesCommand(_userAgent);
                 case "setdevice":
-                    return new SetDeviceCommand(_userAgent, output.ParsedArguments.As<DeviceArguments>());
+                    return new SetDeviceCommand(_userAgent, new DeviceArguments
+                    {
+                        CaptureId = definitions.First(x => x.Key == "c").Value,
+                        PlaybackId = definitions.First(x => x.Key == "p").Value,
+                    });
                 case "calls":
                     return new ShowCallsCommand(_userAgent);
                 case "makecall":
-                    return new MakeCallCommand(_userAgent, output.ParsedArguments.As<CallArguments>());
+                    return new MakeCallCommand(_userAgent, new CallArguments
+                    {
+                        At = definitions.First(x => x.Key == "a").Value,
+                        From = definitions.First(x => x.Key == "f").Value,
+                        Through = definitions.First(x => x.Key == "Through").Value,
+                        To = definitions.First(x => x.Key == "t").Value,
+                    });
                 case "hangupcall":
-                    return new HangupCallCommand(_userAgent, output.ParsedArguments.As<IdArguments>());
+                    return new HangupCallCommand(_userAgent,
+                        new IdArguments {Id = definitions.First(x => x.Key == "i").Value});
                 case "dtmf":
-                    return new SendDtmfCommand(_userAgent, output.ParsedArguments.As<DtmfArguments>());
+                    return new SendDtmfCommand(_userAgent, new DtmfArguments
+                    {
+                        CallId = definitions.First(x => x.Key == "c").Value,
+                        Digits = definitions.First(x => x.Key == "d").Value,
+                    });
                 case "buddies":
                     return new ShowAllBuddiesCommand(_userAgent);
                 case "registerbuddy":
-                    return new RegisterBuddyCommand(_userAgent, output.ParsedArguments.As<RegisterBuddyArguments>());
+                    return new RegisterBuddyCommand(_userAgent, new RegisterBuddyArguments
+                    {
+                        Domain = definitions.First(x => x.Key == "d").Value,
+                        Extension = definitions.First(x => x.Key == "e").Value,
+                        Port = definitions.First(x => x.Key == "Port").Value,
+                        Subscribe = definitions.First(x => x.Key == "s").Value,
+                        Transport = definitions.First(x => x.Key == "t").Value,
+                    });
                 case "unregisterbuddy":
-                    return new UnregisterBuddyCommand(_userAgent, output.ParsedArguments.As<IdArguments>());
+                    return new UnregisterBuddyCommand(_userAgent,
+                        new IdArguments {Id = definitions.First(x => x.Key == "i").Value});
                 case "dumpsub":
-                    return new DumpSubscriptionCommand(_userAgent,
-                                                       output.ParsedArguments.As<DumpSubscriptionArguments>());
+                    return new DumpSubscriptionCommand(_userAgent, new DumpSubscriptionArguments
+                    {
+                        Verbose = definitions.First(x => x.Key == "v").Value
+                    });
                 case "im":
-                    return new SendImCommand(_userAgent, output.ParsedArguments.As<ImArguments>());
+                    return new SendImCommand(_userAgent, new ImArguments
+                    {
+                        At = definitions.First(x => x.Key == "a").Value,
+                        Body = definitions.First(x => x.Key == "b").Value,
+                        From = definitions.First(x => x.Key == "f").Value,
+                        InDialog = definitions.First(x => x.Key == "i").Value,
+                        Through = definitions.First(x => x.Key == "Through").Value,
+                        To = definitions.First(x => x.Key == "t").Value,
+                    });
                 case "?":
                 case "help":
                 case "print":
@@ -132,86 +161,6 @@ namespace pjsip4net.Console
         public void Execute()
         {
             _agent.ImManager.DumpSubscription(Convert.ToBoolean(_arguments.Verbose));
-        }
-
-        #endregion
-    }
-
-    public class PrintUsageCommand : ICommand
-    {
-        #region Implementation of ICommand
-
-        public void Execute()
-        {
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= Available commands | Command arguments      =");
-            System.Console.WriteLine("= <argument example> | <command description>  =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= ? or help or print | <print this table>     =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= register           | <register on server>   =");
-            System.Console.WriteLine("=   <-e:user>        | *Extension or e        =");
-            System.Console.WriteLine("=   <-d:pjsip.org>   | *Domain or d           =");
-            System.Console.WriteLine("=   <-p:1234>        | Password or p          =");
-            System.Console.WriteLine("=   <-Port:5060>     | Port                   =");
-            System.Console.WriteLine("=   <-t:udp,tcp,tls> | Transport or t         =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= unregister         | <delete registration>  =");
-            System.Console.WriteLine("=   <-i:1>           | *Id or i               =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= accounts           | <show all accounts>    =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= setcodec           | <set codec priority>   =");
-            System.Console.WriteLine("=   <-c:speex>       | *CodecId or c          =");
-            System.Console.WriteLine("=   <-f:8000>        | *Frequency or f        =");
-            System.Console.WriteLine("=   <-Channels:2>    | *Channels              =");
-            System.Console.WriteLine("=   <-p:42>          | *Priority or p         =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= codecs             | <show all codecs>      =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= setdevice          | <set devices>          =");
-            System.Console.WriteLine("=   <-p:0>           | *PlaybackId or p       =");
-            System.Console.WriteLine("=   <-c:2>           | *CaptureId or c        =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= devices            | <show all devices>     =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= makecall           | <literally>            =");
-            System.Console.WriteLine("=   <-t:user1>       | *To or t               =");
-            System.Console.WriteLine("=   <-a:pjsip.org>   | *At or a               =");
-            System.Console.WriteLine("=   <-f:1 (acc. id)> | *From or f             =");
-            System.Console.WriteLine("=   <-Through:5060>  | Through                =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= hangupcall         | <literally>            =");
-            System.Console.WriteLine("=   <-i:1>           | *Id or i               =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= dtmf               | <send dtmf digits>     =");
-            System.Console.WriteLine("=   <-c:1>           | *CallId or c           =");
-            System.Console.WriteLine("=   <-d:12345>       | *Digits or d           =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= calls              | <show all calls>       =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= registerbuddy      | <register buddy>       =");
-            System.Console.WriteLine("=   <-e:user>        | *Extension or e        =");
-            System.Console.WriteLine("=   <-d:pjsip.org>   | *Domain or d           =");
-            System.Console.WriteLine("=   <-Port:5060>     | Port                   =");
-            System.Console.WriteLine("=   <-t:udp,tcp,tls> | Transport or t         =");
-            System.Console.WriteLine("=   <-s:true>        | Subscribe or s         =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= unregisterbuddy    | <delete buddy>         =");
-            System.Console.WriteLine("=   <-i:1>           | *Id or i               =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= buddies            | <show all buddies>     =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= dumpsub            | <log subscription>     =");
-            System.Console.WriteLine("===============================================");
-            System.Console.WriteLine("= im                 | <send message>         =");
-            System.Console.WriteLine("=   <t:user>         | *To or t               =");
-            System.Console.WriteLine("=   <a:pjsip.org>    | *At or a               =");
-            System.Console.WriteLine("=   <Through:5060>   | Through                =");
-            System.Console.WriteLine("=   <f:1 (acc. id)>  | *From or f             =");
-            System.Console.WriteLine("=   <i:1 (call id)>  | *InDialog or i         =");
-            System.Console.WriteLine("=   <b:hello>        | *Body or b             =");
-            System.Console.WriteLine("===============================================");
         }
 
         #endregion
@@ -283,6 +232,10 @@ namespace pjsip4net.Console
             System.Console.WriteLine("Available accounts");
             _agent.AccountManager.Accounts.Each(x => System.Console.WriteLine(x.Id + " " + x.AccountId + " " +
                                                                               x.StatusText));
+            System.Console.WriteLine("Default account");
+            System.Console.WriteLine(_agent.AccountManager.DefaultAccount.Id + " " +
+                                     _agent.AccountManager.DefaultAccount.AccountId + " " +
+                                     _agent.AccountManager.DefaultAccount.StatusText);
         }
     }
 
@@ -440,11 +393,13 @@ namespace pjsip4net.Console
         public void Execute()
         {
             System.Console.Write("Current playback device - ");
-            System.Console.WriteLine(_agent.MediaManager.CurrentPlaybackDevice.Id + " " + 
-                _agent.MediaManager.CurrentPlaybackDevice.Name);
+            if (_agent.MediaManager.CurrentPlaybackDevice != null)
+                System.Console.WriteLine(_agent.MediaManager.CurrentPlaybackDevice.Id + " " + 
+                                         _agent.MediaManager.CurrentPlaybackDevice.Name);
             System.Console.Write("Current capture device - ");
-            System.Console.WriteLine(_agent.MediaManager.CurrentCaptureDevice.Id + " " + 
-                _agent.MediaManager.CurrentCaptureDevice.Name);
+            if (_agent.MediaManager.CurrentCaptureDevice != null)
+                System.Console.WriteLine(_agent.MediaManager.CurrentCaptureDevice.Id + " " + 
+                                         _agent.MediaManager.CurrentCaptureDevice.Name);
             System.Console.WriteLine("---------------------------");
             System.Console.WriteLine("Available playback devices");
             _agent.MediaManager.PlaybackDevices.Each(x => System.Console.WriteLine(x.Id + " " + x.Name));
