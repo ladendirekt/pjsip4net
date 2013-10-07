@@ -214,7 +214,7 @@ namespace pjsip4net.IM
 
         public void SendMessage(IAccount account, string body, string to)
         {
-            _imApi.SendIm(account.Id, to, "plain/text", body);
+            _imApi.SendIm(account.Id, to, "text/plain", body);
         }
 
         public void SendTypingInDialog(ICall dialog, bool isTyping)
@@ -233,7 +233,7 @@ namespace pjsip4net.IM
         {
             Helper.GuardNotNull(dialog);
             Helper.GuardPositiveInt(dialog.Id);
-            _callApi.SendIm(dialog.Id, "plain/text", body);
+            _callApi.SendIm(dialog.Id, "text/plain", body);
         }
 
         //protected override void CleanUp()
