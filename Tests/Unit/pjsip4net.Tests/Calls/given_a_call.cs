@@ -19,11 +19,11 @@ namespace pjsip4net.Tests.Calls
         [SetUp]
         public void Setup()
         {
-            _sut = _fixture.Build<Call>().OmitAutoProperties().CreateAnonymous();
             _provider = _fixture.Freeze<Mock<ICallApiProvider>>();
             _provider.Setup(x => x.GetInfo(It.IsAny<int>()))
                 .Returns(new CallInfo() { MediaStatus = CallMediaState.Active });
-            _fixture.Register<ICallManagerInternal>(() => _fixture.CreateAnonymous<DefaultCallManager>());
+            _fixture.Register<ICallManagerInternal>(() => _fixture.CreateAnonymous<DefaultCallManager>()); 
+            _sut = _fixture.Build<Call>().OmitAutoProperties().CreateAnonymous();
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
@@ -41,36 +41,25 @@ namespace pjsip4net.Tests.Calls
         public void when_transfer_in_none_media_state__should_not_delegate_call_to_provider()
         {
             //arrange
-            var provider = _fixture.Freeze<Mock<ICallApiProvider>>();
-            provider.Setup(x => x.GetInfo(It.IsAny<int>()))
-                .Returns(new CallInfo() {MediaStatus = CallMediaState.Active});
-            _fixture.Register<ICallManagerInternal>(() => _fixture.CreateAnonymous<DefaultCallManager>());
-            var sut = _fixture.Build<Call>().OmitAutoProperties().CreateAnonymous();
-
             //act
-            sut.Transfer("sip:sip@sip");
+            _sut.Transfer("sip:sip@sip");
 
             //assert
-            provider.Verify(x => x.TransferCall(It.Is<int>(x1 => x1 == sut.Id), It.Is<string>(x1 => x1 == "sip:sip@sip")), Times.Never());
+            _provider.Verify(x => x.TransferCall(It.Is<int>(x1 => x1 == _sut.Id), It.Is<string>(x1 => x1 == "sip:sip@sip")), Times.Never());
         }
         
         [Test]
         public void when_transfer_in_active_media_state__should_delegate_call_to_provider()
         {
             //arrange
-            var provider = _fixture.Freeze<Mock<ICallApiProvider>>();
-            provider.Setup(x => x.GetInfo(It.IsAny<int>()))
-                .Returns(new CallInfo() {MediaStatus = CallMediaState.Active});
-            _fixture.Register<ICallManagerInternal>(() => _fixture.CreateAnonymous<DefaultCallManager>());
-            var sut = _fixture.Build<Call>().OmitAutoProperties().CreateAnonymous();
-            sut.SetId(_fixture.CreateAnonymous<int>());
-            sut.HandleMediaStateChanged();
+            _sut.SetId(_fixture.CreateAnonymous<int>());
+            _sut.HandleMediaStateChanged();
 
             //act
-            sut.Transfer("sip:sip@sip");
+            _sut.Transfer("sip:sip@sip");
 
             //assert
-            provider.Verify(x => x.TransferCall(It.Is<int>(x1 => x1 == sut.Id), It.Is<string>(x1 => x1 == "sip:sip@sip")), Times.Once());
+            _provider.Verify(x => x.TransferCall(It.Is<int>(x1 => x1 == _sut.Id), It.Is<string>(x1 => x1 == "sip:sip@sip")), Times.Once());
         }
     }
 // ReSharper restore InconsistentNaming
