@@ -15,9 +15,9 @@ namespace pjsip4net.Console
             System.Console.WriteLine("= register           | <register on server>   =");
             System.Console.WriteLine("=   <-e:user>        | *Extension or e        =");
             System.Console.WriteLine("=   <-d:pjsip.org>   | *Domain or d           =");
-            System.Console.WriteLine("=   <-p:1234>        | *Password or p          =");
-            System.Console.WriteLine("=   <-Port:5060>     | *Port                   =");
-            System.Console.WriteLine("=   <-t:udp,tcp,tls> | *Transport or t         =");
+            System.Console.WriteLine("=   <-p:1234>        | *Password or p         =");
+            System.Console.WriteLine("=   <-Port:5060>     | *Port                  =");
+            System.Console.WriteLine("=   <-t:udp,tcp,tls> | *Transport or t        =");
             System.Console.WriteLine("===============================================");
             System.Console.WriteLine("= unregister         | <delete registration>  =");
             System.Console.WriteLine("=   <-i:1>           | *Id or i               =");
@@ -42,7 +42,7 @@ namespace pjsip4net.Console
             System.Console.WriteLine("=   <-t:user1>       | *To or t               =");
             System.Console.WriteLine("=   <-a:pjsip.org>   | *At or a               =");
             System.Console.WriteLine("=   <-f:1 (acc. id)> | *From or f             =");
-            System.Console.WriteLine("=   <-Through:5060>  | *Through                =");
+            System.Console.WriteLine("=   <-Through:5060>  | *Through               =");
             System.Console.WriteLine("===============================================");
             System.Console.WriteLine("= hangupcall         | <literally>            =");
             System.Console.WriteLine("=   <-i:1>           | *Id or i               =");
@@ -51,14 +51,18 @@ namespace pjsip4net.Console
             System.Console.WriteLine("=   <-c:1>           | *CallId or c           =");
             System.Console.WriteLine("=   <-d:12345>       | *Digits or d           =");
             System.Console.WriteLine("===============================================");
+            System.Console.WriteLine("= xfer               | <transfer other party> =");
+            System.Console.WriteLine("=   <-c:1>           | *CallId or c           =");
+            System.Console.WriteLine("=   <-d:sip:sip@sip> | *Destination or d      =");
+            System.Console.WriteLine("===============================================");
             System.Console.WriteLine("= calls              | <show all calls>       =");
             System.Console.WriteLine("===============================================");
             System.Console.WriteLine("= registerbuddy      | <register buddy>       =");
             System.Console.WriteLine("=   <-e:user>        | *Extension or e        =");
             System.Console.WriteLine("=   <-d:pjsip.org>   | *Domain or d           =");
-            System.Console.WriteLine("=   <-Port:5060>     | *Port                   =");
-            System.Console.WriteLine("=   <-t:udp,tcp,tls> | *Transport or t         =");
-            System.Console.WriteLine("=   <-s:true>        | *Subscribe or s         =");
+            System.Console.WriteLine("=   <-Port:5060>     | *Port                  =");
+            System.Console.WriteLine("=   <-t:udp,tcp,tls> | *Transport or t        =");
+            System.Console.WriteLine("=   <-s:true>        | *Subscribe or s        =");
             System.Console.WriteLine("===============================================");
             System.Console.WriteLine("= unregisterbuddy    | <delete buddy>         =");
             System.Console.WriteLine("=   <-i:1>           | *Id or i               =");
@@ -68,12 +72,14 @@ namespace pjsip4net.Console
             System.Console.WriteLine("= dumpsub            | <log subscription>     =");
             System.Console.WriteLine("===============================================");
             System.Console.WriteLine("= im                 | <send message>         =");
-            System.Console.WriteLine("=   <-t:user>         | *To or t               =");
-            System.Console.WriteLine("=   <-a:pjsip.org>    | *At or a               =");
-            System.Console.WriteLine("=   <-Through:5060>   | *Through                =");
-            System.Console.WriteLine("=   <-f:1 (acc. id)>  | *From or f             =");
-            System.Console.WriteLine("=   <-i:1 (call id)>  | *InDialog or i         =");
-            System.Console.WriteLine("=   <-b:hello>        | *Body or b             =");
+            System.Console.WriteLine("=   <-t:user>        | *To or t               =");
+            System.Console.WriteLine("=   <-a:pjsip.org>   | *At or a               =");
+            System.Console.WriteLine("=   <-Through:5060>  | *Through               =");
+            System.Console.WriteLine("=   <-f:1 (acc. id)> | *From or f             =");
+            System.Console.WriteLine("=   <-i:1 (call id)> | *InDialog or i         =");
+            System.Console.WriteLine("=   <-b:hello>       | *Body or b             =");
+            System.Console.WriteLine("===============================================");
+            System.Console.WriteLine("=Press <Enter> to exit and destroy all objects=");
             System.Console.WriteLine("===============================================");
         }
 

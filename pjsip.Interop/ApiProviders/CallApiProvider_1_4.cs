@@ -81,6 +81,12 @@ namespace pjsip.Interop.ApiProviders
             Helper.GuardError(PJSUA_DLL.Calls.pjsua_call_reinvite(callId, Convert.ToInt32(unhold), null));
         }
 
+        public void TransferCall(int callId, string destination)
+        {
+            var dest = new pj_str_t(destination);
+            Helper.GuardError(PJSUA_DLL.Calls.pjsua_call_xfer(callId, ref dest, null));
+        }
+
         public void DialDtmf(int callId, string digits)
         {
             var d = new pj_str_t(digits);

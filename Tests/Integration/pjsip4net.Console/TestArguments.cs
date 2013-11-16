@@ -62,6 +62,12 @@ namespace pjsip4net.Console
         public string Digits { get; set; }
     }
 
+    public class TransferArguments
+    {
+        public string CallId { get; set; }
+        public string Destination { get; set; }
+    }
+
     public class DumpSubscriptionArguments
     {
         public string Verbose { get; set; }

@@ -25,7 +25,7 @@ namespace pjsip4net.Core.Interfaces.ApiProviders
         void PutCallOnHold(int callId);
         void ReinviteCall(int callId, bool unhold);
         //int pjsua_call_update(int call_id, uint options, pjsua_msg_data msg_data);
-        //int pjsua_call_xfer(int call_id, ref pj_str_t dest, pjsua_msg_data msg_data);
+        void TransferCall(int callId, string destination);
         //int pjsua_call_xfer_replaces(int call_id, int dest_call_id, uint options, pjsua_msg_data msg_data);
         void DialDtmf(int callId, string digits);
         void SendIm(int callId, string mime_type, string content);

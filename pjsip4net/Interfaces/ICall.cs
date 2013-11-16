@@ -2,6 +2,7 @@ using System;
 using pjsip4net.Calls;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
+using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Interfaces
 {
@@ -36,6 +37,7 @@ namespace pjsip4net.Interfaces
         void SendDtmf(string digits);
         void Hold();
         void ReleaseHold();
+        void Transfer(string destinationUri);
         string ToString(bool withMedia);
     }
 

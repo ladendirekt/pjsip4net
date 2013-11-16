@@ -76,6 +76,12 @@ namespace pjsip4net.Console
                         CallId = definitions.First(x => x.Key == "c").Value,
                         Digits = definitions.First(x => x.Key == "d").Value,
                     });
+                case "xfer":
+                    return new TransferCommand(_userAgent, new TransferArguments
+                    {
+                        CallId = definitions.First(x => x.Key == "c").Value,
+                        Destination = definitions.First(x => x.Key == "d").Value,
+                    });
                 case "buddies":
                     return new ShowAllBuddiesCommand(_userAgent);
                 case "registerbuddy":
@@ -115,6 +121,23 @@ namespace pjsip4net.Console
         }
 
         #endregion
+    }
+
+    public class TransferCommand : ICommand
+    {
+        private ISipUserAgent _userAgent;
+        private TransferArguments _arguments;
+
+        public TransferCommand(ISipUserAgent userAgent, TransferArguments transferArguments)
+        {
+            _userAgent = userAgent;
+            _arguments = transferArguments;
+        }
+
+        public void Execute()
+        {
+            _userAgent.CallManager.GetCallById(int.Parse(_arguments.CallId)).Transfer(_arguments.Destination);
+        }
     }
 
     public class SendImCommand : ICommand

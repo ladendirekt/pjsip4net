@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Common.Logging;
 using pjsip4net.Accounts;
 using pjsip4net.Core;
@@ -14,7 +13,6 @@ namespace pjsip4net.Calls
     {
         #region Private data
 
-        private readonly object _lock = new object();
         private readonly MediaSession _mediaSession;
         private readonly ICallManagerInternal _callManager;
         private IAccountInternal _account;
@@ -244,11 +242,6 @@ namespace pjsip4net.Calls
                 IsIncoming = info.Role == SipRole.RoleUas;
         }
 
-        //public static ICallBuilder New()
-        //{
-        //    return new /*ToCallBuilderExpression(new*/ CallBuilder();//);
-        //}
-
         public override void BeginInit()
         {
             GuardInitialized();
@@ -279,9 +272,18 @@ namespace pjsip4net.Calls
                 _callManager.CallApiProvider.ReinviteCall(Id, true);
         }
 
+        public void Transfer(string destinationUri)
+        {
+            GuardDisposed();
+            Helper.GuardNotNullStr(destinationUri);
+            Helper.GuardIsTrue(new SipUriParser(destinationUri).IsValid);
+            if (_mediaSession.IsActive)
+                _callManager.CallApiProvider.TransferCall(Id, destinationUri);
+        }
+
         public void Hangup()
         {
-            Hangup("");
+            Hangup(string.Empty);
         }
 
         public void Hangup(string reason)
@@ -293,7 +295,7 @@ namespace pjsip4net.Calls
 
         public void Answer(bool accept)
         {
-            Answer(accept, "");
+            Answer(accept, string.Empty);
         }
 
         public void Answer(bool accept, string reason)
@@ -360,18 +362,15 @@ namespace pjsip4net.Calls
         public CallInfo GetCallInfo()
         {
             GuardDisposed();
-            //lock (_lock)
+            if (Id == -1)
+                return null;
+            try
             {
-                if (Id == -1)
-                    return null;
-                try
-                {
-                    return _callManager.CallApiProvider.GetInfo(Id);
-                }
-                catch (PjsipErrorException)
-                {
-                    return _callManager.CallApiProvider.GetInfo(Id);
-                }
+                return _callManager.CallApiProvider.GetInfo(Id);
+            }
+            catch (PjsipErrorException)
+            {
+                return _callManager.CallApiProvider.GetInfo(Id);
             }
         }
 
