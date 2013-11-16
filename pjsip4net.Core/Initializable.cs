@@ -36,7 +36,6 @@ namespace pjsip4net.Core
 
         protected void GuardNotInitializing()
         {
-            //GuardDisposed();
             if (!_isInitializing)
                 throw new InvalidOperationException(
                     "All adjustments should be made in ISupportInitialize initialization session");
@@ -44,14 +43,12 @@ namespace pjsip4net.Core
 
         protected void GuardNotInitialized()
         {
-            //GuardDisposed();
             if (!_isInitialized)
                 throw new InvalidOperationException("Should be initialized first");
         }
 
         protected void GuardInitialized()
         {
-            //GuardDisposed();
             if (_isInitialized)
                 throw new InvalidOperationException("Initializable doesn't support reconfiguration");
         }

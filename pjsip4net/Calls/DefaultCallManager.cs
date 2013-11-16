@@ -37,7 +37,6 @@ namespace pjsip4net.Calls
             _callApi = callApi;
 
             _barrier = new ManualResetEvent(true);
-            //_syncContext = SynchronizationContext.Current;
         }
 
         #region Private data
@@ -204,34 +203,14 @@ namespace pjsip4net.Calls
             {
                 ea.InviteState = call.InviteState;
                 ea.MediaState = call.MediaState;
-                //try
-                //{
-                //    if (_syncContext != null)
-                //        _syncContext.Post(s => CallStateChanged(this, ea), null);
-                //    else
-                //        CallStateChanged(this, ea);
-                //}
-                //catch (InvalidOperationException)
-                //{
                 CallStateChanged(this, ea);
-                //}
             }
         }
 
         public void RaiseRingEvent(ICallInternal call, bool ringOn)
         {
-            //try
-            //{
             call.InviteSession.IsRinging = true;
-            //    if (_syncContext != null)
-            //        _syncContext.Post(s => Ring(this, new RingEventArgs(ringOn, call)), null);
-            //    else
-            //        Ring(this, new RingEventArgs(ringOn, call));
-            //}
-            //catch (InvalidOperationException)
-            //{
             Ring(this, new RingEventArgs(ringOn, call));
-            //}
         }
 
         public void OnCallState(CallStateChanged e)
@@ -281,17 +260,7 @@ namespace pjsip4net.Calls
 
                     RaiseRingEvent(call, true);
                     var ea = new EventArgs<ICall>(call);
-                    //try
-                    //{
-                    //    if (_syncContext != null)
-                    //        _syncContext.Post(delegate { IncomingCall(this, ea); }, null);
-                    //    else
-                    //        IncomingCall(this, ea);
-                    //}
-                    //catch (InvalidOperationException)
-                    //{
                     IncomingCall(this, ea);
-                    //}
 
                     if (_activeCalls.Count > 0)
                         _barrier.Reset();
@@ -299,7 +268,6 @@ namespace pjsip4net.Calls
                 else
                 {
                     Monitor.Exit(_lock);
-                    //Don't have to create an object here - simply closing this session
                     _callApi.AnswerCall(e.CallId, SipStatusCode.Decline, "Too much calls");
                 }
             }
@@ -378,19 +346,5 @@ namespace pjsip4net.Calls
         }
 
         #endregion
-
-        //internal static CallManager Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //            lock(_lock)
-        //                if (_instance == null)
-        //                    _instance = new CallManager();
-        //        return _instance;
-        //    }
-        //}
-
-        //#endregion
     }
 }

@@ -43,7 +43,7 @@ namespace pjsip4net.Tests.Accounts
         }
 
         [Test]
-        public void when_setConfig_called_during_initialization__should_update_cobfigurable_properties()
+        public void when_setConfig_called_during_initialization__should_update_configurable_properties()
         {
             CreateSut();
             using (_sut.InitializationScope())
@@ -54,7 +54,7 @@ namespace pjsip4net.Tests.Accounts
         }
         
         [Test, ExpectedException(typeof(ArgumentException))]
-        public void when_setConfig_called_during_initialization__should_validate_cobfigurable_properties_after_init()
+        public void when_setConfig_called_during_initialization__should_validate_configurable_properties_after_init()
         {
             CreateSut();
             using (_sut.InitializationScope())

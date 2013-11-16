@@ -1,8 +1,6 @@
-using System.Diagnostics;
 using Common.Logging;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
-using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls
 {

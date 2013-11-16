@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.ConstrainedExecution;
 using pjsip4net.Core.Interfaces;
 
 namespace pjsip4net.Core
 {
-    public class Resource : IResource
+    public class Resource : CriticalFinalizerObject, IResource
     {
         protected bool _isDisposed;
 
