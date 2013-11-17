@@ -18,7 +18,7 @@ namespace pjsip.Interop.Services
             rx.allow_contact_rewrite = System.Convert.ToInt32(x.AllowContactRewrite);
             rx.contact_params = new pj_str_t(x.ContactParams);
             rx.contact_uri_params = new pj_str_t(x.ContactUriParams);
-            rx.cred_count = (uint) x.Credentials.Where(x1 => !string.IsNullOrEmpty(x1.UserName)).Count();
+            rx.cred_count = (uint) x.Credentials.Count(x1 => !string.IsNullOrEmpty(x1.UserName));
             rx.cred_info = x.Credentials.Select(c => c.ToPjsipCredentialsInfo()).GrowWithDefaultToTheSizeOf(8).ToArray();
             rx.force_contact = new pj_str_t(x.ForceContact);
             rx.id = new pj_str_t(x.Id);
@@ -26,7 +26,7 @@ namespace pjsip.Interop.Services
             rx.ka_interval = x.KaInterval;
             rx.pidf_tuple_id = new pj_str_t(x.PidfTupleId);
             rx.priority = x.Priority;
-            rx.proxy_cnt = (uint) x.Proxy.Where(x1 => !string.IsNullOrEmpty(x1)).Count();//make always 
+            rx.proxy_cnt = (uint) x.Proxy.Count(x1 => !string.IsNullOrEmpty(x1));//make always 
             rx.proxy = x.Proxy.Select(s => new pj_str_t(s)).GrowWithDefaultToTheSizeOf(8).ToArray();
             rx.publish_enabled = System.Convert.ToInt32(x.IsPublishEnabled);
             rx.reg_timeout = x.RegTimeout;

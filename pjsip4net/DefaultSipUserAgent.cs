@@ -28,7 +28,7 @@ namespace pjsip4net
             _container = container;
             _eventsProvider = eventsProvider;
 
-            _eventsProvider.Subscribe<LogRequested>(e => OnLog(e));
+            _eventsProvider.Subscribe<LogRequested>(OnLog);
         }
 
         #region Implementation of IDisposable
