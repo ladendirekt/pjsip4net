@@ -103,6 +103,11 @@ namespace pjsip4net.Core.Configuration
             return this;
         }
 
+        internal bool RequireDynamicDiscovery()
+        {
+            return !_configurators.OfType<IConfigureApi>().Any();
+        }
+
         internal void RunConfigurators()
         {
             _configurators.Each(c => c.Configure(Container));

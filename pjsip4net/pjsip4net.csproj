@@ -97,6 +97,7 @@
     <Compile Include="Configuration\DefaultCallComponentConfigurator.cs" />
     <Compile Include="Configuration\DefaultComponentConfigurator.cs" />
     <Compile Include="Configuration\DefaultMediaComponentConfigurator.cs" />
+    <Compile Include="Configuration\DynamicApiConfigurator.cs" />
     <Compile Include="DefaultLocalRegistry.cs" />
     <Compile Include="DefaultObjectFactory.cs" />
     <Compile Include="DefaultSipUserAgent.cs" />

@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 using pjsip4net.Configuration;
@@ -48,10 +50,37 @@ namespace pjsip4net.Tests
                 Times.Once());
         }
 
+        [Ignore]
         public void when_build_called__then_it_should_register_and_call_all_default_component_configurators()
         {
             ConfigureContainer.Set(_container.Object, _sut);
 
+        }
+
+        [Test]
+        public void when_build_called_without_explicitly_supplied_api_version__should_use_dynamic_discovery()
+        {
+            //arrange
+            var sut = Configure.Pjsip4Net();
+
+            //act
+            sut.Build();
+
+            //assert
+            Assert.IsTrue(AppDomain.CurrentDomain.GetAssemblies().Any(x => x.FullName.Contains("pjsip4net.Testing")));
+        }
+        
+        [Ignore]
+        public void when_build_called_with_explicitly_supplied_api_version__should_use_dynamic_discovery()
+        {
+            //arrange
+            var sut = Configure.Pjsip4Net();
+
+            //act
+            sut.Build();
+
+            //assert
+            Assert.IsTrue(AppDomain.CurrentDomain.GetAssemblies().Any(x => x.FullName.Contains("pjsip4net.Testing")));
         }
     }
     // ReSharper restore InconsistentNaming

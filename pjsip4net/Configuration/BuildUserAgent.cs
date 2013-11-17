@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using pjsip4net.Core;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Container;
@@ -29,6 +30,9 @@ namespace pjsip4net.Configuration
             {
             }
 
+            if (cfg.RequireDynamicDiscovery())
+                cfg.With(new DynamicApiConfigurator());
+
             cfg.With(new DefaultComponentConfigurator())
                 .With(new DefaultTransportComponentConfigurator())
                 .With(new DefaultAccountComponentConfigurator())
@@ -40,7 +44,7 @@ namespace pjsip4net.Configuration
 
             var basicApiProvider = cfg.Container.Get<IBasicApiProvider>();
             if (basicApiProvider == null)
-                throw new InvalidOperationException("There is no API version configured");
+                throw new InvalidOperationException("There is neither API version configured nor discovered dynamically");
 
             basicApiProvider.CreatePjsua();
 

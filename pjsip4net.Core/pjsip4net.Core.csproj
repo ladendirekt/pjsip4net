@@ -143,6 +143,7 @@
     <Compile Include="Interfaces\ApiProviders\ITransportApiProvider.cs" />
     <Compile Include="Interfaces\IConfigurationContext.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
+    <Compile Include="Interfaces\IConfigureApi.cs" />
     <Compile Include="Interfaces\IConfigureComponents.cs" />
     <Compile Include="Interfaces\IContainer.cs" />
     <Compile Include="Interfaces\IIdentifiable.cs" />
