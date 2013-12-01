@@ -112,10 +112,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\pjsip.Interop\pjsip.Interop.csproj">
-      <Project>{0AEA8B23-5E46-4923-81B5-7755BA914750}</Project>
-      <Name>pjsip.Interop</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\pjsip4net.Core\pjsip4net.Core.csproj">
       <Project>{DAB611F8-F9B2-49AE-8496-BA98F99BA337}</Project>
       <Name>pjsip4net.Core</Name>
@@ -159,6 +155,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\pjsip.Interop\bin\Debug\pjsip.Interop.dll">
+      <Link>pjsip.Interop.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\pjsip.Interop\bin\Debug\AutoMapper.dll">
+      <Link>AutoMapper.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

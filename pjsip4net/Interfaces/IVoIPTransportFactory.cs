@@ -3,7 +3,7 @@ using pjsip4net.Core.Data;
 
 namespace pjsip4net.Interfaces
 {
-    public interface IVoIPTransportFactory
+    internal interface IVoIPTransportFactory
     {
         IVoIPTransport CreateTransport(TransportType transportType);
         IVoIPTransport CreateTransport(TransportType transportType, TransportConfig config);

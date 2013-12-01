@@ -88,17 +88,34 @@
     <Compile Include="Accounts\Account.cs" />
     <Compile Include="Accounts\Dsl\DefaultAccountBuilder.cs" />
     <Compile Include="Accounts\DefaultAccountManager.cs" />
-    <Compile Include="Accounts\AccountState.cs" />
+    <Compile Include="Accounts\UnknownStatusState.cs" />
     <Compile Include="Accounts\AccountStateChangedEventArgs.cs" />
+    <Compile Include="Accounts\InitializingAccountState.cs" />
+    <Compile Include="Accounts\RegisteredAccountState.cs" />
+    <Compile Include="Accounts\RegisteringAccountState.cs" />
+    <Compile Include="Accounts\TimedOutAccountRegistrationState.cs" />
+    <Compile Include="Calls\ActiveMediaState.cs" />
+    <Compile Include="Calls\CallingInviteState.cs" />
     <Compile Include="Calls\CallRedirectedEventArgs.cs" />
+    <Compile Include="Calls\ConfirmedInviteState.cs" />
+    <Compile Include="Calls\ConnectingInviteState.cs" />
+    <Compile Include="Calls\DisconnectedMediaState.cs" />
+    <Compile Include="Calls\EarlyInviteState.cs" />
+    <Compile Include="Calls\ErrorMediaState.cs" />
+    <Compile Include="Calls\IncomingInviteState.cs" />
+    <Compile Include="Calls\LocalHoldMediaState.cs" />
+    <Compile Include="Calls\NoneMediaState.cs" />
+    <Compile Include="Calls\NullInviteState.cs" />
+    <Compile Include="Calls\RemoteHoldMediaState.cs" />
     <Compile Include="Configuration\BuildUserAgent.cs" />
     <Compile Include="Configuration\ConfigureFromConfig.cs" />
     <Compile Include="Configuration\DefaultAccountComponentConfigurator.cs" />
     <Compile Include="Configuration\DefaultCallComponentConfigurator.cs" />
     <Compile Include="Configuration\DefaultComponentConfigurator.cs" />
+    <Compile Include="Configuration\DefaultAgentConfigurator.cs" />
     <Compile Include="Configuration\DefaultMediaComponentConfigurator.cs" />
     <Compile Include="Configuration\DynamicApiConfigurator.cs" />
-    <Compile Include="DefaultLocalRegistry.cs" />
+    <Compile Include="DefaultRegistry.cs" />
     <Compile Include="DefaultObjectFactory.cs" />
     <Compile Include="DefaultSipUserAgent.cs" />
     <Compile Include="Configuration\DefaultTransportComponentConfigurator.cs" />
@@ -120,9 +137,9 @@
     <Compile Include="Interfaces\ICallManager.cs" />
     <Compile Include="Calls\IncomingCallEventArgs.cs" />
     <Compile Include="Calls\InviteSession.cs" />
-    <Compile Include="Calls\InviteState.cs" />
+    <Compile Include="Calls\DisconnectedInviteState.cs" />
     <Compile Include="Calls\MediaSession.cs" />
-    <Compile Include="Calls\MediaState.cs" />
+    <Compile Include="Calls\ConferenceMediaStateDecorator.cs" />
     <Compile Include="Calls\RingEventArgs.cs" />
     <Compile Include="Configuration\AccountElement.cs" />
     <Compile Include="Configuration\AccountElementsCollection.cs" />
@@ -144,7 +161,7 @@
     <Compile Include="Interfaces\ICallBuilder.cs" />
     <Compile Include="IM\Dsl\DefaultMessageBuilder.cs" />
     <Compile Include="Interfaces\IConferenceBridge.cs" />
-    <Compile Include="Interfaces\ILocalRegistry.cs" />
+    <Compile Include="Interfaces\IRegistry.cs" />
     <Compile Include="Interfaces\IMessageBuilder.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
     <Compile Include="Interfaces\IImManager.cs" />
@@ -164,6 +181,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IM\DefaultImManager.cs" />
     <Compile Include="Transport\DefaultVoIPTransportFactory.cs" />
+    <Compile Include="Transport\TcpTransport.cs" />
+    <Compile Include="Transport\TlsTransport.cs" />
+    <Compile Include="Transport\UdpTransport.cs" />
     <Compile Include="Transport\VoIPTransport.cs" />
     <Compile Include="TypingEventArgs.cs" />
     <Compile Include="UaConfig.cs" />
@@ -173,10 +193,6 @@
       <Project>{DAB611F8-F9B2-49AE-8496-BA98F99BA337}</Project>
       <Name>pjsip4net.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Accounts\ClassDiagram1.cd" />
-    <None Include="Calls\ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sounds\busy.wav" />

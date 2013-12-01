@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using Common.Logging;
 using pjsip4net.Core;
 using pjsip4net.Core.Data.Events;
@@ -20,16 +18,16 @@ namespace pjsip4net.IM
         private readonly IIMApiProvider _imApi;
         private readonly ICallApiProvider _callApi;
         private readonly IEventsProvider _eventsProvider;
-        private ILocalRegistry _localRegistry;
+        private readonly IRegistry _localRegistry;
 
-        private readonly SortedDictionary<int, IBuddyInternal> _buddies = new SortedDictionary<int, IBuddyInternal>();
+        private readonly SortedDictionary<int, Buddy> _buddies = new SortedDictionary<int, Buddy>();
         private readonly object _instLock = new object();
-        private IBuddyInternal _pendingBuddy;
+        private Buddy _pendingBuddy;
         private readonly ILog _logger = LogManager.GetLogger<IImManager>();
 
         #endregion
 
-        public DefaultImManager(ILocalRegistry localRegistry, IIMApiProvider imApi, 
+        public DefaultImManager(IRegistry localRegistry, IIMApiProvider imApi, 
             ICallApiProvider callApi, IEventsProvider eventsProvider)
         {
             Helper.GuardNotNull(localRegistry);
@@ -80,32 +78,18 @@ namespace pjsip4net.IM
         {
             GuardInitialized();
             base.BeginInit();
-
-            //Config.BeginInit();
-            //LoggingConfig.BeginInit();
-            //MediaConfig.BeginInit();
-
-            //_sipTransport.BeginInit();
-
-            //if (ConfigurationProvider != null)
-            //    ConfigurationProvider.Configure(Config, MediaConfig, LoggingConfig);
         }
 
         public override void EndInit()
         {
             base.EndInit();
 
-            //move to account mgr
-            //Config._config.cb.on_reg_state = SingletonHolder<IAccountManagerInternal>.Instance.OnRegistrationState;
-            //call state callbacks
-            
-
-            _eventsProvider.Subscribe<NatDetected>(e => OnNatDetect(e));
-            _eventsProvider.Subscribe<BuddyStateChanged>(e => OnBuddyState(e));
-            _eventsProvider.Subscribe<IncomingSubscribeRecieved>(e => OnIncomingSubscribe(e));
-            _eventsProvider.Subscribe<IncomingImRecieved>(e => OnPager(e));
-            _eventsProvider.Subscribe<ImStatusChanged>(e => OnPagerStatus(e));
-            _eventsProvider.Subscribe<IncomingTypingRecieved>(e => OnTyping(e));
+            _eventsProvider.Subscribe<NatDetected>(OnNatDetect);
+            _eventsProvider.Subscribe<BuddyStateChanged>(OnBuddyState);
+            _eventsProvider.Subscribe<IncomingSubscribeRecieved>(OnIncomingSubscribe);
+            _eventsProvider.Subscribe<IncomingImRecieved>(OnPager);
+            _eventsProvider.Subscribe<ImStatusChanged>(OnPagerStatus);
+            _eventsProvider.Subscribe<IncomingTypingRecieved>(OnTyping);
         }
 
         private void OnNatDetect(NatDetected e)
@@ -127,7 +111,7 @@ namespace pjsip4net.IM
             }
         }
 
-        private void RaiseBuddyState(IBuddyInternal buddy)
+        private void RaiseBuddyState(Buddy buddy)
         {
             BuddyStateChanged(this, buddy.GetEventArgs());
         }
@@ -154,7 +138,7 @@ namespace pjsip4net.IM
             _logger.Debug("Incoming SUBSCRIBE");
         }
 
-        public void RegisterBuddy(IBuddyInternal buddy)
+        public void RegisterBuddy(Buddy buddy)
         {
             if (buddy != null)
                 lock (_instLock)
@@ -176,7 +160,7 @@ namespace pjsip4net.IM
                 }
         }
 
-        public void UnregisterBuddy(IBuddyInternal buddy)
+        public void UnregisterBuddy(Buddy buddy)
         {
             lock (_instLock)
             {
@@ -187,6 +171,12 @@ namespace pjsip4net.IM
                     buddy.InternalDispose();
                 }
             }
+        }
+
+        public IBuddy RegisterBuddy(Func<IBuddyBuilder, IBuddy> builder)
+        {
+            Helper.GuardNotNull(builder);
+            return builder(_localRegistry.Container.Get<IBuddyBuilder>());
         }
 
         public IBuddy GetBuddyById(int id)
@@ -235,38 +225,6 @@ namespace pjsip4net.IM
             Helper.GuardPositiveInt(dialog.Id);
             _callApi.SendIm(dialog.Id, "text/plain", body);
         }
-
-        //protected override void CleanUp()
-        //{
-        //    //lock (_lock)
-        //    {
-        //        try
-        //        {
-        //            if (SingletonHolder<ICallManager>.Instance != null)
-        //                SingletonHolder<ICallManager>.Instance.HangupAll();
-        //        }
-        //        catch (InvalidOperationException)
-        //        {
-        //        }
-
-        //        foreach (pjsip4net.Buddy.Buddy buddy in Buddies)
-        //            UnregisterBuddy(buddy);
-
-        //        if (SingletonHolder<IAccountManagerInternal>.Instance != null)
-        //            SingletonHolder<IAccountManagerInternal>.Instance.UnRegisterAllAccounts();
-
-        //        _rtpTransport.Id = NativeConstants.PJSUA_INVALID_ID;
-        //        GC.SuppressFinalize(_rtpTransport);
-        //        _rtpTransport = null;
-
-        //        if (_sipTransport != null)
-        //            _sipTransport.Dispose();
-
-        //        _basicApi.pjsua_destroy();
-        //        //pjsua is super smart and will clean other parts I forgot to close
-
-        //    }
-        //}
 
         #endregion
     }

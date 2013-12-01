@@ -25,9 +25,14 @@ namespace pjsip4net.Core.Configuration
         private List<IConfigurationProvider> _configProviders = 
             new List<IConfigurationProvider>();
 
-        private List<IConfigureComponents> _configurators = new List<IConfigureComponents>();
+        private readonly List<IConfigureComponents> _configurators = new List<IConfigureComponents>();
 
-        internal IContainer Container { get; set; }
+        internal List<IConfigureComponents> Configurators
+        {
+            get { return _configurators; }
+        }
+
+        public IContainer Container { get; set; }
 
         public Configure()
         {
@@ -35,7 +40,7 @@ namespace pjsip4net.Core.Configuration
         }
 
         /// <summary>
-        /// This method should be used to start configuration like this: Configure.Pjsip4Net()...
+        /// This method should be used to start configuration.
         /// </summary>
         /// <returns></returns>
         public static Configure Pjsip4Net()
@@ -44,7 +49,7 @@ namespace pjsip4net.Core.Configuration
         }
 
         /// <summary>
-        /// Adds closures to code configuration pipeline.
+        /// Lets you configure with block of code.
         /// </summary>
         /// <param name="codeConfigurator">Code block that modifies configuration data.</param>
         /// <returns></returns>
@@ -56,7 +61,7 @@ namespace pjsip4net.Core.Configuration
         }
 
         /// <summary>
-        /// Let you inject alternative sources of configuration.
+        /// Lets you provide alternative sources of configuration.
         /// </summary>
         /// <param name="provider">An abstraction of configuration source.</param>
         /// <returns></returns>
@@ -68,7 +73,7 @@ namespace pjsip4net.Core.Configuration
         }
 
         /// <summary>
-        /// Let you inject your services into dependency injection <see cref="IContainer"/>
+        /// Lets you inject your services into dependency injection <see cref="IContainer"/>
         /// </summary>
         /// <param name="componentsConfigurator"></param>
         /// <returns></returns>
@@ -80,7 +85,7 @@ namespace pjsip4net.Core.Configuration
         }
 
         /// <summary>
-        /// Let you configure sip transport explicitly.
+        /// Lets you configure sip transport explicitly.
         /// </summary>
         /// <param name="tptConfigurator"></param>
         /// <returns></returns>
@@ -92,7 +97,7 @@ namespace pjsip4net.Core.Configuration
         }
         
         /// <summary>
-        /// Let you configure accounts explicitly.
+        /// Lets you configure accounts explicitly.
         /// </summary>
         /// <param name="accConfigurator"></param>
         /// <returns></returns>

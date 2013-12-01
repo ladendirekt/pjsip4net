@@ -12,13 +12,14 @@ namespace pjsip4net.Tests.Accounts
     public class given_an_unknownState : _base
     {
         private RegistrationSession _session;
-        private Mock<IAccountInternal> _account;
+        private Mock<Account> _account;
 
         [SetUp]
         public override void Setup()
         {
             base.Setup();
-            _account = _fixture.Freeze<Mock<IAccountInternal>>();
+            _fixture.Customize(new AccountCustomization());
+            _account = _fixture.CreateAnonymous<Mock<Account>>();
             _session = _fixture.CreateAnonymous<RegistrationSession>();
         }
 

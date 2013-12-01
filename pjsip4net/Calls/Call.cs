@@ -9,13 +9,13 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls
 {
-    internal class Call : Initializable, ICallInternal, IIdentifiable<ICall>
+    internal class Call : Initializable, ICall, IIdentifiable<ICall>
     {
         #region Private data
 
         private readonly MediaSession _mediaSession;
         private readonly ICallManagerInternal _callManager;
-        private IAccountInternal _account;
+        private Account _account;
         private IDisposable _accountLock;
         private readonly InviteSession _inviteSession;
         private ILog _logger = LogManager.GetLogger<ICall>();
@@ -60,7 +60,7 @@ namespace pjsip4net.Calls
             get { return _mediaSession.MediaState; }
         }
 
-        public bool IsIncoming { get; private set; }
+        public virtual bool IsIncoming { get; private set; }
 
         public virtual bool IsActive
         {
@@ -215,7 +215,7 @@ namespace pjsip4net.Calls
 
         public int Id { get; internal set; }
         
-        InviteSession ICallInternal.InviteSession
+        public InviteSession InviteSession
         {
             get { return _inviteSession; }
         }
@@ -224,7 +224,7 @@ namespace pjsip4net.Calls
 
         #region Methods
 
-        public Call(ICallManagerInternal callManager, ILocalRegistry registry, IConferenceBridge conferenceBridge)
+        public Call(ICallManagerInternal callManager, IRegistry registry, IConferenceBridge conferenceBridge)
         {
             Id = -1;
             Helper.GuardNotNull(callManager);
@@ -346,7 +346,7 @@ namespace pjsip4net.Calls
             DestinationUri = uri;
         }
 
-        public void SetAccount(IAccountInternal account)
+        public void SetAccount(Account account)
         {
             Helper.GuardNotNull(account);
             _account = account;
@@ -359,7 +359,7 @@ namespace pjsip4net.Calls
             IsIncoming = true;
         }
 
-        public CallInfo GetCallInfo()
+        public virtual CallInfo GetCallInfo()
         {
             GuardDisposed();
             if (Id == -1)

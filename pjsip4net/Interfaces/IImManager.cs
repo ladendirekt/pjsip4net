@@ -13,7 +13,8 @@ namespace pjsip4net.Interfaces
         event EventHandler<PagerEventArgs> IncomingMessage;
         event EventHandler<TypingEventArgs> TypingAlert;
         event EventHandler<NatEventArgs> NatDetected;
-        
+
+        IBuddy RegisterBuddy(Func<IBuddyBuilder, IBuddy> builder);
         IBuddy GetBuddyById(int id);
         void SendMessage(IAccount account, string body, string to);
         void SendMessageInDialog(ICall dialog, string body);
@@ -27,7 +28,7 @@ namespace pjsip4net.Interfaces
     {
         IIMApiProvider Provider { get; }
 
-        void RegisterBuddy(IBuddyInternal buddy);
-        void UnregisterBuddy(IBuddyInternal buddy);
+        void RegisterBuddy(Buddy buddy);
+        void UnregisterBuddy(Buddy buddy);
     }
 }

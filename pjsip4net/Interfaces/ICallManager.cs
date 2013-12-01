@@ -31,9 +31,9 @@ namespace pjsip4net.Interfaces
         ICallApiProvider CallApiProvider { get; }
         IMediaApiProvider MediaApiProvider { get; }
 
-        void RaiseCallStateChanged(ICallInternal call);
-        void RaiseRingEvent(ICallInternal call, bool ringOn);
-        void TerminateCall(ICallInternal call);
+        void RaiseCallStateChanged(Call call);
+        void RaiseRingEvent(Call call, bool ringOn);
+        void TerminateCall(Call call);
         void OnCallState(CallStateChanged e);
         void OnIncomingCall(IncomingCallRecieved e);
         void OnCallMediaState(CallMediaStateChanged e);
@@ -41,5 +41,7 @@ namespace pjsip4net.Interfaces
         void OnDtmfDigit(DtmfRecieved e);
         void OnCallTransfer(CallTransferRequested e);
         void OnCallTransferStatus(CallTransferStatusChanged e);
+
+        void RegisterCall(Call call);
     }
 }

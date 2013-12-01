@@ -1,4 +1,3 @@
-using System;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
@@ -8,7 +7,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Transport
 {
-    internal abstract class VoIPTransport : Initializable, IVoIPTransportInternal
+    internal abstract class VoIPTransport : Initializable, IVoIPTransport
     {
         #region Protected Data
 
@@ -163,8 +162,8 @@ namespace pjsip4net.Transport
 
         protected override void CleanUp()
         {
-            if (Id != -1)
-                _transportApiProvider.CloseTransport(Id);
+            //if (Id != -1)
+            //    _transportApiProvider.CloseTransport(Id);
         }
 
         public override void BeginInit()
@@ -178,9 +177,6 @@ namespace pjsip4net.Transport
         {
             base.EndInit();
             Helper.GuardInRange(1u, 65535u, Config.Port);
-            //Id = _transportApiProvider.CreateTransportAndGetId(_transportType, _config);
-            //Helper.GuardPositiveInt(Id);
-            //_info = _transportApiProvider.GetTransportInfo(Id);
         }
 
         #endregion
@@ -198,104 +194,5 @@ namespace pjsip4net.Transport
         }
 
         #endregion
-    }
-
-    internal class UdpTransport : VoIPTransport
-    {
-        public UdpTransport(ITransportApiProvider transportApiProvider)
-            : base(transportApiProvider)
-        {
-            _transportType = TransportType.Udp;
-        }
-    }
-
-    internal class TcpTransport : VoIPTransport
-    {
-        public TcpTransport(ITransportApiProvider transportApiProvider)
-            : base(transportApiProvider)
-        {
-            _transportType = TransportType.Tcp;
-        }
-    }
-
-    internal class TlsTransport : VoIPTransport, ITlsTransport
-    {
-        public TlsTransport(ITransportApiProvider transportApiProvider)
-            : base(transportApiProvider)
-        {
-            _transportType = TransportType.Tls;
-        }
-
-        public String CAListFile
-        {
-            get { return _config.TlsSetting.CAListFile; }
-            set
-            {
-                GuardDisposed();
-                GuardNotInitializing();
-                _config.TlsSetting.CAListFile = value;
-            }
-        }
-
-        public String CertificateFile
-        {
-            get { return _config.TlsSetting.CertFile; }
-            set
-            {
-                GuardDisposed();
-                GuardNotInitializing();
-                _config.TlsSetting.CertFile = value;
-            }
-        }
-
-        public String PrivateKeyFile
-        {
-            get { return _config.TlsSetting.PrivKeyFile; }
-            set
-            {
-                GuardDisposed();
-                GuardNotInitializing();
-                _config.TlsSetting.PrivKeyFile = value;
-            }
-        }
-
-        public bool VerifyServer
-        {
-            get { return _config.TlsSetting.VerifyServer; }
-            set
-            {
-                GuardDisposed();
-                GuardNotInitializing();
-                _config.TlsSetting.VerifyServer = value;
-            }
-        }
-
-        public bool VerifyClient
-        {
-            get { return _config.TlsSetting.VerifyClient; }
-            set
-            {
-                GuardDisposed();
-                GuardNotInitializing();
-                _config.TlsSetting.VerifyClient = value;
-            }
-        }
-
-        public bool RequireClientCertificate
-        {
-            get { return _config.TlsSetting.RequireClientCert; }
-            set
-            {
-                GuardDisposed();
-                GuardNotInitializing();
-                _config.TlsSetting.RequireClientCert = value;
-            }
-        }
-
-        public override void BeginInit()
-        {
-            base.BeginInit();
-            _config.Port = 5061;
-        }
     }
 }

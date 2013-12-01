@@ -18,10 +18,10 @@ namespace pjsip4net.Media
         private static readonly object _lock = new object();
         private IConferenceBridge _conferenceBridge;
         private IMediaApiProvider _mediaApi;
-        private ILocalRegistry _registry;
+        private IRegistry _registry;
         //private static MediaManager _instance;
 
-        public DefaultMediaManager(IConferenceBridge conferenceBridge, IMediaApiProvider mediaApi, ILocalRegistry registry)
+        public DefaultMediaManager(IConferenceBridge conferenceBridge, IMediaApiProvider mediaApi, IRegistry registry)
         {
             Helper.GuardNotNull(conferenceBridge);
             Helper.GuardNotNull(mediaApi);

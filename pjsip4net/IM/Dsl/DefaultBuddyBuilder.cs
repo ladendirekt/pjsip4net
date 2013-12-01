@@ -62,12 +62,12 @@ namespace pjsip4net.IM.Dsl
             return buddy;
         }
 
-        protected IBuddyInternal CreateBuddy()
+        protected Buddy CreateBuddy()
         {
-            return _objectFactory.Create<IBuddyInternal>();
+            return _objectFactory.Create<Buddy>();
         }
 
-        private void InternalRegister(IBuddyInternal buddy)
+        private void InternalRegister(Buddy buddy)
         {
             _imManager.RegisterBuddy(buddy);
         }

@@ -6,6 +6,7 @@ using pjsip4net.Configuration;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Container;
 using pjsip4net.Core.Interfaces;
+using pjsip4net.Core.Interfaces.ApiProviders;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 
@@ -23,7 +24,7 @@ namespace pjsip4net.Tests
         public void Setup()
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
-            _sut = _fixture.CreateAnonymous<Configure>();//.WithVersion_For_Tests();
+            _sut = _fixture.Build<Configure>().Without(x => x.Container).CreateAnonymous();//.WithVersion_For_Tests();
             _container = _fixture.Freeze<Mock<IContainer>>();
         }
 
@@ -67,11 +68,11 @@ namespace pjsip4net.Tests
             sut.Build();
 
             //assert
-            Assert.IsTrue(AppDomain.CurrentDomain.GetAssemblies().Any(x => x.FullName.Contains("pjsip4net.Testing")));
+            Assert.IsNotNull(sut.Container.Get<IBasicApiProvider>());
         }
         
         [Ignore]
-        public void when_build_called_with_explicitly_supplied_api_version__should_use_dynamic_discovery()
+        public void when_build_called_with_explicitly_supplied_api_version__should_not_use_dynamic_discovery()
         {
             //arrange
             var sut = Configure.Pjsip4Net();

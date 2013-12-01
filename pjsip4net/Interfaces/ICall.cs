@@ -1,8 +1,6 @@
 using System;
-using pjsip4net.Calls;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
-using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Interfaces
 {
@@ -39,19 +37,5 @@ namespace pjsip4net.Interfaces
         void ReleaseHold();
         void Transfer(string destinationUri);
         string ToString(bool withMedia);
-    }
-
-    internal interface ICallInternal : ICall, IResource
-    {
-        InviteState InviteState { get; }
-        CallMediaState MediaState { get; }
-        InviteSession InviteSession { get; }
-        void HandleInviteStateChanged();
-        void HandleMediaStateChanged();
-        void SetId(int id);
-        void SetDestinationUri(string uri);
-        void SetAccount(IAccountInternal account);
-        void SetAsIncoming();
-        CallInfo GetCallInfo();
     }
 }

@@ -2,7 +2,6 @@ using Moq;
 using NUnit.Framework;
 using pjsip4net.Accounts;
 using pjsip4net.Core.Data;
-using pjsip4net.Interfaces;
 using Ploeh.AutoFixture;
 
 namespace pjsip4net.Tests.Accounts
@@ -12,13 +11,14 @@ namespace pjsip4net.Tests.Accounts
     public class given_a_registeringState : _base
     {
         private RegistrationSession _session;
-        private Mock<IAccountInternal> _account;
+        private Mock<Account> _account;
 
         [SetUp]
         public override void Setup()
         {
             base.Setup();
-            _account = _fixture.Freeze<Mock<IAccountInternal>>();
+            _fixture.Customize(new AccountCustomization());
+            _account = _fixture.CreateAnonymous<Mock<Account>>();
             _session = _fixture.CreateAnonymous<RegistrationSession>();
         }
 
@@ -32,7 +32,7 @@ namespace pjsip4net.Tests.Accounts
         [Test]
         public void when_ctor_called_should_set_session_registered_state_to_false()
         {
-            _fixture.Freeze<Mock<IAccountInternal>>();
+            _fixture.Freeze<Mock<Account>>();
             var session = _fixture.Freeze<Mock<RegistrationSession>>();
             var sut = _fixture.Build<RegisteringAccountState>()
                 .FromFactory(() => new RegisteringAccountState(session.Object)).CreateAnonymous();

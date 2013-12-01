@@ -1,25 +1,34 @@
-using System;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
-using pjsip4net.Core.Interfaces;
+using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Interfaces;
 
 namespace pjsip4net.Transport
 {
     public class DefaultVoIPTransportFactory : IVoIPTransportFactory
     {
-        private IContainer _container;
+        private ITransportApiProvider _provider;
 
-        public DefaultVoIPTransportFactory(IContainer container)
+        public DefaultVoIPTransportFactory(ITransportApiProvider provider)
         {
-            _container = container;
+            _provider = provider;
         }
 
         #region Implementation of IVoIPTransportFactory
 
         public IVoIPTransport CreateTransport(TransportType transportType)
         {
-            return _container.Get<IVoIPTransport>(transportType.ToString());
+            switch (transportType)
+            {
+                case TransportType.Udp:
+                    return new UdpTransport(_provider);
+                case TransportType.Tcp:
+                    return new TcpTransport(_provider);
+                case TransportType.Tls:
+                    return new TlsTransport(_provider);
+                default:
+                    return new UdpTransport(_provider);
+            }
         }
 
         public IVoIPTransport CreateTransport(TransportType transportType, TransportConfig config)

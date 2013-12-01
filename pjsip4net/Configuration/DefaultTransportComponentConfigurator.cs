@@ -12,9 +12,6 @@ namespace pjsip4net.Configuration
         {
             Helper.GuardNotNull(container);
             container.RegisterAsSingleton<IVoIPTransportFactory, DefaultVoIPTransportFactory>();
-            container.Register<IVoIPTransport, UdpTransport>(TransportType.Udp.ToString());
-            container.Register<IVoIPTransport, TcpTransport>(TransportType.Tcp.ToString());
-            container.Register<IVoIPTransport, TlsTransport>(TransportType.Tls.ToString());
         }
     }
 }

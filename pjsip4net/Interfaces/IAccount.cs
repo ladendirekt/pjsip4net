@@ -41,18 +41,4 @@ namespace pjsip4net.Interfaces
         void RenewRegistration();
         void Unregister();
     }
-
-    internal interface IAccountInternal : IAccount, IResource
-    {
-        AccountConfig Config { get; }
-        bool IsInUse { get; }
-        bool IsLocal { get; set; }
-
-        IDisposable Lock();
-        void HandleStateChanged();
-        void SetId(int id);
-        void SetTransport(IVoIPTransport transport);
-        AccountStateChangedEventArgs GetEventArgs();
-        AccountInfo GetAccountInfo();
-    }
 }

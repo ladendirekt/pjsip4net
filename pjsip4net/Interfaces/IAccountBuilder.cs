@@ -26,10 +26,6 @@ namespace pjsip4net.Interfaces
         /// </summary>
         IAccountBuilder Through(string port);
         /// <summary>
-        /// Signalling transport to use to connect to server.
-        /// </summary>
-        IAccountBuilder Via(IVoIPTransport transport);
-        /// <summary>
         /// Mark this account as default for user agent.
         /// </summary>
         IAccountBuilder Default();

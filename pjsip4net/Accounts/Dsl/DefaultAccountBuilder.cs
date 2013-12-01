@@ -16,22 +16,20 @@ namespace pjsip4net.Accounts.Dsl
         protected bool _publish;
         protected string _registrarDomain;
         protected uint _regTimeout;
-        protected IVoIPTransport _transport;
-        private readonly IObjectFactory _objectFactory;
+        protected VoIPTransport _transport;
         private readonly IAccountManagerInternal _accountManager;
-        private readonly ILocalRegistry _localRegistry;
-        private IAccountInternal _account;
+        private Account _account;
         private IDisposable _accountScope;
 
-        public DefaultAccountBuilder(IObjectFactory objectFactory, IAccountManagerInternal accountManager, ILocalRegistry localRegistry)
+        public DefaultAccountBuilder(Account account, VoIPTransport transport, IAccountManagerInternal accountManager)
         {
-            Helper.GuardNotNull(objectFactory);
+            Helper.GuardNotNull(account);
+            Helper.GuardNotNull(transport);
             Helper.GuardNotNull(accountManager);
-            Helper.GuardNotNull(localRegistry);
-            _objectFactory = objectFactory;
             _accountManager = accountManager;
-            _localRegistry = localRegistry;
-            _account = CreateAccount();
+            _account = account;
+            _account.IsLocal = false;
+            _transport = transport;
             _accountScope = _account.InitializationScope();
         }
 
@@ -56,12 +54,6 @@ namespace pjsip4net.Accounts.Dsl
         public IAccountBuilder Through(string port)
         {
             _port = port;
-            return this;
-        }
-
-        public IAccountBuilder Via(IVoIPTransport transport)
-        {
-            _transport = transport;
             return this;
         }
 
@@ -103,7 +95,6 @@ namespace pjsip4net.Accounts.Dsl
                 sb.AppendExtension(_login).AppendDomain(_registrarDomain);
                 if (!string.IsNullOrEmpty(_port))
                     sb.AppendPort(_port);
-                _transport = _transport ?? _localRegistry.SipTransport;
                 if (_transport is TcpTransport)
                     sb.AppendTransportSuffix(TransportType.Tcp);
                 else if (_transport is TlsTransport)
@@ -131,14 +122,7 @@ namespace pjsip4net.Accounts.Dsl
             return _account;
         }
 
-        internal IAccountInternal CreateAccount()
-        {
-            var account = _objectFactory.Create<IAccountInternal>();
-            account.IsLocal = false;
-            return account;
-        }
-
-        internal virtual void InternalRegister(IAccountInternal account)
+        internal virtual void InternalRegister(Account account)
         {
             _accountManager.RegisterAccount(account, _default);
         }

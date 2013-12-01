@@ -1,4 +1,5 @@
-﻿using pjsip4net.Core.Utils;
+﻿using pjsip4net.Accounts;
+using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls.Dsl
@@ -7,13 +8,16 @@ namespace pjsip4net.Calls.Dsl
     {
         private readonly SipUriBuilder _sb = new SipUriBuilder();
         protected IAccount _account;
-        private ICallManagerInternal _callManager;
-        private IAccountManager _accountManager;
+        private readonly Call _call;
+        private readonly ICallManagerInternal _callManager;
+        private readonly IAccountManager _accountManager;
 
-        public DefaultCallBuilder(ICallManagerInternal callManager, IAccountManager accountManager)
+        public DefaultCallBuilder(Call call, ICallManagerInternal callManager, IAccountManager accountManager)
         {
             Helper.GuardNotNull(callManager);
             Helper.GuardNotNull(accountManager);
+            Helper.GuardNotNull(call);
+            _call = call;
             _callManager = callManager;
             _accountManager = accountManager;
         }
@@ -47,13 +51,20 @@ namespace pjsip4net.Calls.Dsl
             _account = _account ?? _accountManager.DefaultAccount;
             IVoIPTransport transport = _account.Transport;
             _sb.AppendTransportSuffix(transport.TransportType);
+            _call.SetAccount(_account.As<Account>());
 
-            return InternalCall();
+            using (Call().InitializationScope())
+            {
+                _call.SetDestinationUri(_sb.ToString());
+            }
+            
+            InternalCall();
+            return _call;
         }
 
-        protected ICall InternalCall()
+        protected void InternalCall()
         {
-            return _callManager.MakeCall(_account, _sb.ToString());
+            _callManager.RegisterCall(_call);
         }
     }
 }

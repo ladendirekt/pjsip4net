@@ -9,7 +9,6 @@ namespace pjsip4net.Interfaces
         ICallManager CallManager { get; }
         IAccountManager AccountManager { get; }
         IMediaManager MediaManager { get; }
-        IContainer Container { get; }
         event EventHandler<LogEventArgs> Log;
 
         void DumpInfo(bool detail);

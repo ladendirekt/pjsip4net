@@ -23,7 +23,7 @@ namespace pjsip4net.Tests.Accounts
                 .Without(x => x.UseSrtp).Without(x => x.SecureSignaling).Without(x => x.Priority)
                 .Without(x => x.RegistrarUri).Without(x => x.PublishPresence)
                 .Without(x => x.RegistrationTimeout).Without(x => x.KeepAliveInterval)
-                .CreateAnonymous();
+                .With(x => x.IsLocal, false).CreateAnonymous();
         }
 
         private Mock<IAccountApiProvider> CreateProvider()

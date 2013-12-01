@@ -8,6 +8,11 @@ namespace pjsip4net.Core
     {
         protected bool _isDisposed;
 
+        internal bool IsDisposed
+        {
+            get { return _isDisposed; }
+        }
+
         protected void GuardDisposed()
         {
             if (_isDisposed)
@@ -16,7 +21,7 @@ namespace pjsip4net.Core
 
         #region Implementation of IDisposable
 
-        void IResource.InternalDispose()
+        public void InternalDispose()
         {
             Dispose(true);
         }

@@ -24,7 +24,7 @@ namespace pjsip4net.Tests
         public void when_configure_is_called__should_register_default_localRegistry_with_configCtx()
         {
             when_configure_called();
-            _container.Verify(x => x.RegisterAsSingleton<ILocalRegistry, DefaultLocalRegistry>(), Times.Exactly(1));
+            _container.Verify(x => x.RegisterAsSingleton<IRegistry, DefaultRegistry>(), Times.Exactly(1));
             _container.Verify(x => x.RegisterAsSingleton(It.IsAny<IConfigurationContext>()), Times.Exactly(1));
         }
 

@@ -1,7 +1,6 @@
 using System;
 using log4net;
 using log4net.Config;
-using pjsip.Interop;
 using pjsip4net.Calls;
 using pjsip4net.Configuration;
 using pjsip4net.Core;
@@ -17,12 +16,14 @@ namespace pjsip4net.Console
         public static void Main(string[] args)
         {
             XmlConfigurator.Configure();
-            _logger = LogManager.GetLogger("root");
-            var ua = Configure.Pjsip4Net().FromConfig().WithVersion_1_4().Build().Start();
-            ua.Log += Log;
+            _logger = LogManager.GetLogger("root");//logging is purely an application facility, you can choose whatever you want to log with
+            var cfg = Configure.Pjsip4Net()//dynamically discovers interop assembly and loads API providers unless concrete version loader specified
+                .FromConfig();//read configuration from .config file 
+            var ua = cfg.Build().Start();//build and start
+            ua.Log += Log;//log events
             ua.ImManager.IncomingMessage += ImManager_IncomingMessage;
             ua.CallManager.CallRedirected += CallManager_CallRedirected;
-            var factory = new CommandFactory(ua);
+            var factory = new CommandFactory(ua, cfg.Container);
             factory.Create("?").Execute();
 
             while (true)

@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using pjsip4net.Core;
-using pjsip4net.Core.Interfaces;
+using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
@@ -13,20 +13,18 @@ namespace pjsip4net
     {
         private readonly IBasicApiProvider _basicApi;
         private readonly IEventsProvider _eventsProvider;
-        private readonly ILocalRegistry _localRegistry;
-        private readonly IContainer _container;
+        private readonly LoggingConfig _loggingConfig;
 
         public DefaultSipUserAgent(IBasicApiProvider basicApi, IEventsProvider eventsProvider, 
-            ILocalRegistry localRegistry, IContainer container)
+            LoggingConfig loggingConfig)
         {
             Helper.GuardNotNull(basicApi);
             Helper.GuardNotNull(eventsProvider);
-            Helper.GuardNotNull(localRegistry);
-            Helper.GuardNotNull(container);
+            Helper.GuardNotNull(loggingConfig);
             _basicApi = basicApi;
-            _localRegistry = localRegistry;
-            _container = container;
+            _loggingConfig = loggingConfig;
             _eventsProvider = eventsProvider;
+            _loggingConfig = loggingConfig;
 
             _eventsProvider.Subscribe<LogRequested>(OnLog);
         }
@@ -35,7 +33,7 @@ namespace pjsip4net
 
         public void Dispose()
         {
-            ((IResource)this).InternalDispose();
+            InternalDispose();
         }
 
         #endregion
@@ -46,10 +44,6 @@ namespace pjsip4net
         public ICallManager CallManager { get; private set; }
         public IAccountManager AccountManager { get; private set; }
         public IMediaManager MediaManager { get; private set; }
-        public IContainer Container
-        {
-            get { return _container; }
-        }
 
         public event EventHandler<LogEventArgs> Log = delegate { };
 
@@ -60,7 +54,7 @@ namespace pjsip4net
 
         public void Destroy()
         {
-            ((IResource)this).InternalDispose();
+            InternalDispose();
         }
 
         public void SetManagers(IImManager imManager, ICallManager callManager, 
@@ -80,7 +74,7 @@ namespace pjsip4net
 
         private void OnLog(LogRequested e)
         {
-            if (_localRegistry.LoggingConfig.TraceAndDebug)
+            if (_loggingConfig.TraceAndDebug)
                 Trace.Write(e.Message);
             if (e.Level <= 2)
                 Helper.LastError = e.Message;
@@ -99,9 +93,6 @@ namespace pjsip4net
                 if (mgr != null)
                     mgr.UnRegisterAllAccounts();
             }
-
-            _localRegistry.SipTransport.InternalDispose();
-            _localRegistry.RtpTransport.InternalDispose();
 
             ImManager = null;
             CallManager = null;

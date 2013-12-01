@@ -8,11 +8,11 @@ namespace pjsip4net.Calls
     internal class MediaSession : StateMachine, IDisposable
     {
         private WeakReference _call;
-        private readonly ILocalRegistry _localRegistry;
+        private readonly IRegistry _localRegistry;
         private readonly ICallManagerInternal _callManager;
         private readonly IConferenceBridge _conferenceBridge;
 
-        public MediaSession(ICallInternal call, ILocalRegistry localRegistry,
+        public MediaSession(Call call, IRegistry localRegistry,
             ICallManagerInternal callManager, IConferenceBridge conferenceBridge)
         {
             Helper.GuardNotNull(call);
@@ -26,12 +26,12 @@ namespace pjsip4net.Calls
             _conferenceBridge = conferenceBridge;
         }
 
-        public ICallInternal Call
+        public Call Call
         {
             get
             {
                 if (_call.IsAlive)
-                    return (ICallInternal)_call.Target;
+                    return (Call)_call.Target;
                 throw new ObjectDisposedException("call");
             }
         }
@@ -40,7 +40,7 @@ namespace pjsip4net.Calls
         public bool IsActive { get; set; }
         public bool IsInConference { get; set; }
         public CallMediaState MediaState { get; set; }
-        public ILocalRegistry Registry
+        public IRegistry Registry
         {
             get { return _localRegistry; }
         }

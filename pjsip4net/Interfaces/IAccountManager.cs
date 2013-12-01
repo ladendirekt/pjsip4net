@@ -24,11 +24,11 @@ namespace pjsip4net.Interfaces
     {
         IAccountApiProvider Provider { get; }
 
-        void RegisterAccount(IAccountInternal account, bool @default);
-        void UnregisterAccount(IAccountInternal account);
-        void RaiseStateChanged(IAccountInternal account);
+        void RegisterAccount(Account account, bool @default);
+        void UnregisterAccount(Account account);
+        void RaiseStateChanged(Account account);
         void OnRegistrationState(RegistrationStateChanged e);
         void UnRegisterAllAccounts();
-        IAccountInternal GetAccount(int id);
+        Account GetAccount(int id);
     }
 }

@@ -14,7 +14,7 @@ namespace pjsip4net.Configuration
             container.RegisterAsSingleton<ICallManager, DefaultCallManager>();
             container.RegisterAsSingleton(container.Get<ICallManager>() as ICallManagerInternal);
             container.Register<ICallBuilder, DefaultCallBuilder>();
-            container.Register<ICallInternal, Call>();
+            container.Register<Call, Call>();
         }
     }
 }

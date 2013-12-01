@@ -7,7 +7,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.IM
 {
-    internal class Buddy : Initializable, IBuddyInternal, IIdentifiable<IBuddy>
+    internal class Buddy : Initializable, IBuddy, IIdentifiable<IBuddy>
     {
         private readonly object _lock = new object();
         private readonly IImManagerInternal _manager;

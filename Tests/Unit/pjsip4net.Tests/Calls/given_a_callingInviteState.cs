@@ -13,15 +13,16 @@ namespace pjsip4net.Tests.Calls
     public class given_a_callingInviteState : _base
     {
         private InviteSession _session;
-        private Mock<ICallInternal> _call;
+        private Mock<Call> _call;
         private Mock<ICallManagerInternal> _callMgr;
 
         [SetUp]
         public override void Setup()
         {
             base.Setup();
-            _callMgr = _fixture.Freeze<Mock<ICallManagerInternal>>();
-            _call = _fixture.Freeze<Mock<ICallInternal>>();
+            _fixture.Customize(new CallCustomization());
+            _callMgr = _fixture.CreateAnonymous<Mock<ICallManagerInternal>>();
+            _call = _fixture.CreateAnonymous<Mock<Call>>();
             _session = _fixture.CreateAnonymous<InviteSession>();
         }
 
@@ -47,7 +48,7 @@ namespace pjsip4net.Tests.Calls
             var sut = new CallingInviteState(_session);
 
             _callMgr.Verify(
-                x => x.RaiseRingEvent(It.Is<ICallInternal>(c => ReferenceEquals(c, _call.Object)), It.Is<bool>(b => b)));
+                x => x.RaiseRingEvent(It.Is<Call>(c => ReferenceEquals(c, _call.Object)), It.Is<bool>(b => b)));
         }
         
         [Test]
@@ -57,7 +58,7 @@ namespace pjsip4net.Tests.Calls
             var sut = new CallingInviteState(_session);
 
             _callMgr.Verify(
-                x => x.RaiseRingEvent(It.Is<ICallInternal>(c => ReferenceEquals(c, _call.Object)), It.Is<bool>(b => b)),
+                x => x.RaiseRingEvent(It.Is<Call>(c => ReferenceEquals(c, _call.Object)), It.Is<bool>(b => b)),
                 Times.Never());
         }
         

@@ -14,10 +14,9 @@ namespace pjsip4net.Accounts
     internal class DefaultAccountManager : Initializable, IAccountManagerInternal
     {
         private static readonly object _lock = new object();
-        private readonly SortedDictionary<int, IAccountInternal> _accounts;
-        private Queue<Account> _deleting;
-        private ILocalRegistry _localRegistry;
-        private IAccountApiProvider _provider;
+        private readonly SortedDictionary<int, Account> _accounts;
+        private readonly IRegistry _localRegistry;
+        private readonly IAccountApiProvider _provider;
         private readonly IEventsProvider _eventsProvider;
 
         #region Properties
@@ -76,12 +75,12 @@ namespace pjsip4net.Accounts
             if (account != null) account.HandleStateChanged();
         }
 
-        public void RaiseStateChanged(IAccountInternal account)
+        public void RaiseStateChanged(Account account)
         {
             AccountStateChanged(this, account.GetEventArgs());
         }
 
-        public void RegisterAccount(IAccountInternal account, bool @default)
+        public void RegisterAccount(Account account, bool @default)
         {
             Helper.GuardNotNull(account);
 
@@ -101,7 +100,7 @@ namespace pjsip4net.Accounts
             }
         }
 
-        public void UnregisterAccount(IAccountInternal account)
+        public void UnregisterAccount(Account account)
         {
             if (account.IsInUse)
                 throw new InvalidOperationException("Can't delete account as long as it's being used by other parties");
@@ -109,10 +108,7 @@ namespace pjsip4net.Accounts
             lock (_lock)
                 if (_accounts.ContainsKey(account.Id))
                 {
-                    //if (account.IsRegistered)
-                    //    Helper.GuardError(PJSUA_DLL.Accounts.pjsua_acc_set_registration(account.Id, false));
-
-                    //_deleting.Enqueue(account);//TODO raise events for accounts being deleted
+                    //TODO raise events for accounts being deleted
                     _provider.DeleteAccount(account.Id);
                     _accounts.Remove(account.Id);
                     account.SetId(-1);
@@ -143,7 +139,7 @@ namespace pjsip4net.Accounts
             Thread.Sleep(1000);
         }
 
-        public IAccountInternal GetAccount(int id)
+        public Account GetAccount(int id)
         {
             lock (_lock)
                 if (_accounts.ContainsKey(id))
@@ -160,7 +156,7 @@ namespace pjsip4net.Accounts
         #endregion
 
         public DefaultAccountManager(IAccountApiProvider accountApi, IEventsProvider eventsProvider, 
-            ILocalRegistry localRegistry)
+            IRegistry localRegistry)
         {
             Helper.GuardNotNull(accountApi);
             Helper.GuardNotNull(eventsProvider);
@@ -168,9 +164,7 @@ namespace pjsip4net.Accounts
             _provider = accountApi;
             _eventsProvider = eventsProvider;
             _localRegistry = localRegistry;
-            _accounts = new SortedDictionary<int, IAccountInternal>();
-            //_syncContext = SynchronizationContext.Current;
-            _deleting = new Queue<Account>();
+            _accounts = new SortedDictionary<int, Account>();
         }
     }
 }

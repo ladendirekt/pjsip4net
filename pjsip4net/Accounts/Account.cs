@@ -11,7 +11,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Accounts
 {
-    internal class Account : Initializable, IAccountInternal, IIdentifiable<IAccount>
+    internal class Account : Initializable, IAccount, IIdentifiable<IAccount>
     {
         private bool _isLocal;
         private readonly object _lock = new object();
@@ -93,7 +93,7 @@ namespace pjsip4net.Accounts
             }
         }
 
-        bool IAccountInternal.IsLocal
+        public virtual bool IsLocal
         {
             get
             {
@@ -313,7 +313,7 @@ namespace pjsip4net.Accounts
             }
         }
 
-        public int Id { get; internal set; }
+        public virtual int Id { get; internal set; }
 
         #endregion
 
@@ -338,7 +338,7 @@ namespace pjsip4net.Accounts
         {
             base.EndInit();
             Helper.GuardPositiveInt(Priority);
-            if (!_isLocal)
+            if (!IsLocal)
             {
                 Helper.GuardNotNullStr(AccountId);
                 Helper.GuardNotNullStr(RegistrarUri);
@@ -368,7 +368,7 @@ namespace pjsip4net.Accounts
         {
             GuardDisposed();
             GuardNotInitialized();
-            if (!_session.IsRegistered && Id != -1 && !((IAccountInternal) this).IsLocal)
+            if (!_session.IsRegistered && Id != -1 && !((Account) this).IsLocal)
             {
                 _manager.Provider.SetAccountRegistration(Id, true);
                 _session.HandleStateChanged();
@@ -402,7 +402,7 @@ namespace pjsip4net.Accounts
             _manager.RaiseStateChanged(this);
         }
 
-        public AccountInfo GetAccountInfo()
+        public virtual AccountInfo GetAccountInfo()
         {
             lock (_lock)
             {

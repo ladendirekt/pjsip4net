@@ -1,11 +1,10 @@
-using System.ComponentModel;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
 
 namespace pjsip4net.Interfaces
 {
-    public interface IVoIPTransport : IIdentifiable<IVoIPTransport>, ISupportInitialize, IInitializable
+    public interface IVoIPTransport : IIdentifiable<IVoIPTransport>, IInitializable
     {
         TransportType TransportType { get ; }
         //uint Port { get; set; }
@@ -20,7 +19,4 @@ namespace pjsip4net.Interfaces
         void SetConfig(TransportConfig config);
         void SetId(int id);
     }
-
-    internal interface IVoIPTransportInternal : IVoIPTransport, IResource
-    { }
 }

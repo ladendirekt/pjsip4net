@@ -18,12 +18,4 @@ namespace pjsip4net.Interfaces
         void UpdatePresenceState();
         void Unregister();
     }
-
-    internal interface IBuddyInternal : IBuddy, IResource
-    {
-        BuddyConfig Config { get; }
-        BuddyInfo GetInfo();
-        BuddyStateChangedEventArgs GetEventArgs();
-        void SetId(int id);
-    }
 }

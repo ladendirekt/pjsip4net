@@ -107,6 +107,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\AccountCustomization.cs" />
     <Compile Include="Accounts\given_an_account.cs" />
     <Compile Include="Accounts\given_an_account_builder.cs" />
     <Compile Include="Accounts\given_an_account_manager.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Accounts\given_a_registeredState.cs" />
     <Compile Include="Accounts\given_a_registeringState.cs" />
     <Compile Include="Accounts\given_a_timedoutState.cs" />
+    <Compile Include="Calls\CallCustomization.cs" />
     <Compile Include="Calls\given_a_call.cs" />
     <Compile Include="Calls\given_a_callingInviteState.cs" />
     <Compile Include="Calls\given_a_nullInviteState.cs" />

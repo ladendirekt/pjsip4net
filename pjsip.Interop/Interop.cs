@@ -5543,60 +5543,60 @@ namespace pjsip.Interop
         public pj_in6_addr ip_addr;
     }
 
-    [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
-    public struct pj_dns_parsed_rr_rdata
-    {
+    //[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
+    //public struct pj_dns_parsed_rr_rdata
+    //{
 
-        /// pj_dns_parsed_rr_rdata_srv
-        [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        public pj_dns_parsed_rr_rdata_srv Struct1;
+    //    /// pj_dns_parsed_rr_rdata_srv
+    //    [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
+    //    public pj_dns_parsed_rr_rdata_srv Struct1;
 
-        /// pj_dns_parsed_rr_rdata_cname
-        [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        public pj_dns_parsed_rr_rdata_cname Struct2;
+    //    /// pj_dns_parsed_rr_rdata_cname
+    //    [System.Runtime.InteropServices.FieldOffsetAttribute(0), MarshalAs(UnmanagedType.LPStruct)]
+    //    public pj_dns_parsed_rr_rdata_cname Struct2;
 
-        /// pj_dns_parsed_rr_rdata_ns
-        [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        public pj_dns_parsed_rr_rdata_ns Struct3;
+    //    /// pj_dns_parsed_rr_rdata_ns
+    //    [System.Runtime.InteropServices.FieldOffsetAttribute(0), MarshalAs(UnmanagedType.LPStruct)]
+    //    public pj_dns_parsed_rr_rdata_ns Struct3;
 
-        /// pj_dns_parsed_rr_rdata_ptr
-        [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        public pj_dns_parsed_rr_rdata_ptr Struct4;
+    //    /// pj_dns_parsed_rr_rdata_ptr
+    //    [System.Runtime.InteropServices.FieldOffsetAttribute(0), MarshalAs(UnmanagedType.LPStruct)]
+    //    public pj_dns_parsed_rr_rdata_ptr Struct4;
 
-        /// pj_dns_parsed_rr_rdata_a
-        [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        public pj_dns_parsed_rr_rdata_a Struct5;
+    //    /// pj_dns_parsed_rr_rdata_a
+    //    [System.Runtime.InteropServices.FieldOffsetAttribute(0), MarshalAs(UnmanagedType.LPStruct)]
+    //    public pj_dns_parsed_rr_rdata_a Struct5;
 
-        /// pj_dns_parsed_rr_rdata_aaaa
-        [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        public pj_dns_parsed_rr_rdata_aaaa Struct6;
-    }
+    //    /// pj_dns_parsed_rr_rdata_aaaa
+    //    [System.Runtime.InteropServices.FieldOffsetAttribute(0), MarshalAs(UnmanagedType.LPStruct)]
+    //    public pj_dns_parsed_rr_rdata_aaaa Struct6;
+    //}
 
-    [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct pj_dns_parsed_rr
-    {
+    //[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    //public struct pj_dns_parsed_rr
+    //{
 
-        /// pj_str_t
-        public pj_str_t name;
+    //    /// pj_str_t
+    //    public pj_str_t name;
 
-        /// pj_uint16_t->unsigned short
-        public ushort type;
+    //    /// pj_uint16_t->unsigned short
+    //    public ushort type;
 
-        /// pj_uint16_t->unsigned short
-        public ushort dnsclass;
+    //    /// pj_uint16_t->unsigned short
+    //    public ushort dnsclass;
 
-        /// pj_uint32_t->unsigned int
-        public uint ttl;
+    //    /// pj_uint32_t->unsigned int
+    //    public uint ttl;
 
-        /// pj_uint16_t->unsigned short
-        public ushort rdlength;
+    //    /// pj_uint16_t->unsigned short
+    //    public ushort rdlength;
 
-        /// void*
-        public System.IntPtr data;
+    //    /// void*
+    //    public System.IntPtr data;
 
-        /// pj_dns_parsed_rr_rdata
-        public pj_dns_parsed_rr_rdata Union1;
-    }
+    //    /// pj_dns_parsed_rr_rdata
+    //    public pj_dns_parsed_rr_rdata Union1;
+    //}
 
     [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
     public struct pj_dns_parsed_packet

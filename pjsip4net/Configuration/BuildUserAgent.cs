@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using pjsip4net.Accounts;
 using pjsip4net.Core;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Container;
@@ -9,6 +10,7 @@ using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
+using pjsip4net.Transport;
 
 namespace pjsip4net.Configuration
 {
@@ -39,19 +41,17 @@ namespace pjsip4net.Configuration
                 .With(new DefaultCallComponentConfigurator())
                 .With(new DefaultMediaComponentConfigurator()).RunConfigurators();
 
-            var localRegistry = cfg.Container.Get<ILocalRegistry>();
+            var localRegistry = cfg.Container.Get<IRegistry>();
             localRegistry.Container = cfg.Container;
 
             var basicApiProvider = cfg.Container.Get<IBasicApiProvider>();
             if (basicApiProvider == null)
-                throw new InvalidOperationException("There is neither API version configured nor discovered dynamically");
+                throw new InvalidOperationException("The API version was neither configured explicitly nor discovered dynamically");
 
             basicApiProvider.CreatePjsua();
 
-            localRegistry.Config = basicApiProvider.GetDefaultUaConfig();
-            localRegistry.LoggingConfig = basicApiProvider.GetDefaultLoggingConfig();
-            localRegistry.MediaConfig = cfg.Container.Get<IMediaApiProvider>().GetDefaultConfig();
-
+            new DefaultAgentConfigurator().Configure(cfg.Container);
+            
             cfg.RunConfigurationProviders();
 
             var accApi = cfg.Container.Get<IAccountApiProvider>();
@@ -93,7 +93,6 @@ namespace pjsip4net.Configuration
             ua.SetManagers(imMgr, callMgr, accMgr, mediaMgr);
 
             basicApiProvider.InitPjsua(localRegistry.Config, localRegistry.LoggingConfig, localRegistry.MediaConfig);
-            //basicApiProvider.Start();
 
             return cfg;
         }
@@ -105,7 +104,7 @@ namespace pjsip4net.Configuration
         /// <returns></returns>
         public static ISipUserAgent Start(this Configure cfg)
         {
-            var localRegistry = cfg.Container.Get<ILocalRegistry>();
+            var localRegistry = cfg.Container.Get<IRegistry>();
             if (localRegistry.Config == null)
                 throw new InvalidOperationException("You should call Build first to build up user agent infrastructure.");
 
@@ -113,15 +112,16 @@ namespace pjsip4net.Configuration
             localRegistry.SipTransport =
                 transportFactory.CreateTransport(localRegistry.TransportConfig.Part1,
                                                  localRegistry.TransportConfig.Part2)
-                    .As<IVoIPTransportInternal>();
+                    .As<VoIPTransport>();
             var tptApiProvider = cfg.Container.Get<ITransportApiProvider>();
             localRegistry.SipTransport.SetId(
                 tptApiProvider.CreateTransportAndGetId(localRegistry.SipTransport.TransportType,
                                                        localRegistry.SipTransport.Config));
             localRegistry.RtpTransport =
-                transportFactory.CreateTransport(TransportType.Udp).As<IVoIPTransportInternal>();
+                transportFactory.CreateTransport(TransportType.Udp).As<VoIPTransport>();
             using (localRegistry.RtpTransport.InitializationScope())
                 localRegistry.RtpTransport.Config.Port = 4000;
+            cfg.Container.RegisterAsSingleton(localRegistry.SipTransport);
 
             var mediaApiProvider = cfg.Container.Get<IMediaApiProvider>();
             mediaApiProvider.CreateMediaTransport(localRegistry.RtpTransport.Config);
@@ -136,7 +136,7 @@ namespace pjsip4net.Configuration
             var objectFactory = cfg.Container.Get<IObjectFactory>();
             var accMgr = cfg.Container.Get<IAccountManagerInternal>();
             //always register local account first
-            var account = objectFactory.Create<IAccountInternal>();
+            var account = objectFactory.Create<Account>();
             using (account.InitializationScope())
             {
                 account.IsLocal = true;
@@ -146,11 +146,11 @@ namespace pjsip4net.Configuration
             //TODO: generalize transport injection
 
             //register configured accounts
-            IEnumerable<AccountConfig> preconfiguredAccounts = localRegistry.AccountConfigs;
-            if (preconfiguredAccounts.Count() > 0)
-                foreach (var accCfg in preconfiguredAccounts)
+            var accountConfigs = localRegistry.AccountConfigs as AccountConfig[] ?? localRegistry.AccountConfigs.ToArray();
+            if (accountConfigs.Any())
+                foreach (var accCfg in accountConfigs)
                 {
-                    var acc = objectFactory.Create<IAccountInternal>();
+                    var acc = objectFactory.Create<Account>();
                     using (acc.InitializationScope())
                     {
                         acc.SetConfig(accCfg);

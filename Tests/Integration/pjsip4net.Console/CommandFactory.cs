@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Magnum.CommandLineParser;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
 
@@ -9,11 +10,13 @@ namespace pjsip4net.Console
     public class CommandFactory : ICommandFactory
     {
         private readonly ISipUserAgent _userAgent;
+        private readonly IContainer _container;
         private readonly ICommandLineParser _parser = new MonadicCommandLineParser();
 
-        public CommandFactory(ISipUserAgent userAgent)
+        public CommandFactory(ISipUserAgent userAgent, IContainer container)
         {
             _userAgent = userAgent;
+            _container = container;
         }
 
         #region Implementation of ICommandFactory
@@ -110,7 +113,7 @@ namespace pjsip4net.Console
                         InDialog = definitions.First(x => x.Key == "i").Value,
                         Through = definitions.First(x => x.Key == "Through").Value,
                         To = definitions.First(x => x.Key == "t").Value,
-                    });
+                    }, _container.Get<IMessageBuilder>());
                 case "?":
                 case "help":
                 case "print":
@@ -144,25 +147,27 @@ namespace pjsip4net.Console
     {
         private readonly ISipUserAgent _agent;
         private readonly ImArguments _arguments;
+        private readonly IMessageBuilder _messageBuilder;
 
-        public SendImCommand(ISipUserAgent agent, ImArguments arguments)
+        public SendImCommand(ISipUserAgent agent, ImArguments arguments, IMessageBuilder messageBuilder)
         {
             _agent = agent;
             _arguments = arguments;
+            _messageBuilder = messageBuilder;
         }
 
         #region Implementation of ICommand
 
         public void Execute()
         {
-            var builder = _agent.Container.Get<IMessageBuilder>().To(_arguments.To).At(_arguments.At).From(
+            _messageBuilder.To(_arguments.To).At(_arguments.At).From(
                 _agent.AccountManager.GetAccountById(Convert.ToInt32(_arguments.From))).WithBody(_arguments.Body);
             if (!string.IsNullOrEmpty(_arguments.Through))
-                builder = builder.Through(_arguments.Through);
+                _messageBuilder.Through(_arguments.Through);
             if (!string.IsNullOrEmpty(_arguments.InDialog))
-                builder = builder.InDialogOf(_agent.CallManager.GetCallById(Convert.ToInt32(_arguments.InDialog)));
+                _messageBuilder.InDialogOf(_agent.CallManager.GetCallById(Convert.ToInt32(_arguments.InDialog)));
 
-            builder.Send();
+            _messageBuilder.Send();
         }
 
         #endregion
@@ -230,12 +235,14 @@ namespace pjsip4net.Console
 
         public void Execute()
         {
-            var builder =
-                _agent.Container.Get<IAccountBuilder>().WithExtension(_arguments.Extension).WithPassword(
+            _agent.AccountManager.Register(x =>
+            {
+                x.WithExtension(_arguments.Extension).WithPassword(
                     _arguments.Password);
-            if (_arguments.Port != null)
-                builder.Through(_arguments.Port);
-            builder.At(_arguments.Domain).Register();
+                if (_arguments.Port != null)
+                    x.Through(_arguments.Port);
+                return x.At(_arguments.Domain).Register();
+            });
         }
 
         #endregion
@@ -315,15 +322,18 @@ namespace pjsip4net.Console
 
         public void Execute()
         {
-            var builder = _agent.Container.Get<IBuddyBuilder>().WithName(_arguments.Extension)
-                .At(_arguments.Domain);
+            _agent.ImManager.RegisterBuddy(x =>
+            {
+                x.WithName(_arguments.Extension)
+                    .At(_arguments.Domain);
 
-            if (_arguments.Port != null)
-                builder = builder.Through(_arguments.Port);
-            if (Convert.ToBoolean(_arguments.Subscribe))
-                builder = builder.Subscribing();
+                if (_arguments.Port != null)
+                    x.Through(_arguments.Port);
+                if (Convert.ToBoolean(_arguments.Subscribe))
+                    x.Subscribing();
 
-            builder.Register();
+                return x.Register();
+            });
         }
 
         #endregion
@@ -460,8 +470,8 @@ namespace pjsip4net.Console
 
         public void Execute()
         {
-            _agent.Container.Get<ICallBuilder>().To(_args.To).At(_args.At).Through(_args.Through)
-                .From(_agent.AccountManager.GetAccountById(Convert.ToInt32(_args.From))).Call();
+            _agent.CallManager.MakeCall(x => x.To(_args.To).At(_args.At).Through(_args.Through)
+                .From(_agent.AccountManager.GetAccountById(Convert.ToInt32(_args.From))).Call());
         }
     }
 

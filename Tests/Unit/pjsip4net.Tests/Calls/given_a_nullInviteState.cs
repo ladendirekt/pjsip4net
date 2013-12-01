@@ -13,15 +13,16 @@ namespace pjsip4net.Tests.Calls
     public class given_a_nullInviteState : _base
     {
         private InviteSession _session;
-        private Mock<ICallInternal> _call;
+        private Mock<Call> _call;
         private Mock<ICallManagerInternal> _callMgr;
 
         [SetUp]
         public override void Setup()
         {
             base.Setup();
-            _callMgr = _fixture.Freeze<Mock<ICallManagerInternal>>();
-            _call = _fixture.Freeze<Mock<ICallInternal>>();
+            _fixture.Customize(new CallCustomization());
+            _callMgr = _fixture.CreateAnonymous<Mock<ICallManagerInternal>>();
+            _call = _fixture.CreateAnonymous<Mock<Call>>();
             _session = _fixture.CreateAnonymous<InviteSession>();
         }
 
