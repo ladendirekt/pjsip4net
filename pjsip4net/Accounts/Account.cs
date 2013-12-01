@@ -474,6 +474,7 @@ namespace pjsip4net.Accounts
 
         private class AccountLock : IDisposable
         {
+            private readonly object _lock = new object();
             private Account _owner;
 
             public AccountLock(Account owner)
@@ -487,8 +488,12 @@ namespace pjsip4net.Accounts
 
             public void Dispose()
             {
-                _owner.Release();
-                _owner = null;
+                lock (_lock)
+                {
+                    if (_owner == null) return;
+                    _owner.Release();
+                    _owner = null;    
+                }
             }
 
             #endregion

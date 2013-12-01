@@ -53,11 +53,9 @@ namespace pjsip4net.Calls.Dsl
             _sb.AppendTransportSuffix(transport.TransportType);
             _call.SetAccount(_account.As<Account>());
 
-            using (Call().InitializationScope())
-            {
+            using (_call.InitializationScope())
                 _call.SetDestinationUri(_sb.ToString());
-            }
-            
+
             InternalCall();
             return _call;
         }

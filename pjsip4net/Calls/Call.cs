@@ -19,6 +19,7 @@ namespace pjsip4net.Calls
         private IDisposable _accountLock;
         private readonly InviteSession _inviteSession;
         private ILog _logger = LogManager.GetLogger<ICall>();
+        private CallInfo _cachedInfo;
 
         #endregion
 
@@ -30,7 +31,6 @@ namespace pjsip4net.Calls
         {
             get
             {
-                GuardDisposed();
                 return _account;
             }
         }
@@ -39,7 +39,6 @@ namespace pjsip4net.Calls
         {
             get
             {
-                GuardDisposed();
                 return _destinationUri;
             }
             internal set
@@ -66,7 +65,6 @@ namespace pjsip4net.Calls
         {
             get
             {
-                GuardDisposed();
                 return Id != -1 &&
                        _callManager.CallApiProvider.IsCallActive(Id);
             }
@@ -76,7 +74,6 @@ namespace pjsip4net.Calls
         {
             get
             {
-                GuardDisposed();
                 return Id != -1 && _callManager.CallApiProvider.CallHasMedia(Id) &&
                        _mediaSession.IsActive;
             }
@@ -167,7 +164,6 @@ namespace pjsip4net.Calls
         {
             get
             {
-                GuardDisposed();
                 var level = _callManager.MediaApiProvider.GetSignalLevel(ConferenceSlotId);
                 return level.Rx/255.0;
             }
@@ -183,7 +179,6 @@ namespace pjsip4net.Calls
         {
             get
             {
-                GuardDisposed();
                 var level = _callManager.MediaApiProvider.GetSignalLevel(ConferenceSlotId);
                 return level.Tx / 255.0;
             }
@@ -291,6 +286,7 @@ namespace pjsip4net.Calls
             GuardDisposed();
             if (!_inviteSession.IsDisconnected)
                 _callManager.CallApiProvider.HangupCall(Id, SipStatusCode.Decline, reason);
+            InternalDispose();
         }
 
         public void Answer(bool accept)
@@ -336,18 +332,21 @@ namespace pjsip4net.Calls
 
         public void SetId(int id)
         {
+            GuardDisposed();
             Helper.GuardPositiveInt(id);
             Id = id;
         }
 
         public void SetDestinationUri(string uri)
         {
+            GuardDisposed();
             Helper.GuardNotNullStr(uri);
             DestinationUri = uri;
         }
 
         public void SetAccount(Account account)
         {
+            GuardDisposed();
             Helper.GuardNotNull(account);
             _account = account;
             if (IsIncoming)
@@ -356,21 +355,26 @@ namespace pjsip4net.Calls
 
         public void SetAsIncoming()
         {
+            GuardDisposed();
             IsIncoming = true;
         }
 
         public virtual CallInfo GetCallInfo()
         {
-            GuardDisposed();
+            if (_isDisposed)
+                return _cachedInfo;
+
             if (Id == -1)
                 return null;
             try
             {
-                return _callManager.CallApiProvider.GetInfo(Id);
+                _cachedInfo = _callManager.CallApiProvider.GetInfo(Id);
+                return _cachedInfo;
             }
             catch (PjsipErrorException)
             {
-                return _callManager.CallApiProvider.GetInfo(Id);
+                _cachedInfo = _callManager.CallApiProvider.GetInfo(Id);
+                return _cachedInfo;
             }
         }
 
@@ -418,9 +422,14 @@ namespace pjsip4net.Calls
 
         protected override void CleanUp()
         {
+            _cachedInfo = GetCallInfo();
+
             _logger.Debug("Call " + Id + " disposed");
-            _accountLock.Dispose();
-            _account = null;
+            if (_accountLock != null)
+            {
+                _accountLock.Dispose();
+                _account = null;
+            }
             _accountLock = null;
             _inviteSession.Dispose();
             _mediaSession.Dispose();
