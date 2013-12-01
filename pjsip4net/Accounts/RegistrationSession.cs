@@ -3,7 +3,7 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Accounts
 {
-    internal class RegistrationSession : StateMachine, IDisposable
+    internal class RegistrationSession : StateMachine
     {
         private WeakReference _account;
 
@@ -25,15 +25,5 @@ namespace pjsip4net.Accounts
         }
 
         public virtual bool IsRegistered { get; set; }
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            _account = null;
-            _state = null;
-        }
-
-        #endregion
     }
 }

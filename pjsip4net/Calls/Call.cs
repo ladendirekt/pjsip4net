@@ -18,7 +18,7 @@ namespace pjsip4net.Calls
         private Account _account;
         private IDisposable _accountLock;
         private readonly InviteSession _inviteSession;
-        private ILog _logger = LogManager.GetLogger<ICall>();
+        private readonly ILog _logger = LogManager.GetLogger<ICall>();
         private CallInfo _cachedInfo;
 
         #endregion
@@ -250,7 +250,7 @@ namespace pjsip4net.Calls
             if (!IsIncoming)
                 Helper.GuardIsTrue(new SipUriParser(DestinationUri).IsValid);
 
-            _accountLock = ((Account)Account).Lock(); //if everything is ok
+            _accountLock = _account.Lock(); //if everything is ok
         }
 
         public void Hold()
@@ -263,7 +263,7 @@ namespace pjsip4net.Calls
         public void ReleaseHold()
         {
             GuardDisposed();
-            if (_mediaSession.IsHeld) // media state should reflect correct state [unknown for now]
+            if (_mediaSession.IsHeld) // media state should reflect correct state
                 _callManager.CallApiProvider.ReinviteCall(Id, true);
         }
 
@@ -286,7 +286,6 @@ namespace pjsip4net.Calls
             GuardDisposed();
             if (!_inviteSession.IsDisconnected)
                 _callManager.CallApiProvider.HangupCall(Id, SipStatusCode.Decline, reason);
-            InternalDispose();
         }
 
         public void Answer(bool accept)
@@ -422,8 +421,6 @@ namespace pjsip4net.Calls
 
         protected override void CleanUp()
         {
-            _cachedInfo = GetCallInfo();
-
             _logger.Debug("Call " + Id + " disposed");
             if (_accountLock != null)
             {
@@ -431,8 +428,6 @@ namespace pjsip4net.Calls
                 _account = null;
             }
             _accountLock = null;
-            _inviteSession.Dispose();
-            _mediaSession.Dispose();
         }
 
         #endregion

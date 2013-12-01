@@ -112,9 +112,15 @@ namespace pjsip4net.Accounts
                     _provider.DeleteAccount(account.Id);
                     _accounts.Remove(account.Id);
                     account.SetId(-1);
-                    if (account.IsLocal)
-                        account.HandleStateChanged();
-                    account.InternalDispose();
+                    try
+                    {
+                        if (account.IsLocal)
+                            account.HandleStateChanged();
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        //tearing down
+                    }
                 }
         }
 
@@ -135,7 +141,13 @@ namespace pjsip4net.Accounts
         public void UnRegisterAllAccounts()
         {
             foreach (var account in _accounts.Values.ToList())
-                UnregisterAccount(account);
+                try
+                {
+                    UnregisterAccount(account);
+                }
+                catch (InvalidOperationException)
+                {
+                }
             Thread.Sleep(1000);
         }
 

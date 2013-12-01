@@ -5,7 +5,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls
 {
-    internal class InviteSession : StateMachine, IDisposable
+    internal class InviteSession : StateMachine
     {
         private readonly ICallManagerInternal _callManager;
         private WeakReference _call;
@@ -37,15 +37,5 @@ namespace pjsip4net.Calls
         {
             get { return _callManager; }
         }
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            _call = null;
-            _state = null;
-        }
-
-        #endregion
     }
 }

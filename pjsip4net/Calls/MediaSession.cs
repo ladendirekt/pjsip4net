@@ -5,7 +5,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls
 {
-    internal class MediaSession : StateMachine, IDisposable
+    internal class MediaSession : StateMachine
     {
         private WeakReference _call;
         private readonly IRegistry _localRegistry;
@@ -53,16 +53,6 @@ namespace pjsip4net.Calls
             get { return _conferenceBridge; }
         }
 
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            _call = null;
-            _state = null;
-        }
-
-        #endregion
-
         public void ConnectToConference()
         {
             if (!IsActive)
@@ -70,7 +60,7 @@ namespace pjsip4net.Calls
             if (IsInConference)
                 return;
 
-            _state = new ConferenceMediaStateDecorator(this, _state as ActiveMediaState);
+            _state = new ConferenceMediaStateDecorator(this, _state.As<ActiveMediaState>());
         }
 
         public void DisconnectFromConference()

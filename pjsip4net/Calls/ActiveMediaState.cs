@@ -1,3 +1,4 @@
+using System;
 using Common.Logging;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
@@ -26,8 +27,18 @@ namespace pjsip4net.Calls
 
         public override void StateChanged()
         {
-            var info = _context.Call.GetCallInfo();
-            if (info.State == InviteState.Disconnected)
+            CallInfo info = null;
+            bool disposed = false;
+            try
+            {
+                info = _context.Call.GetCallInfo();
+            }
+            catch (ObjectDisposedException)
+            {
+                disposed = true;
+            }
+
+            if ((info != null && info.State == InviteState.Disconnected) || disposed)
             {
                 _context.ChangeState(new DisconnectedMediaState(_context));
                 return;

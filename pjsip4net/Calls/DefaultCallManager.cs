@@ -135,6 +135,7 @@ namespace pjsip4net.Calls
                 catch (ObjectDisposedException)
                 {
                 }
+            //_barrier.WaitOne(TimeSpan.FromSeconds(1));
         }
 
         public ICall GetCallById(int id)

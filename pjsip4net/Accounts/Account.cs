@@ -448,12 +448,6 @@ namespace pjsip4net.Accounts
             return new AccountLock(this);
         }
 
-        protected override void CleanUp()
-        {
-            _logger.Debug("Account " + Id + " diposed");
-            _session.Dispose();
-        }
-
         #endregion
 
         #region Implementation of IEquatable<IIdentifiable<Account>>

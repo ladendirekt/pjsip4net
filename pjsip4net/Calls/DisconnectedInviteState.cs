@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Common.Logging;
 using pjsip4net.Core.Data;
@@ -14,18 +15,24 @@ namespace pjsip4net.Calls
         public DisconnectedInviteState(InviteSession context)
             : base(context)
         {
-            LogManager.GetLogger<DisconnectedInviteState>()
-                .DebugFormat("Call {0} {1}", _context.Call.Id, GetType().Name);
-            _context.IsConfirmed = false;
-            _context.IsDisconnected = true;
-            _context.InviteState = InviteState.Disconnected;
-            if (_context.IsRinging)
+            try
             {
-                _context.CallManager.RaiseRingEvent(_context.Call, false);
-                _context.IsRinging = false;
-            }
-            if (!_context.Call.HasMedia)
+                LogManager.GetLogger<DisconnectedInviteState>()
+                    .DebugFormat("Call {0} {1}", _context.Call.Id, GetType().Name);
+
+                _context.IsConfirmed = false;
+                _context.IsDisconnected = true;
+                _context.InviteState = InviteState.Disconnected;
+                if (_context.IsRinging)
+                {
+                    _context.CallManager.RaiseRingEvent(_context.Call, false);
+                    _context.IsRinging = false;
+                }
                 _context.CallManager.TerminateCall(_context.Call);
+            }
+            catch (ObjectDisposedException)
+            {
+            }
         }
 
         #region Overrides of AbstractState

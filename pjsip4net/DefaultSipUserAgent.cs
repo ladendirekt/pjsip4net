@@ -85,20 +85,6 @@ namespace pjsip4net
         protected override void CleanUp()
         {
             base.CleanUp();
-
-            if (CallManager != null) CallManager.HangupAll();
-            if (AccountManager != null)
-            {
-                var mgr = AccountManager.As<IAccountManagerInternal>();
-                if (mgr != null)
-                    mgr.UnRegisterAllAccounts();
-            }
-
-            ImManager = null;
-            CallManager = null;
-            AccountManager = null;
-            MediaManager = null;
-
             _basicApi.Destroy();
         }
     }
