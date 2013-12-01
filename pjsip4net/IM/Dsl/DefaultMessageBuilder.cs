@@ -10,12 +10,14 @@ namespace pjsip4net.IM.Dsl
         private string _body;
         private IAccount _from;
         private ICall _dialog;
-        private IImManager _manager;
+        private readonly IImManager _manager;
+        private readonly IAccountManager _accountManager;
 
-        public DefaultMessageBuilder(IImManager manager)
+        public DefaultMessageBuilder(IImManager manager, IAccountManager accountManager)
         {
             Helper.GuardNotNull(manager);
             _manager = manager;
+            _accountManager = accountManager;
         }
 
         public IMessageBuilder To(string extension)
@@ -44,17 +46,14 @@ namespace pjsip4net.IM.Dsl
 
         public IMessageBuilder From(IAccount account)
         {
-            Helper.GuardNotNull(account);
-            Helper.GuardNotNull(account.Transport);
-            TransportType ttype = account.Transport.TransportType;
+            _from = account ?? _accountManager.DefaultAccount;
+            TransportType ttype = _from.Transport.TransportType;
             _builder.AppendTransportSuffix(ttype);
-            _from = account;
             return this;
         }
 
         public IMessageBuilder InDialogOf(ICall call)
         {
-            Helper.GuardNotNull(call);
             _dialog = call;
             return this;
         }
@@ -83,160 +82,4 @@ namespace pjsip4net.IM.Dsl
                 _manager.SendTypingInDialog(_dialog, false);
         }
     }
-
-    //public class ToMessageBuilderExpression
-    //{
-    //    private readonly MessageBuilder _builder;
-
-    //    public ToMessageBuilderExpression(MessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public AtMessageBuilderExpression To(string extension)
-    //    {
-    //        return new AtMessageBuilderExpression(_builder.SetExtension(extension));
-    //    }
-    //}
-
-    //public class AtMessageBuilderExpression
-    //{
-    //    private readonly MessageBuilder _builder;
-
-    //    public AtMessageBuilderExpression(MessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public ThroughMessageBuilderExpression At(string domain)
-    //    {
-    //        return new ThroughMessageBuilderExpression(_builder.SetDomain(domain));
-    //    }
-    //}
-
-    //public class ThroughMessageBuilderExpression
-    //{
-    //    private readonly MessageBuilder _builder;
-
-    //    public ThroughMessageBuilderExpression(MessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public FromMessageBuilderExpression Through(string port)
-    //    {
-    //        return new FromMessageBuilderExpression(_builder.SetPort(port));
-    //    }
-    //}
-
-    //public class FromMessageBuilderExpression
-    //{
-    //    private readonly MessageBuilder _builder;
-
-    //    public FromMessageBuilderExpression(MessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public FinalMessageBuilderExpression From(Account account)
-    //    {
-    //        return new FinalMessageBuilderExpression(_builder.SetAccount(account));
-    //    }
-    //}
-
-    //public class FinalMessageBuilderExpression
-    //{
-    //    private readonly MessageBuilder _builder;
-
-    //    public FinalMessageBuilderExpression(MessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public void Typing(bool isTyping)
-    //    {
-    //        _builder.SendTyping(isTyping);
-    //    }
-
-    //    public void Go(string message)
-    //    {
-    //        _builder.SetBody(message).SendMessage();
-    //    }
-    //}
-
-    //public class InDialogMessageBuilder
-    //{
-    //    private string _body;
-    //    private Call _call;
-
-    //    public InDialogMessageBuilder SetCall(Call call)
-    //    {
-    //        Helper.GuardNotNull(call);
-    //        Helper.GuardPositiveInt(call.Id);
-    //        _call = call;
-    //        return this;
-    //    }
-
-    //    public InDialogMessageBuilder SetBody(string body)
-    //    {
-    //        _body = body;
-    //        return this;
-    //    }
-
-    //    public void SendMessage()
-    //    {
-    //        //pj_str_t mime = new pj_str_t("plain/text");
-    //        //pj_str_t content = new pj_str_t(_body);
-    //        //Helper.GuardError(SipUserAgent.Instance.ApiFactory.GetCallApi().pjsua_call_send_im(_call.Id, ref mime, ref content, null, IntPtr.Zero));
-    //        SipUserAgent.Instance.SendMessageInDialog(_call, _body);
-    //    }
-
-    //    public void SendTyping(bool isTyping)
-    //    {
-    //        //Helper.GuardError(SipUserAgent.Instance.ApiFactory.GetCallApi().pjsua_call_send_typing_ind(_call.Id, Convert.ToInt32(isTyping), null));
-    //        SipUserAgent.Instance.SendTypingInDialog(_call, isTyping);
-    //    }
-    //}
-
-    //public class OfMessageBuilderExpression
-    //{
-    //    private readonly InDialogMessageBuilder _builder;
-
-    //    public OfMessageBuilderExpression(InDialogMessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public FinalInDialogMessageBuilderExpression Of(Call call)
-    //    {
-    //        return new FinalInDialogMessageBuilderExpression(_builder.SetCall(call));
-    //    }
-    //}
-
-    //public class FinalInDialogMessageBuilderExpression
-    //{
-    //    private readonly InDialogMessageBuilder _builder;
-
-    //    public FinalInDialogMessageBuilderExpression(InDialogMessageBuilder builder)
-    //    {
-    //        Helper.GuardNotNull(builder);
-    //        _builder = builder;
-    //    }
-
-    //    public void Typing(bool isTyping)
-    //    {
-    //        _builder.SendTyping(isTyping);
-    //    }
-
-    //    public void Go(string message)
-    //    {
-    //        _builder.SetBody(message).SendMessage();
-    //    }
-    //}
 }

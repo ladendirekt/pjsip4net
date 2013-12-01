@@ -61,6 +61,11 @@ namespace pjsip4net.Tests.Calls
             //assert
             _provider.Verify(x => x.TransferCall(It.Is<int>(x1 => x1 == _sut.Id), It.Is<string>(x1 => x1 == "sip:sip@sip")), Times.Once());
         }
+
+        public void when_hangup__should_release_account()
+        {
+
+        }
     }
 // ReSharper restore InconsistentNaming
 }
