@@ -21,8 +21,9 @@ namespace pjsip4net.Console
                 .FromConfig();//read configuration from .config file 
             var ua = cfg.Build().Start();//build and start
             ua.Log += Log;//log events
-            ua.ImManager.IncomingMessage += ImManager_IncomingMessage;
-            ua.CallManager.CallRedirected += CallManager_CallRedirected;
+            ua.ImManager.IncomingMessage += IncomingMessage;
+            ua.CallManager.CallRedirected += CallRedirected;
+            ua.CallManager.IncomingDtmfDigit += IncomingDtmfDigit;
             var factory = new CommandFactory(ua, cfg.Container);
             factory.Create("?").Execute();
 
@@ -48,6 +49,11 @@ namespace pjsip4net.Console
             ua.Destroy();
         }
 
+        private static void IncomingDtmfDigit(object sender, DtmfEventArgs eventArgs)
+        {
+            System.Console.WriteLine("Call {0} received {1} digits", eventArgs.CallId, eventArgs.Digit);
+        }
+
         private static void Log(object sender, LogEventArgs e)
         {
             switch (e.Level)
@@ -71,12 +77,12 @@ namespace pjsip4net.Console
             }
         }
 
-        static void ImManager_IncomingMessage(object sender, PagerEventArgs e)
+        static void IncomingMessage(object sender, PagerEventArgs e)
         {
             System.Console.WriteLine("Message from " + e.From + ", text: " + e.Body);
         }
 
-        static void CallManager_CallRedirected(object sender, CallRedirectedEventArgs e)
+        static void CallRedirected(object sender, CallRedirectedEventArgs e)
         {
             e.Option = RedirectOption.Accept;
         }
