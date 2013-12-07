@@ -23,8 +23,7 @@ namespace pjsip4net.Console
             ua.ImManager.IncomingMessage += IncomingMessage;
             ua.CallManager.CallRedirected += CallRedirected;
             ua.CallManager.IncomingDtmfDigit += IncomingDtmfDigit;
-            ua.ImManager.NatDetected += (s, ea) => { 
-                System.Console.WriteLine("{0}:{1}", ea.NatTypeName, ea.StatusText); };
+            ua.ImManager.NatDetected += OnNatDetected;
             var factory = new CommandFactory(ua, cfg.Container);
             factory.Create("?").Execute();
 
@@ -48,6 +47,11 @@ namespace pjsip4net.Console
                 }
             }
             ua.Destroy();
+        }
+
+        private static void OnNatDetected(object s, NatEventArgs ea)
+        {
+            System.Console.WriteLine("NAT type detection complete: {0}; {1}", ea.NatTypeName, ea.StatusText);
         }
 
         private static void IncomingDtmfDigit(object sender, DtmfEventArgs eventArgs)
