@@ -1,16 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using pjsip4net.Accounts;
+using Common.Logging;
 using pjsip4net.Core;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Container;
-using pjsip4net.Core.Data;
+using pjsip4net.Core.Data.Events;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
-using pjsip4net.Transport;
 
 namespace pjsip4net.Configuration
 {
@@ -22,7 +19,7 @@ namespace pjsip4net.Configuration
         /// <exception cref="InvalidOperationException"/>
         /// <exception cref="PjsipErrorException"/>
         /// <exception cref="ArgumentNullException"/>
-        public static Configure Build(this Configure cfg)
+        public static ISipUserAgent Build(this Configure cfg)
         {
             try
             {
@@ -92,72 +89,14 @@ namespace pjsip4net.Configuration
             Helper.GuardNotNull(ua);
             ua.SetManagers(imMgr, callMgr, accMgr, mediaMgr);
 
-            basicApiProvider.InitPjsua(localRegistry.Config, localRegistry.LoggingConfig, localRegistry.MediaConfig);
-
-            return cfg;
-        }
-
-        /// <summary>
-        /// Starts user agent instance.
-        /// </summary>
-        /// <param name="cfg"></param>
-        /// <returns></returns>
-        public static ISipUserAgent Start(this Configure cfg)
-        {
-            var localRegistry = cfg.Container.Get<IRegistry>();
-            if (localRegistry.Config == null)
-                throw new InvalidOperationException("You should call Build first to build up user agent infrastructure.");
-
-            var transportFactory = cfg.Container.Get<IVoIPTransportFactory>();
-            localRegistry.SipTransport =
-                transportFactory.CreateTransport(localRegistry.TransportConfig.Part1,
-                                                 localRegistry.TransportConfig.Part2)
-                    .As<VoIPTransport>();
-            var tptApiProvider = cfg.Container.Get<ITransportApiProvider>();
-            localRegistry.SipTransport.SetId(
-                tptApiProvider.CreateTransportAndGetId(localRegistry.SipTransport.TransportType,
-                                                       localRegistry.SipTransport.Config));
-            localRegistry.RtpTransport =
-                transportFactory.CreateTransport(TransportType.Udp).As<VoIPTransport>();
-            using (localRegistry.RtpTransport.InitializationScope())
-                localRegistry.RtpTransport.Config.Port = 4000;
-            cfg.Container.RegisterAsSingleton(localRegistry.SipTransport);
-
-            var mediaApiProvider = cfg.Container.Get<IMediaApiProvider>();
-            mediaApiProvider.CreateMediaTransport(localRegistry.RtpTransport.Config);
-
-            var basicApiProvider = cfg.Container.Get<IBasicApiProvider>();
-            basicApiProvider.Start();
-
-            var mediaMgr = cfg.Container.Get<IMediaManagerInternal>();
-            Helper.GuardNotNull(mediaMgr);
-            mediaMgr.SetDevices();
-
-            var objectFactory = cfg.Container.Get<IObjectFactory>();
-            var accMgr = cfg.Container.Get<IAccountManagerInternal>();
-            //always register local account first
-            var account = objectFactory.Create<Account>();
-            using (account.InitializationScope())
+            var eventsProvider = cfg.Container.Get<IEventsProvider>();
+            var logger = cfg.Container.Get<ILog>();
+            eventsProvider.Subscribe<LogRequested>(e =>
             {
-                account.IsLocal = true;
-                account.Transport = localRegistry.SipTransport;
-            }
-            accMgr.RegisterAccount(account, true);
-            //TODO: generalize transport injection
+                logger.Log(e);
+            });
 
-            //register configured accounts
-            var accountConfigs = localRegistry.AccountConfigs as AccountConfig[] ?? localRegistry.AccountConfigs.ToArray();
-            if (accountConfigs.Any())
-                foreach (var accCfg in accountConfigs)
-                {
-                    var acc = objectFactory.Create<Account>();
-                    using (acc.InitializationScope())
-                    {
-                        acc.SetConfig(accCfg);
-                        acc.Transport = localRegistry.SipTransport;
-                    }
-                    accMgr.RegisterAccount(acc, acc.Config.IsDefault);
-                }
+            basicApiProvider.InitPjsua(localRegistry.Config, localRegistry.LoggingConfig, localRegistry.MediaConfig);
 
             return cfg.Container.Get<ISipUserAgent>();
         }

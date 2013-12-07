@@ -171,6 +171,7 @@
     <Compile Include="Interfaces\IVoIPTransportFactory.cs" />
     <Compile Include="Interfaces\IWavPlayer.cs" />
     <Compile Include="LogEventArgs.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="Media\DefaultConferenceBridge.cs" />
     <Compile Include="Interfaces\IMediaManager.cs" />
     <Compile Include="Media\DefaultMediaManager.cs" />

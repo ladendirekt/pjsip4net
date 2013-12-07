@@ -20,10 +20,11 @@ namespace pjsip4net.Console
             var cfg = Configure.Pjsip4Net()//dynamically discovers interop assembly and loads API providers unless concrete version loader specified
                 .FromConfig();//read configuration from .config file 
             var ua = cfg.Build().Start();//build and start
-            ua.Log += Log;//log events
             ua.ImManager.IncomingMessage += IncomingMessage;
             ua.CallManager.CallRedirected += CallRedirected;
             ua.CallManager.IncomingDtmfDigit += IncomingDtmfDigit;
+            ua.ImManager.NatDetected += (s, ea) => { 
+                System.Console.WriteLine("{0}:{1}", ea.NatTypeName, ea.StatusText); };
             var factory = new CommandFactory(ua, cfg.Container);
             factory.Create("?").Execute();
 
@@ -52,29 +53,6 @@ namespace pjsip4net.Console
         private static void IncomingDtmfDigit(object sender, DtmfEventArgs eventArgs)
         {
             System.Console.WriteLine("Call {0} received {1} digits", eventArgs.CallId, eventArgs.Digit);
-        }
-
-        private static void Log(object sender, LogEventArgs e)
-        {
-            switch (e.Level)
-            {
-                case 5:
-                case 4:
-                    _logger.Debug(e.Data);
-                    break;
-                case 3:
-                    _logger.Info(e.Data);
-                    break;
-                case 2:
-                    _logger.Warn(e.Data);
-                    break;
-                case 1:
-                    _logger.Error(e.Data);
-                    break;
-                case 0:
-                    _logger.Fatal(e.Data);
-                    break;
-            }
         }
 
         static void IncomingMessage(object sender, PagerEventArgs e)

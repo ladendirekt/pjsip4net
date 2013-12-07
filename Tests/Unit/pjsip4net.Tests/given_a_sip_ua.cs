@@ -1,4 +1,5 @@
 using System;
+using Common.Logging;
 using Moq;
 using NUnit.Framework;
 using pjsip4net.Core.Data;
@@ -55,7 +56,8 @@ namespace pjsip4net.Tests
             var basicApi = _fixture.CreateAnonymous<Mock<IBasicApiProvider>>();
             var eventsProvider = _fixture.CreateAnonymous<IEventsProvider>();
 
-            var sut = new DefaultSipUserAgent(basicApi.Object, eventsProvider, _fixture.CreateAnonymous<LoggingConfig>());
+            var sut = new DefaultSipUserAgent(basicApi.Object, eventsProvider, _fixture.CreateAnonymous<LoggingConfig>(),
+                _fixture.CreateAnonymous<IContainer>());
             sut.Destroy();
 
             basicApi.Verify(x => x.Destroy(), Times.Once());

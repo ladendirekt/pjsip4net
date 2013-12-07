@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common.Logging;
 using pjsip4net.Core.Container;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
@@ -14,9 +15,9 @@ namespace pjsip4net.Core.Configuration
     /// </summary>
     public class Configure
     {
-        private Func<ITransportApiProvider, Utils.Tuple<TransportType,TransportConfig>> _defaultTptConfig =
-            p => new Utils.Tuple<TransportType, TransportConfig>(TransportType.Udp, null);
-        private Func<ITransportApiProvider, Utils.Tuple<TransportType, TransportConfig>> _tptConfigurator;
+        private Func<ITransportApiProvider, Core.Utils.Tuple<TransportType, TransportConfig>> _defaultTptConfig =
+            p => new Core.Utils.Tuple<TransportType, TransportConfig>(TransportType.Udp, null);
+        private Func<ITransportApiProvider, Core.Utils.Tuple<TransportType, TransportConfig>> _tptConfigurator;
         private Func<IAccountApiProvider, IEnumerable<AccountConfig>> _accConfigurator;
 
         private List<Action<IConfigurationContext>> _codeConfigurators =
@@ -37,6 +38,8 @@ namespace pjsip4net.Core.Configuration
         public Configure()
         {
             Container = new SimpleContainer();
+            var logger = LogManager.GetLogger<object>();
+            Container.RegisterAsSingleton(logger);
         }
 
         /// <summary>
@@ -89,7 +92,7 @@ namespace pjsip4net.Core.Configuration
         /// </summary>
         /// <param name="tptConfigurator"></param>
         /// <returns></returns>
-        public Configure WithSipTransport(Func<ITransportApiProvider, Utils.Tuple<TransportType, TransportConfig>> tptConfigurator)
+        public Configure WithSipTransport(Func<ITransportApiProvider, Core.Utils.Tuple<TransportType, TransportConfig>> tptConfigurator)
         {
             Helper.GuardNotNull(tptConfigurator);
             _tptConfigurator = tptConfigurator;
@@ -126,12 +129,12 @@ namespace pjsip4net.Core.Configuration
             return this;
         }
 
-        internal Utils.Tuple<TransportType, TransportConfig> GetConfiguredTransport(ITransportApiProvider transportApiProvider)
+        internal Core.Utils.Tuple<TransportType, TransportConfig> GetConfiguredTransport(ITransportApiProvider transportApiProvider)
         {
             return _tptConfigurator != null ? _tptConfigurator(transportApiProvider) : null;
         }
 
-        public Utils.Tuple<TransportType, TransportConfig> GetDefaultTransport(ITransportApiProvider transportApiProvider)
+        public Core.Utils.Tuple<TransportType, TransportConfig> GetDefaultTransport(ITransportApiProvider transportApiProvider)
         {
             return _defaultTptConfig(transportApiProvider);
         }

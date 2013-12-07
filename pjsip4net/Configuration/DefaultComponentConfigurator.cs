@@ -1,7 +1,4 @@
-using System;
-using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
-using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.IM;
 using pjsip4net.IM.Dsl;
