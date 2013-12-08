@@ -45,6 +45,7 @@ pjsip4net do not impose any restrictions upon logging framework, well, almost. T
   * log4net (1.2.11, 1.2.10 and 1.2.9);
   * NLog (1.0, 2.0);
   * Enterprise Library logging (3.1, 4.1, and 5.0);
+
 It is an application developers' responsibility to configure their favorite logging framework and to plug Common.Logging in (https://gist.github.com/siniypin/7860265).
 
 Examples
