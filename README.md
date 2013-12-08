@@ -1,7 +1,7 @@
 pjsip4net
 =========
 A pjsip (http://www.pjsip.org/) user agent .Net wrapper.
-pjsip4net is an attempt to project procedural pjsua high level API into convenient and easy to use OOP form. The library itself tries to be pjsip version agnostic, allowing you to switch pjsip.dll versions with no need to recompile your application code.   
+pjsip4net is a projection of procedural pjsua high level API into convenient and easy to use OOP form. 
 
 Pjsip version supported
 -----------
@@ -24,15 +24,28 @@ There are a number of things one should configure in order to tune pjsip within 
   * User agent settings - enable or disable auto answer, or auto conference, specify maximum number of simultaneous calls allowed.
 
 There are several ways to configure library:
-  * app.cfg file. Library comes with builtin support for configuration provided in standard .Net configuration files. You have to tell pjsip4net to use this source of configuration at startup <todo:gist>
+  * app.cfg file. Library comes with built-in support for configuration provided in standard .Net configuration files. You have to tell pjsip4net to use this source of configuration at startup (https://gist.github.com/siniypin/7860029);
   * custom config source, by implementing `IConfigurationProvider`. To plug it in, you have to tell the library to use it at startup phase (https://gist.github.com/siniypin/5951687). In fact the previous option is an implementation of this interface by `CfgFileConfigurationProvider`;
-  * configure programmatically, by supplying blocks of code that configure options at runtime (<todo:gist>);
+  * configure programmatically, by supplying blocks of code that configure options at runtime (https://gist.github.com/siniypin/7860386);
+
+Interop assembly automatic discovery
+-----------
+The library tries to be pjsip version agnostic. At start-up phase it will scan through your application folder and will try to load an assembly that provides bindings to pjsip.dll. This feature is particularly useful to application developers who want to switch underlying pjsip library without changes to their application code. This behavior is enabled by default, so nothing has to be done.
+If you find yourself comfortable with well tested and proven to work correctly in your scenarios version of pjsip.dll you can bind it into your application at compile time phase by referencing an interop assembly from your application (https://gist.github.com/siniypin/7860351) . 
 
 Dependency injection
 -----------
-pjsip4net leverages the dependency injection principle by means of pluggable DI-containers it uses to loose couple the code and to enable automatic library's public contracts resolution within applications that already use DI-containers. 
-If no container provided, the library will use its own simple container internally. Currently the only external container supported is Castle Windsor (http://docs.castleproject.org/Windsor.MainPage.ashx). 
-To plug your own container instance into library you have to tell it to use it startup phase <todo:gist>
+pjsip4net leverages the dependency injection principle by means of pluggable DI-containers. It uses them to loosely couple the code and to enable automatic resolution of library's public contracts within applications that already use DI-containers. 
+If no container is provided, the library will use its own simple container internally. Currently the only external container supported out of the box is Castle Windsor (http://docs.castleproject.org/Windsor.MainPage.ashx). 
+To plug your own container instance into library you have to tell it to use it startup phase (https://gist.github.com/siniypin/7860556)
+
+Logging
+-----------
+pjsip4net do not impose any restrictions upon logging framework, well, almost. To be precise it leverages the Apache Commons Logging facade (http://netcommon.sourceforge.net/), to hide a concrete framework utilized by application, thus there is a restriction on frameworks supported by Common.Logging. Currently supported frameworks are:
+  * log4net (1.2.11, 1.2.10 and 1.2.9);
+  * NLog (1.0, 2.0);
+  * Enterprise Library logging (3.1, 4.1, and 5.0);
+It is an application developers' responsibility to configure their favorite logging framework and to plug Common.Logging in (https://gist.github.com/siniypin/7860265).
 
 Examples
 -----------
