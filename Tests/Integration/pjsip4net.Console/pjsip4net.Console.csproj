@@ -68,6 +68,12 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\lib\Castle\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\..\lib\Castle\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\..\lib\Common.Logging\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
@@ -115,6 +121,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\pjsip4net.Container.Castle\pjsip4net.Container.Castle.csproj">
+      <Project>{3502e166-26b1-4a7b-ab50-5cc8baf0019e}</Project>
+      <Name>pjsip4net.Container.Castle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\pjsip4net.Core\pjsip4net.Core.csproj">
       <Project>{DAB611F8-F9B2-49AE-8496-BA98F99BA337}</Project>
       <Name>pjsip4net.Core</Name>

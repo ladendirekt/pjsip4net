@@ -11,8 +11,7 @@ namespace pjsip4net.Configuration
         public void Configure(IContainer container)
         {
             Helper.GuardNotNull(container);
-            container.RegisterAsSingleton<IAccountManager, DefaultAccountManager>();
-            container.RegisterAsSingleton(container.Get<IAccountManager>() as IAccountManagerInternal);
+            container.RegisterAsSingleton<IAccountManager, IAccountManagerInternal, DefaultAccountManager>();
             container.Register<IAccountBuilder, DefaultAccountBuilder>();
             container.Register<Account, Account>();
         }

@@ -1,8 +1,10 @@
 using System;
+using Castle.Windsor;
 using log4net;
 using log4net.Config;
 using pjsip4net.Calls;
 using pjsip4net.Configuration;
+using pjsip4net.Container.Castle;
 using pjsip4net.Core;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Data;
@@ -17,7 +19,8 @@ namespace pjsip4net.Console
         {
             XmlConfigurator.Configure();
             _logger = LogManager.GetLogger("root");//logging is purely an application facility, you can choose whatever you want to log with
-            var cfg = Configure.Pjsip4Net()//dynamically discovers interop assembly and loads API providers unless concrete version loader specified
+            var container = new WindsorContainer();
+            var cfg = Configure.Pjsip4Net().With_CastleContainer(container)//dynamically discovers interop assembly and loads API providers unless concrete version loader specified
                 .FromConfig();//read configuration from .config file 
             var ua = cfg.Build().Start();//build and start
             ua.ImManager.IncomingMessage += IncomingMessage;

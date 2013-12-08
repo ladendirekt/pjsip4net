@@ -22,8 +22,7 @@ namespace pjsip4net.Tests
         public void when_configure_is_called__should_register_default_media_manager_with_internal_interface_as_singleton()
         {
             when_configure_called();
-            _container.Verify(x => x.RegisterAsSingleton<IMediaManager, DefaultMediaManager>());
-            _container.Verify(x => x.RegisterAsSingleton(It.IsAny<IMediaManagerInternal>()));
+            _container.Verify(x => x.RegisterAsSingleton<IMediaManager, IMediaManagerInternal, DefaultMediaManager>());
         }
         
         [Test]

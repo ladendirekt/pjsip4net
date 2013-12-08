@@ -48,6 +48,13 @@ namespace pjsip4net.Core.Container
             return this;
         }
 
+        public IContainer RegisterAsSingleton<T, T1, T2>() where T2 : T, T1 where T1 : class
+        {
+            var instance = RegisterAsSingleton<T, T2>().Get<T>().As<T1>();
+            RegisterAsSingleton(instance);
+            return this;
+        }
+
         public IContainer RegisterAsSingleton<T, T1>(string name) where T1 : T
         {
             Invariant(!_namedRegistry.ContainsKey(name));
@@ -83,7 +90,7 @@ namespace pjsip4net.Core.Container
             return
                 _namedRegistry
                     .Where(kvp =>
-                           !kvp.Value.GetType().Equals(typeof (Type)) && service.IsAssignableFrom(kvp.Value.GetType()))
+                           !(kvp.Value.GetType() == typeof (Type)) && service.IsInstanceOfType(kvp.Value))
                     .Select(kvp => kvp.Value)
                     .Union(_namedRegistry
                                .Where(kvp => kvp.Value is Type && service.IsAssignableFrom((Type) kvp.Value))
@@ -105,8 +112,8 @@ namespace pjsip4net.Core.Container
 
             return _namedRegistry
                 .Where(kvp => kvp.Key.Equals(name) &&
-                              (!kvp.Value.GetType().Equals(typeof (Type)) &&
-                               service.IsAssignableFrom(kvp.Value.GetType())))
+                              (!(kvp.Value.GetType() == typeof (Type)) &&
+                               service.IsInstanceOfType(kvp.Value)))
                 .Select(kvp => kvp.Value)
                 .Union(_namedRegistry.Where(kvp => kvp.Key.Equals(name) &&
                                                    ((kvp.Value is Type &&
@@ -126,7 +133,7 @@ namespace pjsip4net.Core.Container
         {
             var result = new List<object>();
             return _transientRegistry
-                .Where(kvp => kvp.Key.Equals(service))
+                .Where(kvp => kvp.Key == service)
                 .SelectMany(kvp =>
                                 {
                                     kvp.Value.Each(t =>
@@ -135,15 +142,15 @@ namespace pjsip4net.Core.Container
                                     return result;
                                 })
                 .Union(_singletonRegistry
-                           .Where(kvp => kvp.Key.Equals(service))
+                           .Where(kvp => kvp.Key == service)
                            .SelectMany(kvp =>
                                            {
                                                kvp.Value.Each(result.Add);
                                                return result;
                                            }))
                 .Union(_namedRegistry
-                           .Where(kvp => !kvp.Value.GetType().Equals(typeof (Type))
-                                         && service.IsAssignableFrom(kvp.Value.GetType()))
+                           .Where(kvp => !(kvp.Value.GetType() == typeof (Type))
+                                         && service.IsInstanceOfType(kvp.Value))
                            .Select(kvp => kvp.Value)
                            .Union(_namedRegistry
                                       .Where(kvp => (kvp.Value is Type && service.IsAssignableFrom((Type) kvp.Value)))

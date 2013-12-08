@@ -21,10 +21,12 @@ namespace pjsip4net.Core.Interfaces
         /// Registers <typeparamref name="T1"/> implementation of <typeparamref name="T"/> as singleton service.
         /// </summary>
         IContainer RegisterAsSingleton<T, T1>() where T1 : T;
+        IContainer RegisterAsSingleton<T, T1, T2>()  where T2 : T, T1 where T1 : class;
         /// <summary>
         /// Registers <typeparamref name="T1"/> implementation of <typeparamref name="T"/> as singleton service with additional name.
         /// </summary>
         IContainer RegisterAsSingleton<T, T1>(string name) where T1 : T;
+
         /// <summary>
         /// Registers <typeparamref name="T"/> instance as singleton service.
         /// </summary>

@@ -12,8 +12,7 @@ namespace pjsip4net.Configuration
         {
             Helper.GuardNotNull(container);
             container.RegisterAsSingleton<IConferenceBridge, DefaultConferenceBridge>();
-            container.RegisterAsSingleton<IMediaManager, DefaultMediaManager>();
-            container.RegisterAsSingleton(container.Get<IMediaManager>() as IMediaManagerInternal);
+            container.RegisterAsSingleton<IMediaManager, IMediaManagerInternal, DefaultMediaManager>();
             container.Register<CodecInfo, CodecInfo>();
             container.Register<IWavPlayer, WavPlayer>();
         }

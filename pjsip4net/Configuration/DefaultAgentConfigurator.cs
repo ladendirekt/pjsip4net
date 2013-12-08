@@ -18,8 +18,7 @@ namespace pjsip4net.Configuration
             container.RegisterAsSingleton(registry.Config);
             container.RegisterAsSingleton(registry.MediaConfig);
 
-            container.RegisterAsSingleton<ISipUserAgent, DefaultSipUserAgent>();
-            container.RegisterAsSingleton(container.Get<ISipUserAgent>() as ISipUserAgentInternal);
+            container.RegisterAsSingleton<ISipUserAgent, ISipUserAgentInternal, DefaultSipUserAgent>();
         }
     }
 }

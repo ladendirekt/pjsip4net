@@ -16,7 +16,7 @@ namespace pjsip4net.Tests
         [Test, ExpectedException(typeof(ContainerException))]
         public void when_registering_already_registered_configuration_then_it_should_throw_container_exception()
         {
-            var sut = new CastleContainer();
+            var sut = new CastleContainerAdapter();
             sut.Register<given_a_simple_container.Interfaze, given_a_simple_container.Clazz>();
             sut.Register<given_a_simple_container.Interfaze, given_a_simple_container.Clazz>();
             Assert.Fail("Should have thrown an exception");
@@ -25,7 +25,7 @@ namespace pjsip4net.Tests
         [Test, ExpectedException(typeof(ContainerException))]
         public void when_resolving_whats_is_not_there_should_wrap_original_exception_with_container_exception()
         {
-            var sut = new CastleContainer();
+            var sut = new CastleContainerAdapter();
             sut.Get<given_a_simple_container.Interfaze>();
             Assert.Fail("Should have thrown an exception");
         }
@@ -34,7 +34,7 @@ namespace pjsip4net.Tests
         public void when_registering_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.Register<given_a_simple_container.Interfaze, given_a_simple_container.Clazz>();
 
@@ -49,7 +49,7 @@ namespace pjsip4net.Tests
         public void when_resolving_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.Get<given_a_simple_container.Interfaze>();
 
@@ -60,7 +60,7 @@ namespace pjsip4net.Tests
         public void when_resolving_all_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.GetAll<given_a_simple_container.Interfaze>();
 
@@ -71,7 +71,7 @@ namespace pjsip4net.Tests
         public void when_resolving_with_name_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.Get<given_a_simple_container.Interfaze>("anonymousName");
 
@@ -83,7 +83,7 @@ namespace pjsip4net.Tests
         public void when_resolving_with_type_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.Get(typeof(given_a_simple_container.Interfaze));
 
@@ -94,7 +94,7 @@ namespace pjsip4net.Tests
         public void when_resolving_all_with_type_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.GetAll(typeof(given_a_simple_container.Interfaze));
 
@@ -105,7 +105,7 @@ namespace pjsip4net.Tests
         public void when_resolving_with_type_and_name_obviously_should_delegate_to_underlying_container()
         {
             var inner = new Mock<IWindsorContainer>(MockBehavior.Loose);
-            var sut = new CastleContainer(inner.Object);
+            var sut = new CastleContainerAdapter(inner.Object);
 
             sut.Get("anonymousName", typeof(given_a_simple_container.Interfaze));
 

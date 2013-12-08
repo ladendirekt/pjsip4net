@@ -60,11 +60,11 @@ namespace pjsip4net.Core
 
         #region Nested type: Initializer
 
-        private class Initializer : IDisposable
+        private sealed class Initializer : IDisposable
         {
-            protected readonly ISupportInitialize _toInit;
+            private readonly IInitializable _toInit;
 
-            public Initializer(ISupportInitialize toInit)
+            public Initializer(IInitializable toInit)
             {
                 Helper.GuardNotNull(toInit);
                 _toInit = toInit;
@@ -78,7 +78,7 @@ namespace pjsip4net.Core
                 OnInitializationFinished();
             }
 
-            protected virtual void OnInitializationFinished()
+            private void OnInitializationFinished()
             {
                 _toInit.EndInit();
             }

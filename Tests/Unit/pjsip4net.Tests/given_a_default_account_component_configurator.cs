@@ -15,14 +15,10 @@ namespace pjsip4net.Tests
         [Test]
         public void when_configure_is_called__should_register_default_account_manager_as_singleton_with_internal_interface()
         {
-            _container.Setup(x => x.RegisterAsSingleton<IAccountManager, DefaultAccountManager>());
-            _container.Setup(
-                x => x.RegisterAsSingleton(It.IsAny<IAccountManagerInternal>()));
-            when_configure_called();
+            _container.Setup(x => x.RegisterAsSingleton<IAccountManager, IAccountManagerInternal, DefaultAccountManager>());
+            when_configure_called(); 
             _container.Verify(
-                x => x.RegisterAsSingleton<IAccountManager, DefaultAccountManager>(), Times.Exactly(1));
-            _container.Verify(
-                x => x.RegisterAsSingleton(It.IsAny<IAccountManagerInternal>()), Times.Exactly(1));
+                x => x.RegisterAsSingleton<IAccountManager, IAccountManagerInternal, DefaultAccountManager>(), Times.Exactly(1));
         }
         
         [Test]

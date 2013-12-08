@@ -5,6 +5,7 @@ using pjsip4net.Core;
 using pjsip4net.Core.Configuration;
 using pjsip4net.Core.Container;
 using pjsip4net.Core.Data.Events;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
@@ -28,6 +29,8 @@ namespace pjsip4net.Configuration
             catch (ContainerException)//it might be already configured somewhere up
             {
             }
+
+            cfg.With(new CoreComponentConfigurator());
 
             if (cfg.RequireDynamicDiscovery())
                 cfg.With(new DynamicApiConfigurator());
@@ -90,11 +93,8 @@ namespace pjsip4net.Configuration
             ua.SetManagers(imMgr, callMgr, accMgr, mediaMgr);
 
             var eventsProvider = cfg.Container.Get<IEventsProvider>();
-            var logger = cfg.Container.Get<ILog>();
-            eventsProvider.Subscribe<LogRequested>(e =>
-            {
-                logger.Log(e);
-            });
+            var logger = LogManager.GetLogger("root");
+            eventsProvider.Subscribe<LogRequested>(logger.Log);
 
             basicApiProvider.InitPjsua(localRegistry.Config, localRegistry.LoggingConfig, localRegistry.MediaConfig);
 

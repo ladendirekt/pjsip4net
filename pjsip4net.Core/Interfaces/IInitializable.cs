@@ -1,13 +1,14 @@
 using System;
-using System.ComponentModel;
 
 namespace pjsip4net.Core.Interfaces
 {
     /// <summary>
     /// Marks class' instance as the one that demand initialization prior its' use.
     /// </summary>
-    public interface IInitializable : ISupportInitialize
+    public interface IInitializable
     {
+        void BeginInit();
+        void EndInit();
         /// <summary>
         /// Signals whether an object has been initialized.
         /// </summary>

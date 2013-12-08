@@ -49,7 +49,6 @@
     <Compile Include="ConfigureForTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConfigurator.cs" />
-    <Compile Include="TestEventsProvider.cs" />
     <Compile Include="MediaApiTestProvider.cs" />
     <Compile Include="TransportApiTestProvider.cs" />
   </ItemGroup>

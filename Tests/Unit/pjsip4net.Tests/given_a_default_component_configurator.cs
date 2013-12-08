@@ -24,15 +24,14 @@ namespace pjsip4net.Tests
         public void when_configure_is_called__should_register_default_localRegistry_with_configCtx()
         {
             when_configure_called();
-            _container.Verify(x => x.RegisterAsSingleton<IRegistry, DefaultRegistry>(), Times.Exactly(1));
-            _container.Verify(x => x.RegisterAsSingleton(It.IsAny<IConfigurationContext>()), Times.Exactly(1));
+            _container.Verify(x => x.RegisterAsSingleton<IRegistry, IConfigurationContext, DefaultRegistry>(), Times.Exactly(1));
         }
 
         [Test]
         public void when_configure_is_called__should_register_default_im_manager_as_singleton()
         {
             when_configure_called();
-            _container.Verify(x => x.RegisterAsSingleton<IImManager, DefaultImManager>());
+            _container.Verify(x => x.RegisterAsSingleton<IImManager, IImManagerInternal, DefaultImManager>());
         }
 
         [Test]

@@ -14,11 +14,9 @@ namespace pjsip4net.Tests
         [Test]
         public void when_configure_is_called__should_register_default_call_manager_as_singleton_with_internal_interface()
         {
-            _container.Setup(x => x.RegisterAsSingleton<ICallManager, DefaultCallManager>());
-            //_container.Setup(x => x.RegisterAsSingleton(It.IsAny<ICallManagerInternal>()));
+            _container.Setup(x => x.RegisterAsSingleton<ICallManager, ICallManagerInternal, DefaultCallManager>());
             when_configure_called();
-            _container.Verify(x => x.RegisterAsSingleton<ICallManager, DefaultCallManager>());
-            //_container.Verify(x => x.RegisterAsSingleton(It.IsAny<ICallManagerInternal>()));
+            _container.Verify(x => x.RegisterAsSingleton<ICallManager, ICallManagerInternal, DefaultCallManager>());
         }
 
         [Test]
