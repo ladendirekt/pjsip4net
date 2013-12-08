@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Configuration\ConfigureContainer.cs" />
+    <Compile Include="Configuration\CoreComponentConfigurator.cs" />
     <Compile Include="Container\ContainerException.cs" />
     <Compile Include="Container\SimpleContainer.cs" />
     <Compile Include="Data\AccountConfig.cs" />
@@ -135,12 +136,13 @@
     <Compile Include="Data\SubscriptionState.cs" />
     <Compile Include="Data\TransportFlags.cs" />
     <Compile Include="Data\TransportInfo.cs" />
+    <Compile Include="DelegatingConsumer.cs" />
+    <Compile Include="EventsProvider.cs" />
     <Compile Include="Initializable.cs" />
     <Compile Include="Interfaces\ApiProviders\IAccountApiProvider.cs" />
-    <Compile Include="Interfaces\ApiProviders\IApiFactory.cs" />
     <Compile Include="Interfaces\ApiProviders\IBasicApiProvider.cs" />
     <Compile Include="Interfaces\ApiProviders\ICallApiProvider.cs" />
-    <Compile Include="Interfaces\ApiProviders\IEventsProvider.cs" />
+    <Compile Include="Interfaces\IEventsProvider.cs" />
     <Compile Include="Interfaces\ApiProviders\IIMApiProvider.cs" />
     <Compile Include="Interfaces\ApiProviders\IMediaApiProvider.cs" />
     <Compile Include="Interfaces\ApiProviders\ITransportApiProvider.cs" />

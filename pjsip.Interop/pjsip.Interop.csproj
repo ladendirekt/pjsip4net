@@ -75,10 +75,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\AutoMapper\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Magnum, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Magnum\Magnum.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -102,8 +98,6 @@
     <Compile Include="Services\AutoMappingMapper.cs" />
     <Compile Include="Services\CallInfoConverter.cs" />
     <Compile Include="Services\ConferencePortInfoConverter.cs" />
-    <Compile Include="Services\DelegatingConsumer.cs" />
-    <Compile Include="Services\EventsProvider.cs" />
     <Compile Include="Services\Pjsip4net2PjsuaProfile.cs" />
     <Compile Include="Services\Pjsua2Pjsip4netProfile.cs" />
     <Compile Include="Services\SoundDeviceInfoConverter.cs" />

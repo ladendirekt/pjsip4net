@@ -1,8 +1,8 @@
 using System;
-using Magnum.Pipeline;
 using pjsip.Interop.Interfaces;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Data.Events;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 
@@ -13,13 +13,13 @@ namespace pjsip.Interop.ApiProviders
     /// </summary>
     public class BasicApiProvider_1_4 : IBasicApiProvider
     {
-        private IMapper _mapper;
-        private Pipe _eventAggregator;
+        private readonly IMapper _mapper;
+        private readonly IEventsProvider _eventAggregator;
         private pjsua_config _uaCfg;
         private pjsua_logging_config _lCfg;
         private pjsua_media_config _mCfg;
 
-        public BasicApiProvider_1_4(IMapper mapper, Pipe eventAggregator)
+        public BasicApiProvider_1_4(IMapper mapper, IEventsProvider eventAggregator)
         {
             Helper.GuardNotNull(mapper);
             Helper.GuardNotNull(eventAggregator);
@@ -101,12 +101,12 @@ namespace pjsip.Interop.ApiProviders
         
         private void OnLog(int level, string data, int len)
         {
-            _eventAggregator.Send(new LogRequested() {Message = data, Level = level});
+            _eventAggregator.Publish(new LogRequested() {Message = data, Level = level});
         }
 
         private void OnTyping(int callId, ref pj_str_t @from, ref pj_str_t to, ref pj_str_t contact, int isTyping)
         {
-            _eventAggregator.Send(new IncomingTypingRecieved()
+            _eventAggregator.Publish(new IncomingTypingRecieved()
                                       {
                                           CallId = callId,
                                           From = from,
@@ -118,7 +118,7 @@ namespace pjsip.Interop.ApiProviders
 
         private void OnPagerStatus(int callId, ref pj_str_t to, ref pj_str_t body, IntPtr user_data, pjsip_status_code status, ref pj_str_t reason)
         {
-            _eventAggregator.Send(new ImStatusChanged()
+            _eventAggregator.Publish(new ImStatusChanged()
                                       {
                                           Id = callId,
                                           To = to,
@@ -130,7 +130,7 @@ namespace pjsip.Interop.ApiProviders
 
         private void OnPager(int callId, ref pj_str_t @from, ref pj_str_t to, ref pj_str_t contact, ref pj_str_t mimeType, ref pj_str_t body)
         {
-            _eventAggregator.Send(new IncomingImRecieved()
+            _eventAggregator.Publish(new IncomingImRecieved()
                                       {
                                           CallId = callId,
                                           From = from,
@@ -142,7 +142,7 @@ namespace pjsip.Interop.ApiProviders
 
         private void OnIncomingSubscribe(int accId, IntPtr srvPres, int buddyId, ref pj_str_t @from, IntPtr rdata, ref pjsip_status_code code, ref pj_str_t reason, pjsua_msg_data msgData)
         {
-            _eventAggregator.Send(new IncomingSubscribeRecieved()
+            _eventAggregator.Publish(new IncomingSubscribeRecieved()
                                       {
                                           AccountId = accId,
                                           BuddyId = buddyId,
@@ -154,7 +154,7 @@ namespace pjsip.Interop.ApiProviders
 
         private void OnNatDetect(ref pj_stun_nat_detect_result res)
         {
-            _eventAggregator.Send(new NatDetected()
+            _eventAggregator.Publish(new NatDetected()
                                       {
                                           NatType = (NatType) res.nat_type,
                                           NatName = res.nat_type_name,
@@ -166,7 +166,7 @@ namespace pjsip.Interop.ApiProviders
         private pjsip_redirect_op OnCallRedirect(int callId, ref pjsip_uri target, IntPtr e)
         {
             var @event = new CallRedirected() {Id = callId};
-            _eventAggregator.Send(@event);
+            _eventAggregator.Publish(@event);
             return (pjsip_redirect_op) @event.Option;
         }
 
@@ -180,49 +180,49 @@ namespace pjsip.Interop.ApiProviders
                                  Final = Convert.ToBoolean(final),
                                  Continue = Convert.ToBoolean(pCont)
                              };
-            _eventAggregator.Send(@event);
+            _eventAggregator.Publish(@event);
             pCont = Convert.ToInt32(@event.Continue);
         }
 
         private void OnCallTransfer(int callId, ref pj_str_t dst, ref pjsip_status_code code)
         {
-            _eventAggregator.Send(new CallTransferRequested()
+            _eventAggregator.Publish(new CallTransferRequested()
                                       {Id = callId, Destination = dst, Status = (SipStatusCode) code});
         }
 
         private void OnDtmfDigit(int callId, int digit)
         {
-            _eventAggregator.Send(new DtmfRecieved() {Id = callId, Digit = digit});
+            _eventAggregator.Publish(new DtmfRecieved() {Id = callId, Digit = digit});
         }
 
         private void OnStreamDestroyed(int callId, IntPtr sess, uint streamIdx)
         {
-            _eventAggregator.Send(new StreamDestroyed() {Id = callId});
+            _eventAggregator.Publish(new StreamDestroyed() {Id = callId});
         }
 
         private void OnIncomingCall(int accId, int callId, IntPtr rdata)
         {
-            _eventAggregator.Send(new IncomingCallRecieved() {AccountId = callId, CallId = callId});
+            _eventAggregator.Publish(new IncomingCallRecieved() {AccountId = callId, CallId = callId});
         }
 
         private void OnCallMediaState(int callId)
         {
-            _eventAggregator.Send(new CallMediaStateChanged() {Id = callId});
+            _eventAggregator.Publish(new CallMediaStateChanged() {Id = callId});
         }
 
         private void OnCallState(int callId, ref IntPtr e)
         {
-            _eventAggregator.Send(new CallStateChanged() {Id = callId});
+            _eventAggregator.Publish(new CallStateChanged() {Id = callId});
         }
 
         private void OnRegState(int accId)
         {
-            _eventAggregator.Send(new RegistrationStateChanged() { Id = accId });
+            _eventAggregator.Publish(new RegistrationStateChanged() { Id = accId });
         }
 
         private void OnBuddyState(int buddyId)
         {
-            _eventAggregator.Send(new BuddyStateChanged {Id = buddyId});
+            _eventAggregator.Publish(new BuddyStateChanged {Id = buddyId});
         }
 
         #endregion

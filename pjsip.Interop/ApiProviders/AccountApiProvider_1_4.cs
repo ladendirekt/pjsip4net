@@ -8,7 +8,7 @@ namespace pjsip.Interop.ApiProviders
 {
     public class AccountApiProvider_1_4 : IAccountApiProvider
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public AccountApiProvider_1_4(IMapper mapper)
         {

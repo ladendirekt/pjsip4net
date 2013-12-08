@@ -1,4 +1,3 @@
-using System;
 using pjsip.Interop.Interfaces;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
@@ -9,7 +8,7 @@ namespace pjsip.Interop.ApiProviders
 {
     public class TransportApiProvider_1_4 : ITransportApiProvider
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public TransportApiProvider_1_4(IMapper mapper)
         {

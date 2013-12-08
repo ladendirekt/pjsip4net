@@ -9,7 +9,7 @@ namespace pjsip.Interop.ApiProviders
 {
     public class CallApiProvider_1_4 : ICallApiProvider
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public CallApiProvider_1_4(IMapper mapper)
         {

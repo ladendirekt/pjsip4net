@@ -12,8 +12,7 @@ namespace pjsip4net.Testing
                 .RegisterAsSingleton<ICallApiProvider, CallApiTestProvider>()
                 .RegisterAsSingleton<IIMApiProvider, ImApiTestProvider>()
                 .RegisterAsSingleton<ITransportApiProvider, TransportApiTestProvider>()
-                .RegisterAsSingleton<IMediaApiProvider, MediaApiTestProvider>()
-                .RegisterAsSingleton<IEventsProvider, TestEventsProvider>();
+                .RegisterAsSingleton<IMediaApiProvider, MediaApiTestProvider>();
         }
     }
 }

@@ -1,6 +1,4 @@
 using AutoMapper;
-using Magnum.Pipeline;
-using Magnum.Pipeline.Segments;
 using pjsip.Interop.ApiProviders;
 using pjsip.Interop.Interfaces;
 using pjsip.Interop.Services;
@@ -19,19 +17,11 @@ namespace pjsip.Interop
         public void Configure(IContainer container)
         {
             Helper.GuardNotNull(container);
-            RegisterApplicationServices(container);
             RegisterMappingServices(container);
             RegisterVoIPServices(container);
         }
 
         #endregion
-
-        private void RegisterApplicationServices(IContainer container)
-        {
-            var pipe = PipeSegment.Input(PipeSegment.End());
-            container.RegisterAsSingleton((Pipe)pipe);
-            container.RegisterAsSingleton<IEventsProvider, EventsProvider>();
-        }
 
         private void RegisterMappingServices(IContainer container)
         {

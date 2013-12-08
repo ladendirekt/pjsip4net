@@ -10,7 +10,7 @@ namespace pjsip.Interop.ApiProviders
 {
     public class MediaApiProvider_1_4 : IMediaApiProvider
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public MediaApiProvider_1_4(IMapper mapper)
         {
