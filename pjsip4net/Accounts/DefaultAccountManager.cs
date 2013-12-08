@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using pjsip4net.Core;
 using pjsip4net.Core.Data.Events;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;

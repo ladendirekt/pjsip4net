@@ -21,7 +21,7 @@ namespace pjsip4net.Accounts
         private IVoIPTransport _transport;
         private ILog _logger = LogManager.GetLogger<IAccount>();
 
-        private IAccountManagerInternal _manager;
+        private readonly IAccountManagerInternal _manager;
 
         #region Properties
 

@@ -9,6 +9,7 @@ using pjsip4net.Accounts;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Data.Events;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
@@ -185,7 +186,7 @@ namespace pjsip4net.Calls
                 call.SetId(_callApi.MakeCallAndGetId(call.Account.Id, call.DestinationUri, 0));
                 AddCallAndUpdateEaCache(call.DestinationUri, call);
 
-                call.HandleInviteStateChanged();
+                call.HandleSignallingStateChanged();
 
                 _barrier.Reset();
             }
@@ -219,7 +220,7 @@ namespace pjsip4net.Calls
                         ea.DestinationUri = _activeCalls[e.Id].DestinationUri;
                         ea.Duration = _activeCalls[e.Id].TotalDuration;
                     }
-                    _activeCalls[e.Id].HandleInviteStateChanged();
+                    _activeCalls[e.Id].HandleSignallingStateChanged();
                 }
         }
 

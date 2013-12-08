@@ -7,9 +7,9 @@ namespace pjsip4net.Calls
     /// <summary>
     /// After response with To tag
     /// </summary>
-    internal class EarlyInviteState : AbstractState<InviteSession>
+    internal class EarlyInviteState : AbstractState<SignallingSession>
     {
-        public EarlyInviteState(InviteSession context)
+        public EarlyInviteState(SignallingSession context)
             : base(context)
         {
             LogManager.GetLogger<EarlyInviteState>()

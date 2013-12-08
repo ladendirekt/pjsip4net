@@ -12,7 +12,7 @@ namespace pjsip4net.Tests.Calls
     [TestFixture]
     public class given_a_nullInviteState : _base
     {
-        private InviteSession _session;
+        private SignallingSession _session;
         private Mock<Call> _call;
         private Mock<ICallManagerInternal> _callMgr;
 
@@ -23,7 +23,7 @@ namespace pjsip4net.Tests.Calls
             _fixture.Customize(new CallCustomization());
             _callMgr = _fixture.CreateAnonymous<Mock<ICallManagerInternal>>();
             _call = _fixture.CreateAnonymous<Mock<Call>>();
-            _session = _fixture.CreateAnonymous<InviteSession>();
+            _session = _fixture.CreateAnonymous<SignallingSession>();
         }
 
         [TearDown]

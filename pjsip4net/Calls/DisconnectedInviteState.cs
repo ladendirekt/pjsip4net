@@ -10,9 +10,9 @@ namespace pjsip4net.Calls
     /// <summary>
     /// Session is terminated
     /// </summary>
-    internal class DisconnectedInviteState : AbstractState<InviteSession>
+    internal class DisconnectedInviteState : AbstractState<SignallingSession>
     {
-        public DisconnectedInviteState(InviteSession context)
+        public DisconnectedInviteState(SignallingSession context)
             : base(context)
         {
             try

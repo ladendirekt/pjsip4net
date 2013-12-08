@@ -7,9 +7,9 @@ namespace pjsip4net.Calls
     /// <summary>
     /// After INVITE is sent
     /// </summary>
-    internal class CallingInviteState : AbstractState<InviteSession>
+    internal class CallingInviteState : AbstractState<SignallingSession>
     {
-        public CallingInviteState(InviteSession context)
+        public CallingInviteState(SignallingSession context)
             : base(context)
         {
             LogManager.GetLogger<CallingInviteState>()

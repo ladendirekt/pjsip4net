@@ -17,7 +17,7 @@ namespace pjsip4net.Calls
         private readonly ICallManagerInternal _callManager;
         private Account _account;
         private IDisposable _accountLock;
-        private readonly InviteSession _inviteSession;
+        private readonly SignallingSession _signallingSession;
         private readonly ILog _logger = LogManager.GetLogger<ICall>();
         private CallInfo _cachedInfo;
 
@@ -51,7 +51,7 @@ namespace pjsip4net.Calls
 
         public InviteState InviteState
         {
-            get { return _inviteSession.InviteState; }
+            get { return _signallingSession.InviteState; }
         }
 
         public CallMediaState MediaState
@@ -210,9 +210,9 @@ namespace pjsip4net.Calls
 
         public int Id { get; internal set; }
         
-        public InviteSession InviteSession
+        public SignallingSession InviteSession
         {
-            get { return _inviteSession; }
+            get { return _signallingSession; }
         }
 
         #endregion
@@ -227,12 +227,12 @@ namespace pjsip4net.Calls
             Helper.GuardNotNull(registry);
             _callManager = callManager;
 
-            _inviteSession = new InviteSession(this, callManager);
-            _inviteSession.StateChanged += delegate { OnStateChanged(); };
+            _signallingSession = new SignallingSession(this, callManager);
+            _signallingSession.StateChanged += delegate { OnStateChanged(); };
             _mediaSession = new MediaSession(this, registry, callManager, conferenceBridge);
             _mediaSession.StateChanged += delegate { OnStateChanged(); };
 
-            CallInfo info = GetCallInfo();
+            CallInfo info = GetCallInfo();//TODO: move to inviteSession
             if (info != null) 
                 IsIncoming = info.Role == SipRole.RoleUas;
         }
@@ -256,7 +256,7 @@ namespace pjsip4net.Calls
         public void Hold()
         {
             GuardDisposed();
-            if (_inviteSession.IsConfirmed && IsActive)
+            if (_signallingSession.IsConfirmed && IsActive)
                 _callManager.CallApiProvider.PutCallOnHold(Id);
         }
 
@@ -284,7 +284,7 @@ namespace pjsip4net.Calls
         public void Hangup(string reason)
         {
             GuardDisposed();
-            if (!_inviteSession.IsDisconnected)
+            if (!_signallingSession.IsDisconnected)
                 _callManager.CallApiProvider.HangupCall(Id, SipStatusCode.Decline, reason);
         }
 
@@ -299,7 +299,7 @@ namespace pjsip4net.Calls
             if (!IsIncoming)
                 throw new InvalidOperationException("Can not answer on outgoing call");
 
-            if (!_inviteSession.IsConfirmed)
+            if (!_signallingSession.IsConfirmed)
             {
                 var code = (accept
                                 ? SipStatusCode.Ok
@@ -377,9 +377,9 @@ namespace pjsip4net.Calls
             }
         }
 
-        public void HandleInviteStateChanged()
+        public void HandleSignallingStateChanged()
         {
-            _inviteSession.HandleStateChanged();
+            _signallingSession.HandleStateChanged();
         }
 
         public void HandleMediaStateChanged()

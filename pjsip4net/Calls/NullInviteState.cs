@@ -7,9 +7,9 @@ namespace pjsip4net.Calls
     /// <summary>
     /// Before INVITE is sent or received
     /// </summary>
-    internal class NullInviteState : AbstractState<InviteSession>
+    internal class NullInviteState : AbstractState<SignallingSession>
     {
-        public NullInviteState(InviteSession context)
+        public NullInviteState(SignallingSession context)
             : base(context)
         {
             LogManager.GetLogger<NullInviteState>()

@@ -8,9 +8,9 @@ namespace pjsip4net.Calls
     /// <summary>
     /// After ACK is sent/received
     /// </summary>
-    internal class ConfirmedInviteState : AbstractState<InviteSession>
+    internal class ConfirmedInviteState : AbstractState<SignallingSession>
     {
-        public ConfirmedInviteState(InviteSession context)
+        public ConfirmedInviteState(SignallingSession context)
             : base(context)
         {
             LogManager.GetLogger<ConfirmedInviteState>()

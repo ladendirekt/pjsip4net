@@ -136,7 +136,7 @@
     <Compile Include="Interfaces\ICall.cs" />
     <Compile Include="Interfaces\ICallManager.cs" />
     <Compile Include="Calls\IncomingCallEventArgs.cs" />
-    <Compile Include="Calls\InviteSession.cs" />
+    <Compile Include="Calls\SignallingSession.cs" />
     <Compile Include="Calls\DisconnectedInviteState.cs" />
     <Compile Include="Calls\MediaSession.cs" />
     <Compile Include="Calls\ConferenceMediaStateDecorator.cs" />
