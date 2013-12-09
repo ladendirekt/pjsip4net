@@ -41,7 +41,7 @@ To plug your own container instance into library you have to tell it to use it s
 
 Logging
 -----------
-pjsip4net do not impose any restrictions upon logging framework, well, almost. To be precise it leverages the Apache Commons Logging facade (http://netcommon.sourceforge.net/), to hide a concrete framework utilized by application, thus there is a restriction on frameworks supported by Common.Logging. Currently supported frameworks are:
+pjsip4net doesn't impose any restrictions upon logging framework, well, almost. To be precise it leverages the Apache Commons Logging facade (http://netcommon.sourceforge.net/) to hide a specific framework utilized by application, thus there is a restriction on frameworks supported by Common.Logging. Currently supported libraries are:
   * log4net (1.2.11, 1.2.10 and 1.2.9);
   * NLog (1.0, 2.0);
   * Enterprise Library logging (3.1, 4.1, and 5.0);
