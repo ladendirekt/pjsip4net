@@ -121,6 +121,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\pjsip.Interop\pjsip.Interop.csproj">
+      <Project>{0aea8b23-5e46-4923-81b5-7755ba914750}</Project>
+      <Name>pjsip.Interop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\pjsip4net.Container.Castle\pjsip4net.Container.Castle.csproj">
       <Project>{3502e166-26b1-4a7b-ab50-5cc8baf0019e}</Project>
       <Name>pjsip4net.Container.Castle</Name>
@@ -169,19 +173,11 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\pjsip.Interop\bin\Debug\pjsip.Interop.dll">
-      <Link>pjsip.Interop.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\pjsip.Interop\bin\Debug\AutoMapper.dll">
-      <Link>AutoMapper.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

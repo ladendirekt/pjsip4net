@@ -58,7 +58,7 @@ namespace pjsip4net.Tests
 
         }
 
-        [Test]
+        [Ignore]
         public void when_build_called_without_explicitly_supplied_api_version__should_use_dynamic_discovery()
         {
             //arrange
