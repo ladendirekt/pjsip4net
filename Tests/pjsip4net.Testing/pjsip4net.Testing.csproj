@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B973166B-018B-418F-94D8-60350E2DAC26}</ProjectGuid>
+    <ProjectGuid>{05DD289F-99C7-4C87-BC6A-05774B90117C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>pjsip4net.Testing</RootNamespace>
     <AssemblyName>pjsip4net.Testing</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,11 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SolutionVersion.cs">
@@ -45,11 +40,11 @@
     <Compile Include="AccountApiTestProvider.cs" />
     <Compile Include="BasicApiTestProvider.cs" />
     <Compile Include="CallApiTestProvider.cs" />
-    <Compile Include="ImApiTestProvider.cs" />
     <Compile Include="ConfigureForTest.cs" />
+    <Compile Include="ImApiTestProvider.cs" />
+    <Compile Include="MediaApiTestProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConfigurator.cs" />
-    <Compile Include="MediaApiTestProvider.cs" />
     <Compile Include="TransportApiTestProvider.cs" />
   </ItemGroup>
   <ItemGroup>
