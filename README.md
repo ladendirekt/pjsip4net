@@ -3,6 +3,22 @@ pjsip4net
 A pjsip (http://www.pjsip.org/) user agent .Net wrapper.
 pjsip4net is a projection of procedural pjsua high level API into convenient and easy to use OOP form. 
 
+License
+-----------
+Copyright pjsip4net RobertT.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use these files except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 Pjsip version supported
 -----------
 Currently only old 1.x branch version is supported. The code is distributed with custom built pjsip 1.4 dll file. No other versions were tested, however one can develop its own interop code version and plug it into the application. If you do, please, send me a pull request.
