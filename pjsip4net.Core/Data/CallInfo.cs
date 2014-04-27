@@ -16,7 +16,7 @@ namespace pjsip4net.Core.Data
         public string StateText { get; set; }
         public SipStatusCode LastStatus { get; set; }
         public string LastStatusText { get; set; }
-        public CallMediaState MediaStatus { get; set; }
+        public virtual CallMediaState MediaStatus { get; set; }
         public MediaDirection MediaDir { get; set; }
         public int ConfSlot { get; set; }
         public TimeSpan ConnectDuration { get; set; }

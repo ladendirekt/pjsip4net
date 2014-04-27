@@ -177,6 +177,7 @@
     <Compile Include="Utils\StringBuilderExtension.cs" />
     <Compile Include="Utils\TransitionFunction.cs" />
     <Compile Include="Utils\Tuple.cs" />
+    <Compile Include="Utils\ValidFileNameTemplate.cs" />
     <Compile Include="Utils\ValueWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

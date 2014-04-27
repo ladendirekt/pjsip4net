@@ -8,6 +8,7 @@ namespace pjsip4net.Interfaces
         double? RxLevel { get; set; }
         double? TxLevel { get; set; }
 
+        void Connect(int sourceSlot, int sinkSlot);
         void Interconnect(int slotX, int slotY);
         void Disconnect(int slotX, int slotY);
         void ConnectToSoundDevice(int slotId);

@@ -6,6 +6,7 @@ namespace pjsip4net.Interfaces
         ICallBuilder At(string domain);
         ICallBuilder Through(string port);
         ICallBuilder From(IAccount account);
+        ICallBuilder RecordTo(string fileName);
         ICall Call();
     }
 }

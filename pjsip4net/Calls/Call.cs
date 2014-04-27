@@ -215,6 +215,11 @@ namespace pjsip4net.Calls
             get { return _signallingSession; }
         }
 
+        public MediaSession MediaSession
+        {
+            get { return _mediaSession; }
+        }
+
         #endregion
 
         #region Methods
@@ -284,6 +289,7 @@ namespace pjsip4net.Calls
         public void Hangup(string reason)
         {
             GuardDisposed();
+            _mediaSession.Dispose();
             if (!_signallingSession.IsDisconnected)
                 _callManager.CallApiProvider.HangupCall(Id, SipStatusCode.Decline, reason);
         }

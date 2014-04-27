@@ -11,6 +11,8 @@ namespace pjsip4net.Calls.Dsl
         private readonly Call _call;
         private readonly ICallManagerInternal _callManager;
         private readonly IAccountManager _accountManager;
+        private string _recordFileName;
+        private bool _recordCall;
 
         public DefaultCallBuilder(Call call, ICallManagerInternal callManager, IAccountManager accountManager)
         {
@@ -46,23 +48,45 @@ namespace pjsip4net.Calls.Dsl
             return this;
         }
 
+        public ICallBuilder RecordTo(string fileName)
+        {
+            _recordCall = true;
+            _recordFileName = fileName;
+            return this;
+        }
+
         public ICall Call()
+        {
+            FinalizeUri();
+            InitializeCall();
+            RegisterCall();
+            StartRecording();
+            return _call;
+        }
+
+        private void InitializeCall()
+        {
+            using (_call.InitializationScope())
+                _call.SetDestinationUri(_sb.ToString());
+        }
+
+        private void FinalizeUri()
         {
             _account = _account ?? _accountManager.DefaultAccount;
             IVoIPTransport transport = _account.Transport;
             _sb.AppendTransportSuffix(transport.TransportType);
             _call.SetAccount(_account.As<Account>());
-
-            using (_call.InitializationScope())
-                _call.SetDestinationUri(_sb.ToString());
-
-            InternalCall();
-            return _call;
         }
 
-        protected void InternalCall()
+        protected void RegisterCall()
         {
             _callManager.RegisterCall(_call);
+        }
+
+        private void StartRecording()
+        {
+            if (_recordCall && ValidFileNameTemplate.Check(_recordFileName))
+                _call.MediaSession.RecordTo(_recordFileName);
         }
     }
 }

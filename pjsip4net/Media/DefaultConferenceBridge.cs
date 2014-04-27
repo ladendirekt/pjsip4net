@@ -66,12 +66,17 @@ namespace pjsip4net.Media
             _mediaApi = mediaApi;
         }
 
+        public void Connect(int sourceSlot, int sinkSlot)
+        {
+            Helper.GuardPositiveInt(sourceSlot);
+            Helper.GuardPositiveInt(sinkSlot);
+            _mediaApi.Connect(sourceSlot, sinkSlot);
+        }
+
         public void Interconnect(int slotX, int slotY)
         {
-            Helper.GuardPositiveInt(slotX);
-            Helper.GuardPositiveInt(slotY);
-            _mediaApi.Connect(slotX, slotY);
-            _mediaApi.Connect(slotY, slotX);
+            Connect(slotX, slotY);
+            Connect(slotY, slotX);
         }
 
         public void Disconnect(int slotX, int slotY)

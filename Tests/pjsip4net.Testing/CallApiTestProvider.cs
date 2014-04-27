@@ -6,6 +6,8 @@ namespace pjsip4net.Testing
 {
     public class CallApiTestProvider : ICallApiProvider
     {
+        public static Func<CallInfo> CallInfoBuilder = null;
+
         public uint GetMaxAllowedCalls()
         {
             return 1;
@@ -33,7 +35,9 @@ namespace pjsip4net.Testing
 
         public CallInfo GetInfo(int callId)
         {
-            throw new System.NotImplementedException();
+            if (CallInfoBuilder != null)
+                return CallInfoBuilder();
+            return new CallInfo();
         }
 
         public void AnswerCall(int callId, SipStatusCode code, string reason)

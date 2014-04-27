@@ -471,7 +471,7 @@ namespace pjsip4net.Console
         public void Execute()
         {
             _agent.CallManager.MakeCall(x => x.To(_args.To).At(_args.At).Through(_args.Through)
-                .From(_agent.AccountManager.GetAccountById(Convert.ToInt32(_args.From))).Call());
+                .From(_agent.AccountManager.GetAccountById(Convert.ToInt32(_args.From))).RecordTo("test.wav").Call());
         }
     }
 

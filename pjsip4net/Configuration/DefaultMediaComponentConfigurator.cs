@@ -15,6 +15,7 @@ namespace pjsip4net.Configuration
             container.RegisterAsSingleton<IMediaManager, IMediaManagerInternal, DefaultMediaManager>();
             container.Register<CodecInfo, CodecInfo>();
             container.Register<IWavPlayer, WavPlayer>();
+            container.Register<IWavRecorder, WavRecorder>();
         }
     }
 }

@@ -5,12 +5,14 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls
 {
-    internal class MediaSession : StateMachine
+    internal class MediaSession : StateMachine, IDisposable
     {
         private WeakReference _call;
         private readonly IRegistry _localRegistry;
         private readonly ICallManagerInternal _callManager;
         private readonly IConferenceBridge _conferenceBridge;
+        private IWavRecorder _callRecorder;
+        private string _recordFileName;
 
         public MediaSession(Call call, IRegistry localRegistry,
             ICallManagerInternal callManager, IConferenceBridge conferenceBridge)
@@ -39,6 +41,10 @@ namespace pjsip4net.Calls
         public bool IsHeld { get; set; }
         public bool IsActive { get; set; }
         public bool IsInConference { get; set; }
+        public bool RecordToFile
+        { 
+            get { return _recordFileName != null; } 
+        }
         public CallMediaState MediaState { get; set; }
         public IRegistry Registry
         {
@@ -51,6 +57,12 @@ namespace pjsip4net.Calls
         public IConferenceBridge ConferenceBridge
         {
             get { return _conferenceBridge; }
+        }
+
+        public void RecordTo(string fileName)
+        {
+            _recordFileName = fileName;
+            StartRecording();
         }
 
         public void ConnectToConference()
@@ -71,6 +83,31 @@ namespace pjsip4net.Calls
                 return;
 
             _state.StateChanged();
+        }
+
+        protected override void OnStateChanged()
+        {
+            base.OnStateChanged();
+            if (RecordToFile)
+                StartRecording();
+        }
+
+        public void Dispose()
+        {
+            if (_callRecorder != null)
+                _callRecorder.Dispose();
+        }
+
+        private void StartRecording()
+        {
+            if (!IsActive)
+                return;
+            if (_callRecorder == null)
+            {
+                _callRecorder = Registry.Container.Get<IWavRecorder>();
+                _callRecorder.Start(_recordFileName);
+                ConferenceBridge.Connect(Call.ConferenceSlotId, _callRecorder.ConferenceSlot.SlotId);
+            }
         }
     }
 }

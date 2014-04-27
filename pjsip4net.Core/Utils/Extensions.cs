@@ -39,6 +39,11 @@ namespace pjsip4net.Core.Utils
         {
             return @object as T;
         }
+
+        public static bool Is<T>(this object @object) where T : class
+        {
+            return @object is T;
+        }
     }
 
     public class AllDifferentComparer<T> : IEqualityComparer<T>

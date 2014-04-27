@@ -9,7 +9,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Media
 {
-    public class WavPlayer : Resource, IWavPlayer, IIdentifiable<IWavPlayer>, IDisposable
+    public class WavPlayer : Resource, IWavPlayer
     {
         #region Private Data
 
@@ -50,7 +50,7 @@ namespace pjsip4net.Media
         public void Start(string file, bool loop)
         {
             GuardDisposed();
-            Helper.GuardNotNullStr(file);
+            ValidFileNameTemplate.Check(file);
 
             var filename = Path.GetFullPath(file);
             File = file;

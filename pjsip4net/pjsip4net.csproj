@@ -161,6 +161,7 @@
     <Compile Include="Interfaces\ICallBuilder.cs" />
     <Compile Include="IM\Dsl\DefaultMessageBuilder.cs" />
     <Compile Include="Interfaces\IConferenceBridge.cs" />
+    <Compile Include="Interfaces\IFileSourceMedia.cs" />
     <Compile Include="Interfaces\IRegistry.cs" />
     <Compile Include="Interfaces\IMessageBuilder.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
@@ -170,13 +171,15 @@
     <Compile Include="Interfaces\IVoIPTransport.cs" />
     <Compile Include="Interfaces\IVoIPTransportFactory.cs" />
     <Compile Include="Interfaces\IWavPlayer.cs" />
+    <Compile Include="Interfaces\IWavRecorder.cs" />
     <Compile Include="LogEventArgs.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Media\DefaultConferenceBridge.cs" />
     <Compile Include="Interfaces\IMediaManager.cs" />
     <Compile Include="Media\DefaultMediaManager.cs" />
-    <Compile Include="Media\SoundDevice.cs" />
+    <Compile Include="Media\IIdenitfiable.cs" />
     <Compile Include="Media\WavPlayer.cs" />
+    <Compile Include="Media\WavRecorder.cs" />
     <Compile Include="NatEventArgs.cs" />
     <Compile Include="PagerEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
