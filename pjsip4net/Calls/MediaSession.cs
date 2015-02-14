@@ -2,6 +2,7 @@ using System;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
+using Common.Logging;
 
 namespace pjsip4net.Calls
 {
@@ -95,7 +96,10 @@ namespace pjsip4net.Calls
         public void Dispose()
         {
             if (_callRecorder != null)
+            {
                 _callRecorder.Dispose();
+                LogManager.GetLogger<MediaSession>().Debug("Disposed call recorder");
+            }
         }
 
         private void StartRecording()
