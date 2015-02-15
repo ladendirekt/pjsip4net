@@ -114,6 +114,8 @@ namespace pjsip4net.Console
                         Through = definitions.First(x => x.Key == "Through").Value,
                         To = definitions.First(x => x.Key == "t").Value,
                     }, _container.Get<IMessageBuilder>());
+                case "playertest" : 
+                    return new PlayFileCommand(_userAgent, _container);
                 case "?":
                 case "help":
                 case "print":
@@ -511,5 +513,29 @@ namespace pjsip4net.Console
         }
 
         #endregion
+    }
+
+    public class PlayFileCommand : ICommand
+    {
+        private readonly ISipUserAgent _userAgent;
+        private readonly IContainer _container;
+
+        public PlayFileCommand(ISipUserAgent userAgent, IContainer container)
+        {
+            _userAgent = userAgent;
+            _container = container;
+        }
+
+        public void Execute()
+        {
+            var player = _container.Get<IWavPlayer>();
+            player.Completed += (sender, args) =>
+            {
+                System.Console.WriteLine("Player {0} has reached the end of file {1}", player.Id, player.File);
+                player.Dispose();
+            };
+            player.Start("NeroSoundTrax_test8_PCM_Mono_VBR_16SS_48000Hz.wav", false) ;
+            _userAgent.MediaManager.ConferenceBridge.ConnectToSoundDevice(player.ConferenceSlot.SlotId);
+        }
     }
 }

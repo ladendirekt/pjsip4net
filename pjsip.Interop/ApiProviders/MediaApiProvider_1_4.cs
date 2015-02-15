@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Timers;
 using pjsip.Interop.Interfaces;
 using pjsip4net.Core.Data;
+using pjsip4net.Core.Data.Events;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
 
@@ -11,11 +16,14 @@ namespace pjsip.Interop.ApiProviders
     public class MediaApiProvider_1_4 : IMediaApiProvider
     {
         private readonly IMapper _mapper;
+        private readonly IEventsProvider _eventsProvider;
 
-        public MediaApiProvider_1_4(IMapper mapper)
+        public MediaApiProvider_1_4(IMapper mapper, IEventsProvider eventsProvider)
         {
             Helper.GuardNotNull(mapper);
+            Helper.GuardNotNull(eventsProvider);
             _mapper = mapper;
+            _eventsProvider = eventsProvider;
         }
 
         #region Implementation of IMediaApiProvider
@@ -85,6 +93,8 @@ namespace pjsip.Interop.ApiProviders
             var id = NativeConstants.PJSUA_INVALID_ID;
             var name = new pj_str_t(fileName);
             Helper.GuardError(PJSUA_DLL.Media.pjsua_player_create(ref name, options, ref id));
+            if (options == 1)
+                SchedulePlayerEof(fileName, id);
             return id;
         }
 
@@ -201,5 +211,21 @@ namespace pjsip.Interop.ApiProviders
         }
 
         #endregion
+
+        private void SchedulePlayerEof(string fileName, int id)
+        {
+            var pInfo = IntPtr.Zero;
+            PJSUA_DLL.Media.pjsua_player_get_port(id, ref pInfo);
+            var info = (pjmedia_port)Marshal.PtrToStructure(pInfo, typeof(pjmedia_port));
+            var approxDurationSec = new FileInfo(Path.GetFullPath(fileName)).Length /
+                                    (info.info.clock_rate * info.info.channel_count * (double)info.info.bits_per_sample / 8);
+            var timer = new Timer(approxDurationSec * 1000);
+            timer.Elapsed += (sender, args) =>
+            {
+                timer.Dispose();
+                _eventsProvider.Publish(new PlayerCompleted { Id = id });
+            };
+            timer.Enabled = true;
+        }
     }
 }

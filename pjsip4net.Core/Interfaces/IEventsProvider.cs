@@ -6,5 +6,6 @@ namespace pjsip4net.Core.Interfaces
     {
         void Publish<T>(T @event) where T : class;
         void Subscribe<T>(Action<T> actOnEvent) where T : class;
+        IDisposable SubscribeTemporarilly<T>(Action<T> actOnEvent) where T : class;
     }
 }

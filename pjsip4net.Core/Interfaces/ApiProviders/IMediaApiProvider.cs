@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using pjsip4net.Core.Data;
-using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Core.Interfaces.ApiProviders
 {

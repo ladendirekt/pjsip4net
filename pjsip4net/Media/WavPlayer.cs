@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using pjsip4net.Core;
 using pjsip4net.Core.Data;
+using pjsip4net.Core.Data.Events;
 using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
@@ -14,7 +15,8 @@ namespace pjsip4net.Media
         #region Private Data
 
         private ConferencePortInfo _mediaInfo;
-        private IMediaApiProvider _mediaApi;
+        private readonly IMediaApiProvider _mediaApi;
+        private IDisposable _subscription;
 
         #endregion
 
@@ -22,29 +24,37 @@ namespace pjsip4net.Media
 
         public string File { get; private set; }
 
+        public int ConferencePortId
+        {
+            get { return Id != -1 ? _mediaApi.GetPlayerConfPort(Id) : -1; }
+        }
+
         public ConferencePortInfo ConferenceSlot
         {
             get
             {
-                //GuardDisposed();
-                if (Id != -1)
+                if (Id != -1 && ConferencePortId != -1)
                     if (_mediaInfo == null)
-                        _mediaInfo = _mediaApi.GetPortInfo(Id);
+                        _mediaInfo = _mediaApi.GetPortInfo(ConferencePortId);
                 return _mediaInfo;
             }
         }
 
         public int Id { get; private set; }
 
+        public event EventHandler<EventArgs> Completed = delegate { };
+
         #endregion
 
         #region Methods
 
-        public WavPlayer(IMediaApiProvider mediaApi)
+        public WavPlayer(IMediaApiProvider mediaApi, IEventsProvider eventsProvider)
         {
             Id = -1;
             Helper.GuardNotNull(mediaApi);
+            Helper.GuardNotNull(eventsProvider);
             _mediaApi = mediaApi;
+            _subscription = eventsProvider.SubscribeTemporarilly<PlayerCompleted>(OnPlayerEof);
         }
 
         public void Start(string file, bool loop)
@@ -54,7 +64,7 @@ namespace pjsip4net.Media
 
             var filename = Path.GetFullPath(file);
             File = file;
-            Id = _mediaApi.CreatePlayerAndGetId(filename, loop ? 1u : 0u);
+            Id = _mediaApi.CreatePlayerAndGetId(filename, loop ? 0u : 1u);
         }
 
         public void SetPosition(uint position)
@@ -65,6 +75,7 @@ namespace pjsip4net.Media
 
         protected override void CleanUp()
         {
+            _subscription.Dispose();
             try
             {
                 _mediaApi.DestroyPlayer(Id);
@@ -74,6 +85,12 @@ namespace pjsip4net.Media
                 _mediaInfo = null;
                 Id = -1;
             }
+        }
+
+        private void OnPlayerEof(PlayerCompleted @event)
+        {
+            if (@event.Id == Id)
+                Completed(this, EventArgs.Empty);
         }
 
         #endregion
@@ -96,7 +113,7 @@ namespace pjsip4net.Media
 
         bool IIdentifiable<IWavPlayer>.DataEquals(IWavPlayer other)
         {
-            return File.Equals(other.File) && ConferenceSlot.Equals(other.ConferenceSlot);
+            return ConferencePortId.Equals(other.ConferencePortId);
         }
 
         #endregion

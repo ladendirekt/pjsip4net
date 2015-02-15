@@ -1,5 +1,4 @@
 using System;
-using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
 
 namespace pjsip4net.Interfaces
@@ -8,5 +7,6 @@ namespace pjsip4net.Interfaces
     {
         void Start(string file, bool loop);
         void SetPosition(uint position);
+        event EventHandler<EventArgs> Completed;
     }
 }

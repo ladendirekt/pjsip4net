@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using pjsip4net.Core;
-using pjsip4net.Interfaces;
-using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Data;
-using pjsip4net.Core.Utils;
 using pjsip4net.Core.Interfaces;
+using pjsip4net.Core.Interfaces.ApiProviders;
+using pjsip4net.Core.Utils;
+using pjsip4net.Interfaces;
 
 namespace pjsip4net.Media
 {
@@ -18,11 +15,16 @@ namespace pjsip4net.Media
         private IMediaApiProvider _mediaApi;
         private string _fileName;
 
+        public int ConferencePortId
+        {
+            get { return Id == -1 ? -1 : _mediaApi.GetRecorderConfPort(Id); }
+        }
+
         public ConferencePortInfo ConferenceSlot
         {
             get 
             {
-                if (Id != -1)
+                if (Id != -1 && ConferencePortId != -1)
                     if (_mediaInfo == null)
                         _mediaInfo = _mediaApi.GetPortInfo(Id);
                 return _mediaInfo;
@@ -44,13 +46,8 @@ namespace pjsip4net.Media
         {
             GuardDisposed();
             ValidFileNameTemplate.Check(fileName);
-            UpdateFileNameWithPath(fileName);
-            Id = _mediaApi.CreateRecorderAndGetId(File, 0, IntPtr.Zero, 0, 0);
-        }
-
-        private void UpdateFileNameWithPath(string fileName)
-        {
             _fileName = Path.GetFullPath(fileName);
+            Id = _mediaApi.CreateRecorderAndGetId(File, 0, IntPtr.Zero, 0, 0);
         }
 
         public void Dispose()
@@ -67,7 +64,7 @@ namespace pjsip4net.Media
 
         public bool DataEquals(IWavRecorder other)
         {
-            return File.Equals(other.File) && ConferenceSlot.Equals(other.ConferenceSlot);
+            return ConferencePortId.Equals(other.ConferencePortId);
         }
 
         public bool Equals(IIdentifiable<IWavRecorder> other)

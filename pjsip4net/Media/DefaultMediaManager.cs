@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,10 +15,9 @@ namespace pjsip4net.Media
         //#region Singleton
 
         private static readonly object _lock = new object();
-        private IConferenceBridge _conferenceBridge;
-        private IMediaApiProvider _mediaApi;
-        private IRegistry _registry;
-        //private static MediaManager _instance;
+        private readonly IConferenceBridge _conferenceBridge;
+        private readonly IMediaApiProvider _mediaApi;
+        private readonly IRegistry _registry;
 
         public DefaultMediaManager(IConferenceBridge conferenceBridge, IMediaApiProvider mediaApi, IRegistry registry)
         {
@@ -29,8 +27,6 @@ namespace pjsip4net.Media
             _conferenceBridge = conferenceBridge;
             _registry = registry;
             _mediaApi = mediaApi;
-
-            //SetDevices();
         }
 
         #region Private Data
@@ -44,11 +40,7 @@ namespace pjsip4net.Media
         #region Properties
 
         private ReadOnlyCollection<CodecInfo> _codecs;
-
         private ReadOnlyCollection<SoundDeviceInfo> _sndDevs;
-        public IWavPlayer Ringer { get; set; }
-        public IWavPlayer CallbackRinger { get; set; }
-        public IWavPlayer BusyRinger { get; set; }
         
         public IMediaApiProvider Provider
         {
@@ -108,48 +100,6 @@ namespace pjsip4net.Media
             get { return _curCapture; }
         }
 
-        //private int _outDev = 0;
-        //public SoundDevice PlaybackDevice
-        //{
-        //    get
-        //    {
-        //        int outDev = -1, captDev = -1;
-        //        Helper.GuardError(PJSUA_DLL.Media.pjsua_get_snd_dev(ref captDev, ref outDev));
-        //        _outDev = outDev;
-        //        _captDev = captDev;
-        //        return _captDev != NativeConstants.PJSUA_INVALID_ID ? SoundDevices[_outDev] : null;
-        //    }
-        //    set
-        //    {
-        //        Helper.GuardNotNull(value);
-        //        Helper.GuardInRange(1u, 100u, value.OutputCount);
-        //        Helper.GuardPositiveInt(SoundDevices.IndexOf(value));
-        //        _outDev = SoundDevices.IndexOf(value);
-        //        Helper.GuardError(PJSUA_DLL.Media.pjsua_set_snd_dev(_captDev, _outDev));
-        //    }
-        //}
-
-        //private int _captDev = 0;
-        //public SoundDevice CaptureDevice
-        //{
-        //    get
-        //    {
-        //        int outDev = -1, captDev = -1;
-        //        Helper.GuardError(PJSUA_DLL.Media.pjsua_get_snd_dev(ref captDev, ref outDev));
-        //        _outDev = outDev;
-        //        _captDev = captDev;
-        //        return _captDev != NativeConstants.PJSUA_INVALID_ID ? SoundDevices[_captDev] : null;
-        //    }
-        //    set
-        //    {
-        //        Helper.GuardNotNull(value);
-        //        Helper.GuardInRange(1u, 100u, value.InputCount);
-        //        Helper.GuardPositiveInt(SoundDevices.IndexOf(value));
-        //        _captDev = SoundDevices.IndexOf(value);
-        //        Helper.GuardError(PJSUA_DLL.Media.pjsua_set_snd_dev(_captDev, _outDev));
-        //    }
-        //}
-
         #endregion
 
         #region Methods
@@ -180,29 +130,19 @@ namespace pjsip4net.Media
             SetDevices();
         }
 
-        internal void CreateRingers()
-        {
-            //Ringer = new WavPlayer(@"Sounds\old-phone-ring6.wav", true);
-            //CallbackRinger = new WavPlayer(@"Sounds\ring.wav", true);
-            //BusyRinger = new WavPlayer(@"Sounds\busy.wav", true);
-        }
-
         public void SetDevices()
         {
-            //if (_curCapture == null && _curPlayback == null)
-            {
-                _curCapture = _registry.MediaConfig.CaptureDeviceId != -1
-                                  ? SoundDevices.Where(s => s.Id == _registry.MediaConfig.CaptureDeviceId).Take(1).SingleOrDefault()
-                                  : null;
-                _curPlayback = _registry.MediaConfig.PlaybackDeviceId != -1
-                                   ? SoundDevices.Where(s => s.Id == _registry.MediaConfig.PlaybackDeviceId).Take(1).SingleOrDefault()
-                                   : null;
-            }
+            _curCapture = _registry.MediaConfig.CaptureDeviceId != -1
+                ? SoundDevices.Where(s => s.Id == _registry.MediaConfig.CaptureDeviceId).Take(1).SingleOrDefault()
+                : null;
+            _curPlayback = _registry.MediaConfig.PlaybackDeviceId != -1
+                ? SoundDevices.Where(s => s.Id == _registry.MediaConfig.PlaybackDeviceId).Take(1).SingleOrDefault()
+                : null;
 
             if (_curCapture != null && _curPlayback != null)
-                _mediaApi.SetCurrentSoundDevices(new Core.Utils.Tuple<int, int>(_curCapture.Id, _curPlayback.Id));
+                _mediaApi.SetCurrentSoundDevices(new Tuple<int, int>(_curCapture.Id, _curPlayback.Id));
             else
-                _mediaApi.SetCurrentSoundDevicesToNull(); 
+                _mediaApi.SetCurrentSoundDevicesToNull();
         }
 
         #endregion

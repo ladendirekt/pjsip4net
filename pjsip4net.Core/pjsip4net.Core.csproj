@@ -110,6 +110,7 @@
     <Compile Include="Data\Events\IncomingTypingRecieved.cs" />
     <Compile Include="Data\Events\LogRequested.cs" />
     <Compile Include="Data\Events\NatDetected.cs" />
+    <Compile Include="Data\Events\PlayerCompleted.cs" />
     <Compile Include="Data\Events\RegistrationStateChanged.cs" />
     <Compile Include="Data\Events\StateChanged.cs" />
     <Compile Include="Data\Events\StreamDestroyed.cs" />

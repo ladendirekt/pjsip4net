@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 using pjsip4net.Core.Data;
+using pjsip4net.Core.Data.Events;
+using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 
 namespace pjsip4net.Testing
 {
     public class MediaApiTestProvider : IMediaApiProvider
     {
+        private readonly IEventsProvider _eventsProvider;
+
+        public MediaApiTestProvider(IEventsProvider eventsProvider)
+        {
+            _eventsProvider = eventsProvider;
+        }
+
         public MediaConfig GetDefaultConfig()
         {
             return new MediaConfig();
@@ -50,6 +60,16 @@ namespace pjsip4net.Testing
 
         public int CreatePlayerAndGetId(string fileName, uint options)
         {
+            if (options == 1)
+            {
+                var timer = new Timer(10);
+                timer.Elapsed += (sender, args) =>
+                {
+                    _eventsProvider.Publish(new PlayerCompleted() {Id = 0});
+                    timer.Dispose();
+                };
+                timer.Enabled = true;
+            }
             return 0;
         }
 

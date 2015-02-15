@@ -125,6 +125,7 @@
     <Compile Include="Calls\given_a_callingInviteState.cs" />
     <Compile Include="Calls\given_a_nullInviteState.cs" />
     <Compile Include="Media\given_a_call_to_be_recorded.cs" />
+    <Compile Include="Media\given_a_wav_player.cs" />
     <Compile Include="_base.cs" />
     <Compile Include="given_a_sip_ua.cs" />
     <Compile Include="given_a_valueWrapper.cs" />
@@ -156,6 +157,10 @@
     <ProjectReference Include="..\..\..\pjsip4net\pjsip4net.csproj">
       <Project>{77160365-9A80-4F6A-9BD7-4F0532BE0EB0}</Project>
       <Name>pjsip4net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\pjsip4net.Testing\pjsip4net.Testing.csproj">
+      <Project>{05DD289F-99C7-4C87-BC6A-05774B90117C}</Project>
+      <Name>pjsip4net.Testing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

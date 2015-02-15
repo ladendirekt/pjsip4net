@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Ploeh.AutoFixture;
-using pjsip4net.Core.Interfaces.ApiProviders;
 using Moq;
-using pjsip4net.Interfaces;
+using NUnit.Framework;
+using pjsip4net.Accounts;
 using pjsip4net.Calls;
 using pjsip4net.Calls.Dsl;
-using pjsip4net.Tests.Calls;
-using pjsip4net.Accounts;
-using pjsip4net.Tests.Accounts;
 using pjsip4net.Core.Data;
+using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
+using pjsip4net.Interfaces;
+using pjsip4net.Tests.Accounts;
+using pjsip4net.Tests.Calls;
+using Ploeh.AutoFixture;
 
 namespace pjsip4net.Tests.Media
 {
@@ -50,8 +47,10 @@ namespace pjsip4net.Tests.Media
                 It.Is<int>(i => i == 0), It.Is<uint>(i => i == 0)));
         }
 
+        [Test]
         public void when_call_state_changed_to_active__should_start_recording()
-        { }
+        {
+        }
 
         public void when_call_state_disconnected__should_stop_recording()
         { }

@@ -28,6 +28,13 @@ namespace pjsip4net.Core
             _scope.Subscribe(new DelegatingConsumer<T>(actOnEvent));
         }
 
+        public IDisposable SubscribeTemporarilly<T>(Action<T> actOnEvent) where T : class
+        {
+            var result = _eventsPipe.NewSubscriptionScope();
+            result.Subscribe(new DelegatingConsumer<T>(actOnEvent));
+            return result;
+        }
+
         #endregion
     }
 }
