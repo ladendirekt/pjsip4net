@@ -5,7 +5,7 @@ pjsip4net is a projection of procedural pjsua high level API into convenient and
 
 License
 -----------
-Copyright pjsip4net RobertT.
+Copyright pjsip4net Boris Tveritnev.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use these files except in compliance with the License.
