@@ -2,6 +2,7 @@ using System;
 using Common.Logging;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
+using System.Text;
 
 namespace pjsip4net.Calls
 {
@@ -20,6 +21,10 @@ namespace pjsip4net.Calls
                     _context.Call.ConferenceSlotId);
                 _context.IsActive = true;
                 _context.MediaState = CallMediaState.Active;
+                if (_context.Registry.Config.AutoRecord)
+                {
+                    _context.Record();
+                }
             }
         }
 

@@ -25,6 +25,8 @@ namespace pjsip4net.Interfaces
         double TxLevel { get; set; }
         TimeSpan ConnectDuration { get; }
         TimeSpan TotalDuration { get; }
+        InviteState InviteState { get; }
+        CallMediaState MediaState { get; }
 
         void Answer(bool accept);
         void Answer(bool accept, string reason);

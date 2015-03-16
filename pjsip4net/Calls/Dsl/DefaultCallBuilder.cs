@@ -1,4 +1,5 @@
 ﻿using pjsip4net.Accounts;
+using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
 
@@ -11,17 +12,20 @@ namespace pjsip4net.Calls.Dsl
         private readonly Call _call;
         private readonly ICallManagerInternal _callManager;
         private readonly IAccountManager _accountManager;
+        private readonly UaConfig _uaConfig;
         private string _recordFileName;
         private bool _recordCall;
 
-        public DefaultCallBuilder(Call call, ICallManagerInternal callManager, IAccountManager accountManager)
+        public DefaultCallBuilder(Call call, ICallManagerInternal callManager, IAccountManager accountManager, UaConfig uaConfig)
         {
             Helper.GuardNotNull(callManager);
             Helper.GuardNotNull(accountManager);
             Helper.GuardNotNull(call);
+            Helper.GuardNotNull(uaConfig);
             _call = call;
             _callManager = callManager;
             _accountManager = accountManager;
+            _uaConfig = uaConfig;
         }
 
         public ICallBuilder To(string extension)

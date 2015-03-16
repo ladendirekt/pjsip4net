@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Magnum.CommandLineParser;
+using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
@@ -473,7 +474,7 @@ namespace pjsip4net.Console
         public void Execute()
         {
             _agent.CallManager.MakeCall(x => x.To(_args.To).At(_args.At).Through(_args.Through)
-                .From(_agent.AccountManager.GetAccountById(Convert.ToInt32(_args.From))).RecordTo("test.wav").Call());
+                .From(_agent.AccountManager.GetAccountById(Convert.ToInt32(_args.From))).Call());
         }
     }
 

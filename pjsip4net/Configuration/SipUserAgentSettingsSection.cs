@@ -7,6 +7,7 @@ namespace pjsip4net.Configuration
     {
         private static readonly ConfigurationProperty _accountsProp;
         private static readonly ConfigurationProperty _autoAnswer;
+        private static readonly ConfigurationProperty _autoRecording;
         private static readonly ConfigurationProperty _autoConference;
         private static readonly ConfigurationProperty _logLevel;
         private static readonly ConfigurationProperty _logMsgs;
@@ -33,6 +34,7 @@ namespace pjsip4net.Configuration
                                                   ConfigurationPropertyOptions.None);
             _traceAndDebugProp = new ConfigurationProperty("traceAndDebug", typeof (bool), false);
             _autoAnswer = new ConfigurationProperty("autoAnswer", typeof (bool), false);
+            _autoRecording = new ConfigurationProperty("autoRecording", typeof(bool), false);
             _autoConference = new ConfigurationProperty("autoConference", typeof (bool), false);
             _maxCalls = new ConfigurationProperty("maxCalls", typeof (int), 5);
             _mediaConfigProp = new ConfigurationProperty("media", typeof (MediaConfigurationElement), null,
@@ -49,6 +51,7 @@ namespace pjsip4net.Configuration
                              _logLevel,
                              _traceAndDebugProp,
                              _autoAnswer,
+                             _autoRecording,
                              _autoConference,
                              _maxCalls,
                              _mediaConfigProp
@@ -120,6 +123,13 @@ namespace pjsip4net.Configuration
             set { base[_autoAnswer] = value; }
         }
 
+        [ConfigurationProperty("autoRecording", DefaultValue = false)]
+        public bool AutoRecording
+        {
+            get { return (bool)base[_autoRecording]; }
+            set { base[_autoRecording] = value; }
+        }
+
         [ConfigurationProperty("autoConference", DefaultValue = false)]
         public bool AutoConference
         {
@@ -150,6 +160,7 @@ namespace pjsip4net.Configuration
         {
             Accounts = section.Accounts;
             AutoAnswer = section.AutoAnswer;
+            AutoRecording = section.AutoRecording;
             AutoConference = section.AutoConference;
             SecureMedia = section.SecureMedia;
             SecureSignaling = section.SecureSignaling;

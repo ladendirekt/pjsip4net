@@ -81,6 +81,7 @@ namespace pjsip.Interop.Services
                 .ForMember(x => x.UseSrtp, cx => cx.MapFrom(x => (SrtpRequirement) x.use_srtp))
                 .ForMember(x => x.UserAgent, cx => cx.MapFrom(x => (string) x.user_agent))
                 .ForMember(x => x.AutoAnswer, cx => cx.Ignore())
+                .ForMember(x => x.AutoRecord, cx => cx.Ignore())
                 .ForMember(x => x.AutoConference, cx => cx.Ignore());
 
             Mapper.CreateMap<LoggingConfig, pjsua_logging_config>()

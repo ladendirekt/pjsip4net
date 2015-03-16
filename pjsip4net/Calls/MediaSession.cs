@@ -3,6 +3,7 @@ using pjsip4net.Core.Data;
 using pjsip4net.Core.Utils;
 using pjsip4net.Interfaces;
 using Common.Logging;
+using System.Text;
 
 namespace pjsip4net.Calls
 {
@@ -42,22 +43,40 @@ namespace pjsip4net.Calls
         public bool IsHeld { get; set; }
         public bool IsActive { get; set; }
         public bool IsInConference { get; set; }
+        
         public bool RecordToFile
         { 
             get { return _recordFileName != null; } 
         }
+        
         public CallMediaState MediaState { get; set; }
+        
         public IRegistry Registry
         {
             get { return _localRegistry; }
         }
+
         public ICallManagerInternal CallManager
         {
             get { return _callManager; }
         }
+        
         public IConferenceBridge ConferenceBridge
         {
             get { return _conferenceBridge; }
+        }
+
+        public void Record()
+        {
+            if (RecordToFile) return;
+
+            var fileName = new StringBuilder().Append(DateTime.Now.ToString("yyyy-MM-dd HH-mm")).Append("-").Append(Call.Account.AccountId);
+            if (Call.IsIncoming)
+                fileName.Append("-incoming");
+            else
+                fileName.Append("-outgoing");
+            fileName.Append(".wav");
+            RecordTo(fileName.ToString());
         }
 
         public void RecordTo(string fileName)
@@ -110,7 +129,7 @@ namespace pjsip4net.Calls
             {
                 _callRecorder = Registry.Container.Get<IWavRecorder>();
                 _callRecorder.Start(_recordFileName);
-                ConferenceBridge.Connect(Call.ConferenceSlotId, _callRecorder.ConferenceSlot.SlotId);
+                ConferenceBridge.Connect(Call.ConferenceSlotId, _callRecorder.ConferencePortId);
             }
         }
     }

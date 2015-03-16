@@ -11,6 +11,7 @@ namespace pjsip4net.Core.Data
         private IList<NetworkCredential> _credentials = new List<NetworkCredential>();
         public bool AutoAnswer { get; set; }
         public bool AutoConference { get; set; }
+        public bool AutoRecord { get; set; }
         public uint MaxCalls { get; set; }
         public string StunDomain { get; set; }
         public string StunHost { get; set; }

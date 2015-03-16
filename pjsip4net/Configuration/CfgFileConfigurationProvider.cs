@@ -97,6 +97,7 @@ namespace pjsip4net.Configuration
                     mediaConfig.IsVadEnabled = _section.MediaConfig.IsVadEnabled;
 
                     config.AutoAnswer = _section.AutoAnswer;
+                    config.AutoRecord = _section.AutoRecording;
                     config.AutoConference = _section.AutoConference;
                     config.MaxCalls = (uint) _section.MaxCalls;
 
