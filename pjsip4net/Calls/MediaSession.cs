@@ -70,7 +70,7 @@ namespace pjsip4net.Calls
         {
             if (RecordToFile) return;
 
-            var fileName = new StringBuilder().Append(DateTime.Now.ToString("yyyy-MM-dd HH-mm")).Append("-").Append(Call.Account.AccountId);
+            var fileName = new StringBuilder().Append(DateTime.Now.ToString("ddMMyyyyHHmmss")).Append("-").Append(Call.Account.AccountId);
             if (Call.IsIncoming)
                 fileName.Append("-incoming");
             else
