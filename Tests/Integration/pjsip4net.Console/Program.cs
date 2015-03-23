@@ -28,6 +28,8 @@ namespace pjsip4net.Console
             ua.CallManager.CallRedirected += CallRedirected;
             ua.CallManager.IncomingDtmfDigit += IncomingDtmfDigit;
             ua.ImManager.NatDetected += OnNatDetected;
+            ua.CallManager.IncomingCall += CallManager_IncomingCall;
+            ua.CallManager.CallStateChanged += CallManager_CallStateChanged;
             var factory = new CommandFactory(ua, cfg.Container);
             factory.Create("?").Execute();
 
@@ -51,6 +53,16 @@ namespace pjsip4net.Console
                 }
             }
             ua.Destroy();
+        }
+
+        static void CallManager_CallStateChanged(object sender, CallStateChangedEventArgs e)
+        {
+            System.Console.WriteLine("Call to {0}: {1}", e.DestinationUri, e.Duration);
+        }
+
+        static void CallManager_IncomingCall(object sender, Core.Utils.EventArgs<Interfaces.ICall> e)
+        {
+            System.Console.WriteLine("Incoming call from: {0}", e.Data.RemoteContact);
         }
 
         private static void OnNatDetected(object s, NatEventArgs ea)
