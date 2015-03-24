@@ -26,6 +26,7 @@ Currently only old 1.x branch version is supported. The code is distributed with
 Roadmap
 -----------
 Things to come in order of importance:
+  * pjsip 1.latest support
   * pjsip 2.x line support
   * mono support
   * x64 build
