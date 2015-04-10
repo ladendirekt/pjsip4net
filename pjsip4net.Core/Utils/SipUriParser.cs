@@ -26,6 +26,9 @@ namespace pjsip4net.Core.Utils
     {
         private readonly HashSet<char> _alfabet;
         private readonly HashSet<char> _numbers;
+        private readonly HashSet<char> _passSpecialCharacters;
+        private readonly HashSet<char> _domainSpecialCharacters;
+
         private readonly NfaWithBackTracking<SipLexem, char> _stateMachine = new NfaWithBackTracking<SipLexem, char>();
         //private StringBuilder _builder = new StringBuilder();
 
@@ -37,6 +40,8 @@ namespace pjsip4net.Core.Utils
             foreach (char alfa in Enumerable.Range('A', 26).Select(i => ((char) i)))
                 _alfabet.Add(alfa);
             _numbers = new HashSet<char>(Enumerable.Range('0', 10).Select(i => (char) i));
+            _passSpecialCharacters = new HashSet<char>(new char[]{'!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}'});
+            _domainSpecialCharacters = new HashSet<char>(new char[] { '-', '_', '.' });
 
             Parameters = new Dictionary<string, string>();
             Headers = new Dictionary<string, string>();
@@ -151,17 +156,17 @@ namespace pjsip4net.Core.Utils
             _stateMachine.TransitionTable.Add(
                 new PredicateTransitionFunction<NfaState<SipLexem>, char, NfaState<SipLexem>>(
                     s =>
-                    _alfabet.Contains(s) || _numbers.Contains(s) || s.Equals('.'))
+                    _alfabet.Contains(s) || _numbers.Contains(s) || _domainSpecialCharacters.Contains(s))
                     {From = domainState, To = domainState, TransitionSymbols = new List<char> {'~'}});
             //extension to extension
             _stateMachine.TransitionTable.Add(
                 new PredicateTransitionFunction<NfaState<SipLexem>, char, NfaState<SipLexem>>(
-                    s => _numbers.Contains(s) || _alfabet.Contains(s) || s.Equals('.'))
+                    s => _numbers.Contains(s) || _alfabet.Contains(s) || _domainSpecialCharacters.Contains(s))
                     {From = extState, To = extState, TransitionSymbols = new List<char> {'~'}});
             //password to password
             _stateMachine.TransitionTable.Add(
                 new PredicateTransitionFunction<NfaState<SipLexem>, char, NfaState<SipLexem>>(
-                    s => _numbers.Contains(s) || _alfabet.Contains(s))
+                    s => _numbers.Contains(s) || _alfabet.Contains(s) || _passSpecialCharacters.Contains(s))
                     {From = pwdState, To = pwdState, TransitionSymbols = new List<char> {'~'}});
             //port to port
             _stateMachine.TransitionTable.Add(
@@ -254,7 +259,7 @@ namespace pjsip4net.Core.Utils
                                                   {
                                                       From = extDelim,
                                                       To = pwdState,
-                                                      TransitionSymbols = _alfabet.Union(_numbers).ToList()
+                                                      TransitionSymbols = _alfabet.Union(_numbers).Union(_passSpecialCharacters).ToList()
                                                   });
             //extension to at
             _stateMachine.TransitionTable.Add(new TransitionFunction<NfaState<SipLexem>, char, NfaState<SipLexem>>
@@ -284,14 +289,7 @@ namespace pjsip4net.Core.Utils
         {
             string str = sipUri.TrimStart('<').TrimEnd('>');
             Helper.GuardIsTrue(str.StartsWith(SipUriBuilder.SIPScheme));
-            //Helper.GuardError(SipUserAgent.Instance.ApiFactory.GetBasicApi().pjsua_verify_sip_url(str));
             ParseString(str);
-            //while (_statesStack.Count > 0)
-            //{
-            //    var mem = _statesStack.Pop();
-            //    if (mem.State.Act != null)
-            //        mem.State.Act();
-            ////}
         }
 
         public string Extension { get; private set; }
@@ -335,75 +333,6 @@ namespace pjsip4net.Core.Utils
                         state.Act();
                 }
             }
-            //int inx = 0;
-            //int move = 0;
-
-            //while (inx < sipUri.Length)
-            //{
-            //    var token = sipUri[inx];
-            //    if (_stateMachine.Alphabets.Contains(token))
-            //    {
-            //        _stateMachine.ConsumeInputSymbol(token);
-            //    }
-            //    else
-            //    {
-            //        _stateMachine.CurrentStates[0].NextToken(token);
-            //    }
-
-
-            //    if (_stateMachine.Alphabets.Contains(sipUri[inx]))
-            //        if (_stateMachine.CurrentStates.Count > 0)
-            //        {
-            //            _statesStack.Push(new SipParseStateMemento()
-            //                                  {
-            //                                      Move = move,
-            //                                      State = (SipUriParseState) _stateMachine.CurrentStates[0],
-            //                                      TokenIndex = inx
-            //                                  });
-            //        }
-
-            //    try
-            //    {
-            //        var nextStates = _stateMachine.ConsumeInputSymbol(sipUri[inx]);
-            //        if (_stateMachine.Alphabets.Contains(sipUri[inx]))
-            //            _stateMachine.CurrentStates = nextStates.Skip(move).Take(1).ToList();
-            //    }
-            //    catch (SystemException)
-            //    {
-            //        _stateMachine.CurrentStates = new List<State<SipLexem>>();
-            //    }
-
-            //    if (_stateMachine.Alphabets.Contains(sipUri[inx]))
-            //    {
-            //        if (_stateMachine.CurrentStates.Count == 0)
-            //        {
-            //            if (_statesStack.Count == 0)
-            //                break;
-            //            var mem = _statesStack.Pop();
-            //            inx = mem.TokenIndex;
-            //            move = ++mem.Move;
-            //            _stateMachine.CurrentStates.Clear();
-            //            _stateMachine.CurrentStates.Add(mem.State);
-            //        }
-            //    }
-            //    else
-            //        //if (_stateMachine.CurrentStates.Count > move)
-            //            _stateMachine.CurrentStates[0].NextToken(sipUri[inx]);
-
-            //    inx++;
-            //}
-            ////foreach (var s in sipUri)
-            ////{
-            ////    if (!_stateMachine.Alphabets.Contains(s.ToString()))
-            ////        _builder.Append(s);
-            ////    _stateMachine.ConsumeInputSymbol(s.ToString());
-            ////}
-            //if (!_stateMachine.IsAcceptedString())
-            //    throw new ArgumentException("Unable to parse SIP Uri");
-
-            //var finalStates = _stateMachine.CurrentStates.Where(s => s.StateType == StateType.FinalState).ToList();
-            //if (finalStates.Count > 0)
-            //    _statesStack.Push(new SipParseStateMemento(){State = (SipUriParseState) finalStates[0]});
         }
 
         #region Nested type: SipHeaderState

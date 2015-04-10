@@ -43,6 +43,28 @@ namespace pjsip4net.Tests
             Assert.AreEqual("5060", sut.Port);
             Assert.AreEqual("", sut.Password);
         }
+
+        [Test]
+        public void when_parse_called_with_valid_sip_uri_with_alfabet_extension_and_domain_as_dns_with_dash__should_fill_valid_properties()
+        {
+            var sut = new SipUriParser("sip:sip@temp.ur-i.com");
+
+            Assert.AreEqual("temp.ur-i.com", sut.Domain);
+            Assert.AreEqual("sip", sut.Extension);
+            Assert.AreEqual("5060", sut.Port);
+            Assert.AreEqual("", sut.Password);
+        }
+
+        [Test]
+        public void when_parse_called_with_valid_sip_uri_with_alfabet_extension_and_domain_as_dns_with_underscore__should_fill_valid_properties()
+        {
+            var sut = new SipUriParser("sip:sip@temp.ur_i.com");
+
+            Assert.AreEqual("temp.ur_i.com", sut.Domain);
+            Assert.AreEqual("sip", sut.Extension);
+            Assert.AreEqual("5060", sut.Port);
+            Assert.AreEqual("", sut.Password);
+        }
         
         [Test]
         public void when_parse_called_with_valid_sip_uri_with_alfabet_extension_and_domain_as_dns_and_port__should_fill_valid_properties()
@@ -78,7 +100,20 @@ namespace pjsip4net.Tests
             Assert.AreEqual(1, sut.Headers.Count);
             Assert.AreEqual(TransportType.Tcp, sut.Transport);
         }
-        
+
+        [Test]
+        public void when_parse_called_with_valid_sip_uri_with_alfabet_extension_and_complex_pwd_and_domain_as_dns_and_port_with_transport_header__should_fill_valid_properties()
+        {
+            var sut = new SipUriParser("sip:test:!@test$%@tempuri.org:5080;transport=tcp");
+
+            Assert.AreEqual("tempuri.org", sut.Domain);
+            Assert.AreEqual("test", sut.Extension);
+            Assert.AreEqual("5080", sut.Port);
+            Assert.AreEqual("!@test$%", sut.Password);
+            Assert.AreEqual(1, sut.Headers.Count);
+            Assert.AreEqual(TransportType.Tcp, sut.Transport);
+        }
+
         [Test]
         public void when_parse_called_with_valid_sip_uri_with_alfabet_domain_as_dns_with_transport_header__should_fill_valid_properties()
         {
