@@ -297,7 +297,7 @@ namespace pjsip4net.Calls
         public void Answer(bool accept)
         {
             Answer(accept, string.Empty);
-        }
+                    }
 
         public void Answer(bool accept, string reason)
         {
@@ -319,6 +319,14 @@ namespace pjsip4net.Calls
             GuardDisposed();
             if (!_mediaSession.IsInConference)
                 _mediaSession.ConnectToConference();
+        }
+        public void RecordTo(string path)
+        {
+            GuardDisposed();
+            Helper.GuardNotNull(path);
+            Helper.GuardNotNullStr(path);
+           
+            _mediaSession.RecordTo(path);
         }
 
         public void DisconnectFromConference()
@@ -437,5 +445,8 @@ namespace pjsip4net.Calls
         }
 
         #endregion
+
+
+       
     }
 }
