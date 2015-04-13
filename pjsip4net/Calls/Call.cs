@@ -297,7 +297,7 @@ namespace pjsip4net.Calls
         public void Answer(bool accept)
         {
             Answer(accept, string.Empty);
-                    }
+        }
 
         public void Answer(bool accept, string reason)
         {
