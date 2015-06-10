@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>MyPackage</id>
+        <version>1.0.0</version>
+        <authors>Alex</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>My package description.</description>
+    </metadata>
+    <files>
+        <file src="..\pjsip.Interop\bin\Release\libeay32.dll" target="lib\net40\libeay32.dll" />
+        <file src="..\pjsip.Interop\bin\Release\ssleay32.dll" target="lib\net40\ssleay32.dll" />
+        <file src="..\pjsip.Interop\bin\Release\pjsua.dll" target="lib\net40\pjsua.dll" />
+        <file src="..\pjsip4net\bin\Release\pjsip4net.pdb" target="lib\net40\pjsip4net.pdb" />
+        <file src="..\pjsip4net.Container.Castle\bin\Release\pjsip4net.Container.Castle.pdb" target="lib\net40\pjsip4net.Container.Castle.pdb" />
+        <file src="..\pjsip.Interop\bin\Release\pjsip4net.Core.pdb" target="lib\net40\pjsip4net.Core.pdb" />
+        <file src="..\pjsip4net\bin\Release\pjsip4net.dll" target="lib\net40\pjsip4net.dll" />
+        <file src="..\pjsip.Interop\bin\Release\pjsip4net.Core.dll" target="lib\net40\pjsip4net.Core.dll" />
+        <file src="..\pjsip4net.Container.Castle\bin\Release\pjsip4net.Container.Castle.dll" target="lib\net40\pjsip4net.Container.Castle.dll" />
+        <file src="..\pjsip.Interop\bin\Release\pjsip.Interop.pdb" target="lib\net40\pjsip.Interop.pdb" />
+        <file src="..\pjsip.Interop\bin\Release\pjsip.Interop.dll" target="lib\net40\pjsip.Interop.dll" />
+    </files>
+</package>

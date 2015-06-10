@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{44B1BE89-9319-459D-96F2-35C589C025B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Acceptance", "Acceptance", "{1A000287-A3E4-4D22-8882-D5E09E1EE1D2}"
@@ -28,6 +30,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pjsip4net.Console", "Tests\
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pjsip4net.Testing", "Tests\pjsip4net.Testing\pjsip4net.Testing.csproj", "{05DD289F-99C7-4C87-BC6A-05774B90117C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1D897224-B8D8-44C2-9E37-6761C9230220}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\nuget.exe = nuget\nuget.exe
+		nuget\pjsip4net.1.0.0.nupkg = nuget\pjsip4net.1.0.0.nupkg
+		nuget\pjsip4net.1.0.0.nuspec = nuget\pjsip4net.1.0.0.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,8 +90,8 @@ Global
 		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Debug|Any CPU.Build.0 = Debug|x86
 		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Debug|x86.ActiveCfg = Debug|x86
 		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Debug|x86.Build.0 = Debug|x86
-		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Release|Any CPU.ActiveCfg = Release|x86
-		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Release|Any CPU.Build.0 = Release|x86
+		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Release|x86.ActiveCfg = Release|x86
 		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D}.Release|x86.Build.0 = Release|x86
 		{05DD289F-99C7-4C87-BC6A-05774B90117C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -99,8 +108,8 @@ Global
 		{1A000287-A3E4-4D22-8882-D5E09E1EE1D2} = {44B1BE89-9319-459D-96F2-35C589C025B6}
 		{1E21DE94-E985-49F3-89A6-A329EA6C0C3A} = {44B1BE89-9319-459D-96F2-35C589C025B6}
 		{663FC254-13E2-4A2A-9270-F5F87F6D0A22} = {44B1BE89-9319-459D-96F2-35C589C025B6}
-		{05DD289F-99C7-4C87-BC6A-05774B90117C} = {44B1BE89-9319-459D-96F2-35C589C025B6}
 		{3DB8BE38-55D9-4B8F-961F-6D89CEA0FE65} = {1E21DE94-E985-49F3-89A6-A329EA6C0C3A}
 		{3CB3B26C-77D8-4329-A1FF-B538B2C66F6D} = {663FC254-13E2-4A2A-9270-F5F87F6D0A22}
+		{05DD289F-99C7-4C87-BC6A-05774B90117C} = {44B1BE89-9319-459D-96F2-35C589C025B6}
 	EndGlobalSection
 EndGlobal
