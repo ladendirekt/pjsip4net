@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+<package>
     <metadata>
         <id>pjsip4net</id>
-        <version>0.0.2</version>
+        <version>DO_NOT_EDIT</version>
         <authors>RobertT</authors>
         <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+		<projectUrl>https://github.com/siniypin/pjsip4net</projectUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>A pjsip (http://www.pjsip.org/) user agent .Net wrapper.
 pjsip4net is a projection of procedural pjsua high level API into convenient and easy to use OOP form.</description>
@@ -24,16 +25,20 @@ Currently only old 1.x branch version is supported. The code is distributed with
         </dependencies>
     </metadata>
     <files>
-        <file src="lib\native\libeay32.dll" target="lib\native\libeay32.dll" />
-        <file src="lib\native\pjsua.dll" target="lib\native\pjsua.dll" />
-        <file src="lib\native\ssleay32.dll" target="lib\native\ssleay32.dll" />
-        <file src="lib\net40\pjsip.Interop.dll" target="lib\net40\pjsip.Interop.dll" />
-        <file src="lib\net40\pjsip.Interop.pdb" target="lib\net40\pjsip.Interop.pdb" />
-        <file src="lib\net40\pjsip4net.Container.Castle.dll" target="lib\net40\pjsip4net.Container.Castle.dll" />
-        <file src="lib\net40\pjsip4net.Container.Castle.pdb" target="lib\net40\pjsip4net.Container.Castle.pdb" />
-        <file src="lib\net40\pjsip4net.Core.dll" target="lib\net40\pjsip4net.Core.dll" />
-        <file src="lib\net40\pjsip4net.Core.pdb" target="lib\net40\pjsip4net.Core.pdb" />
-        <file src="lib\net40\pjsip4net.dll" target="lib\net40\pjsip4net.dll" />
-        <file src="lib\net40\pjsip4net.pdb" target="lib\net40\pjsip4net.pdb" />
+        <file src="lib\libeay32.dll" target="lib\native\libeay32.dll" />
+        <file src="lib\pjsua.dll" target="lib\native\pjsua.dll" />
+        <file src="lib\ssleay32.dll" target="lib\native\ssleay32.dll" />
+        <file src="lib\pjsip.Interop.dll" target="lib\net40\pjsip.Interop.dll" />
+        <file src="lib\pjsip.Interop.xml" target="lib\net40\pjsip.Interop.xml" />
+        <file src="lib\pjsip.Interop.pdb" target="lib\net40\pjsip.Interop.pdb" />
+        <file src="lib\pjsip4net.Container.Castle.dll" target="lib\net40\pjsip4net.Container.Castle.dll" />
+        <file src="lib\pjsip4net.Container.Castle.xml" target="lib\net40\pjsip4net.Container.Castle.xml" />
+        <file src="lib\pjsip4net.Container.Castle.pdb" target="lib\net40\pjsip4net.Container.Castle.pdb" />
+        <file src="lib\pjsip4net.Core.dll" target="lib\net40\pjsip4net.Core.dll" />
+        <file src="lib\pjsip4net.Core.xml" target="lib\net40\pjsip4net.Core.xml" />
+        <file src="lib\pjsip4net.Core.pdb" target="lib\net40\pjsip4net.Core.pdb" />
+        <file src="lib\pjsip4net.dll" target="lib\net40\pjsip4net.dll" />
+        <file src="lib\pjsip4net.xml" target="lib\net40\pjsip4net.xml" />
+        <file src="lib\pjsip4net.pdb" target="lib\net40\pjsip4net.pdb" />
     </files>
 </package>
