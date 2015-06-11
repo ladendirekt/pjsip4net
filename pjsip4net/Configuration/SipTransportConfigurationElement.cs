@@ -27,16 +27,12 @@ namespace pjsip4net.Configuration
                               };
         }
 
-        //[ConfigurationProperty("type", DefaultValue = "udp", IsRequired = true)]
-        //[CallbackValidator(CallbackMethodName = "ValidateTransportType")]
         public string TransportType
         {
             get { return base[_ttypeProp].ToString(); }
             set { base[_ttypeProp] = value; }
         }
 
-        //[ConfigurationProperty("port", DefaultValue = 5060)]
-        //[IntegerValidator(ExcludeRange = false, MaxValue = 65536, MinValue = 1)]
         public int Port
         {
             get { return (int) base[_portProp]; }
