@@ -6,8 +6,8 @@ namespace pjsip4net.Configuration
     public class SipTransportConfigurationElement : ConfigurationElement
     {
         private readonly ConfigurationProperty _portProp =
-            new ConfigurationProperty("Port", typeof (int), 5060, null,
-                                      new IntegerValidator(1, 65536, false),
+            new ConfigurationProperty("port", typeof (int), 5060, null,
+                                      new IntegerValidator(0, 65536, false),
                                       ConfigurationPropertyOptions.None);
 
         private readonly ConfigurationPropertyCollection _properties;
@@ -27,16 +27,16 @@ namespace pjsip4net.Configuration
                               };
         }
 
-        [ConfigurationProperty("type", DefaultValue = "udp", IsRequired = true)]
-        [CallbackValidator(CallbackMethodName = "ValidateTransportType")]
+        //[ConfigurationProperty("type", DefaultValue = "udp", IsRequired = true)]
+        //[CallbackValidator(CallbackMethodName = "ValidateTransportType")]
         public string TransportType
         {
             get { return base[_ttypeProp].ToString(); }
             set { base[_ttypeProp] = value; }
         }
 
-        [ConfigurationProperty("port", DefaultValue = 5060)]
-        [IntegerValidator(ExcludeRange = false, MaxValue = 65536, MinValue = 1)]
+        //[ConfigurationProperty("port", DefaultValue = 5060)]
+        //[IntegerValidator(ExcludeRange = false, MaxValue = 65536, MinValue = 1)]
         public int Port
         {
             get { return (int) base[_portProp]; }

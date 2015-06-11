@@ -84,9 +84,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SolutionVersion.cs">
-      <Link>SolutionVersion.cs</Link>
-    </Compile>
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Configuration\ConfigureContainer.cs" />
     <Compile Include="Configuration\CoreComponentConfigurator.cs" />
