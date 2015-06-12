@@ -14,12 +14,18 @@ using pjsip4net.Interfaces;
 using Castle.Windsor;
 using pjsip4net.Container.Castle;
 using pjsip4net.Core.Data;
+using Couchbase;
 
 namespace MultiRinger
 {
     class Program
     {
         private static readonly TraceSource _traceSource = new TraceSource("MultiRinger", SourceLevels.Error);
+        private static readonly Cluster Cluster = new Cluster("couchbaseClients/couchbase");
+
+
+
+
         static void Main(string[] args)
         {
 
@@ -238,7 +244,7 @@ namespace MultiRinger
 
 
 
-        static void CallManager_Ring(object sender, pjsip4net.Calls.RingEventArgs e)
+        static async void CallManager_Ring(object sender, pjsip4net.Calls.RingEventArgs e)
         {
             _traceSource.TraceEvent(TraceEventType.Information, 0, e.DumpToString("RingEventArgs"));
 
@@ -256,6 +262,35 @@ namespace MultiRinger
             //pjsip4net.Calls.Call call = icall as pjsip4net.Calls.Call;
 
             _traceSource.TraceEvent(TraceEventType.Verbose, 0, callInfo.DumpToString("callInfo"));
+
+            using (var bucket = Cluster.OpenBucket())
+            {
+                var document = new RBCallInfo
+                {
+                     CallID = callInfo.CallId,
+                      Contact=callInfo.LocalContact,
+                       CSeq=callInfo.StateText,
+                        From=callInfo.RemoteContact,
+                         timestamp=DateTime.Now - callInfo.TotalDuration ,
+                          To=callInfo.LocalContact,
+                           Via=callInfo.RemoteInfo
+                };
+
+                var upsertTask = bucket.UpsertAsync<RBCallInfo>(callInfo.CallId, document);
+                upsertTask.Wait();
+                //var upsert = bucket.Upsert<RBCallInfo>(callInfo.CallId, document);
+                if (!upsertTask.Result.Success)
+                {
+                    //we need a retry of some sort here
+
+                    //var get = bucket.GetDocument<dynamic>(document.Id);
+                    //document = get.Document;
+                    //var msg = string.Format("{0} {1}! {2}", document.Id, document.Content.name, document.Content.job);
+                    //Console.WriteLine(msg);
+                }
+            }
+
+
 
         }
 
