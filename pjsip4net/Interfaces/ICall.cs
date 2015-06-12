@@ -28,6 +28,11 @@ namespace pjsip4net.Interfaces
         InviteState InviteState { get; }
         CallMediaState MediaState { get; }
 
+
+        CallInfo GetCallInfo();
+
+
+
         void Answer(bool accept);
         void Answer(bool accept, string reason);
         void Hangup();
