@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Logging;
 using pjsip4net.Core.Container;
 using pjsip4net.Core.Data;
 using pjsip4net.Core.Interfaces;
 using pjsip4net.Core.Interfaces.ApiProviders;
 using pjsip4net.Core.Utils;
+using Common.Logging;
 
 namespace pjsip4net.Core.Configuration
 {
