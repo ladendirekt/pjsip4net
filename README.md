@@ -21,7 +21,7 @@ limitations under the License.
 
 Pjsip version supported
 -----------
-Currently only old 1.x branch version is supported. The code is distributed with custom built pjsip 1.4 dll file. No other versions were tested, however one can develop its own interop code version and plug it into the application. If you do, please, send me a pull request.
+Currently only old 1.x branch version is supported. The code is distributed with custom built pjsip 1.4 dll file. No other versions were tested, however one can develop his own interop code version and plug it into the application. If you do, please, send me a pull request.
 
 Roadmap
 -----------
