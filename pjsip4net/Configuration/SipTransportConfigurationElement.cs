@@ -7,7 +7,7 @@ namespace pjsip4net.Configuration
     {
         private readonly ConfigurationProperty _portProp =
             new ConfigurationProperty("Port", typeof (int), 5060, null,
-                                      new IntegerValidator(1, 65536, false),
+                                      new IntegerValidator(0, 65536, false),
                                       ConfigurationPropertyOptions.None);
 
         private readonly ConfigurationPropertyCollection _properties;
@@ -36,7 +36,7 @@ namespace pjsip4net.Configuration
         }
 
         [ConfigurationProperty("port", DefaultValue = 5060)]
-        [IntegerValidator(ExcludeRange = false, MaxValue = 65536, MinValue = 1)]
+        [IntegerValidator(ExcludeRange = false, MaxValue = 65536, MinValue = 0)]
         public int Port
         {
             get { return (int) base[_portProp]; }
@@ -55,29 +55,5 @@ namespace pjsip4net.Configuration
                 throw new ConfigurationErrorsException(
                     "Wrong SIP transport type. Can be one of following: udp, tcp, tls");
         }
-
-        //public VoIPTransport CreateTransport()
-        //{
-        //    VoIPTransport transport;
-        //    switch (TransportType)
-        //    {
-        //        case "udp":
-        //            transport = VoIPTransport.CreateUDPTransport();
-        //            break;
-        //        case "tcp":
-        //            transport = VoIPTransport.CreateTCPTransport();
-        //            break;
-        //        case "tls":
-        //            transport = VoIPTransport.CreateTLSTransport();
-        //            break;
-        //        default:
-        //            transport = VoIPTransport.CreateUDPTransport();
-        //            break;
-        //    }
-
-        //    using (transport.InitializationScope())
-        //        transport.Port = (uint) Port;
-        //    return transport;
-        //}
     }
 }
