@@ -51,10 +51,8 @@ namespace pjsip4net.Calls
 
             if (info.MediaStatus == CallMediaState.Error)
                 _context.ChangeState(new ErrorMediaState(_context));
-            else if (info.MediaStatus == CallMediaState.LocalHold)
-                _context.ChangeState(new LocalHoldMediaState(_context));
-            else if (info.MediaStatus == CallMediaState.RemoteHold)
-                _context.ChangeState(new RemoteHoldMediaState(_context));
+            else if (info.MediaStatus == CallMediaState.LocalHold || info.MediaStatus == CallMediaState.RemoteHold)
+                _context.ChangeState(new HoldMediaState(info.MediaStatus, _context));
             else if (info.MediaStatus == CallMediaState.Active)
                 _context.ChangeState(new ActiveMediaState(_context)); //to remove decorator
         }

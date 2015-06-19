@@ -103,10 +103,9 @@
     <Compile Include="Calls\EarlyInviteState.cs" />
     <Compile Include="Calls\ErrorMediaState.cs" />
     <Compile Include="Calls\IncomingInviteState.cs" />
-    <Compile Include="Calls\LocalHoldMediaState.cs" />
     <Compile Include="Calls\NoneMediaState.cs" />
     <Compile Include="Calls\NullInviteState.cs" />
-    <Compile Include="Calls\RemoteHoldMediaState.cs" />
+    <Compile Include="Calls\HoldMediaState.cs" />
     <Compile Include="Configuration\BuildUserAgent.cs" />
     <Compile Include="Configuration\ConfigureFromConfig.cs" />
     <Compile Include="Configuration\DefaultAccountComponentConfigurator.cs" />

@@ -4,16 +4,16 @@ using pjsip4net.Core.Utils;
 
 namespace pjsip4net.Calls
 {
-    internal class LocalHoldMediaState : AbstractState<MediaSession>
+    internal class HoldMediaState : AbstractState<MediaSession>
     {
-        public LocalHoldMediaState(MediaSession context)
+        public HoldMediaState(CallMediaState holdState, MediaSession context)
             : base(context)
         {
             _context.IsHeld = true;
-            LogManager.GetLogger<LocalHoldMediaState>()
+            LogManager.GetLogger<HoldMediaState>()
                 .DebugFormat("Call {0} {1}", _context.Call.Id, GetType().Name);
-            _context.MediaState = CallMediaState.LocalHold;
-            //disconnect call's media from sound device if connected
+            _context.MediaState = holdState;
+            //connect media if not connected
             if (_context.IsActive)
             {
                 _context.IsActive = false;
