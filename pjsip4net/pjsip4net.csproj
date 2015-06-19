@@ -161,6 +161,7 @@
     <Compile Include="IM\Dsl\DefaultMessageBuilder.cs" />
     <Compile Include="Interfaces\IConferenceBridge.cs" />
     <Compile Include="Interfaces\IFileSourceMedia.cs" />
+    <Compile Include="Interfaces\IMediaSource.cs" />
     <Compile Include="Interfaces\IRegistry.cs" />
     <Compile Include="Interfaces\IMessageBuilder.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />

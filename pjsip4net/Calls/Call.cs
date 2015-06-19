@@ -9,7 +9,7 @@ using pjsip4net.Interfaces;
 
 namespace pjsip4net.Calls
 {
-    internal class Call : Initializable, ICall, IIdentifiable<ICall>
+    internal class Call : Initializable, ICall, IMediaSource, IIdentifiable<ICall>
     {
         #region Private data
 
@@ -437,5 +437,14 @@ namespace pjsip4net.Calls
         }
 
         #endregion
+
+        # region IMediaSource
+
+        public void RecordTo(string fileName)
+        {
+            _mediaSession.RecordTo(fileName);
+        }
+
+        # endregion
     }
 }

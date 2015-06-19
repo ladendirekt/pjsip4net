@@ -90,7 +90,7 @@ namespace pjsip4net.Calls.Dsl
         private void StartRecording()
         {
             if (_recordCall && ValidFileNameTemplate.Check(_recordFileName))
-                _call.MediaSession.RecordTo(_recordFileName);
+                _call.RecordTo(_recordFileName);
         }
     }
 }

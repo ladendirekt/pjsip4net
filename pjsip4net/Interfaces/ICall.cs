@@ -21,9 +21,13 @@ namespace pjsip4net.Interfaces
         SipStatusCode LastStatusCode { get; }
         string LastStatusText { get; }
         int ConferenceSlotId { get; }
+        [Obsolete("To be moved to IMediaSource")]
         double RxLevel { get; set; }
+        [Obsolete("To be moved to IMediaSource")]
         double TxLevel { get; set; }
+        [Obsolete("To be moved to ICallStats")]
         TimeSpan ConnectDuration { get; }
+        [Obsolete("To be moved to ICallStats")]
         TimeSpan TotalDuration { get; }
         InviteState InviteState { get; }
         CallMediaState MediaState { get; }
