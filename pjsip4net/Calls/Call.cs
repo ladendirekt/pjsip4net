@@ -320,6 +320,14 @@ namespace pjsip4net.Calls
             if (!_mediaSession.IsInConference)
                 _mediaSession.ConnectToConference();
         }
+        public void RecordTo(string path)
+        {
+            GuardDisposed();
+            Helper.GuardNotNull(path);
+            Helper.GuardNotNullStr(path);
+           
+            _mediaSession.RecordTo(path);
+        }
 
         public void DisconnectFromConference()
         {
@@ -437,5 +445,8 @@ namespace pjsip4net.Calls
         }
 
         #endregion
+
+
+       
     }
 }

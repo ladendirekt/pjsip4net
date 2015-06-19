@@ -39,5 +39,11 @@ namespace pjsip4net.Interfaces
         void ReleaseHold();
         void Transfer(string destinationUri);
         string ToString(bool withMedia);
+        /// <summary>
+        /// This function start to record, the call is running in the moment of the execute, Throw Exception if it fail to init record
+        /// </summary>
+        /// <param name="path">Name File to Record call</param>
+        void RecordTo(string path);
+        
     }
 }
