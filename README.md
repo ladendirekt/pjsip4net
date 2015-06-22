@@ -68,7 +68,8 @@ It is an application developers' responsibility to configure their favorite logg
 Examples
 -----------
 The library comes with console application one can use to test if configuration options specified are correct within particular environment or to study application code. Almost every scenario is covered within this small application: registering accounts, issuing calls, sending instant messages, adding buddies, specifying codecs and media devices. 
-In order to build a library you have to run build.bat file first. pjsip4net uses UpperCut project to run builds. If you want to know more about how it works, please refer to UpperCut documentation (http://uppercut.pbworks.com/w/page/9022442/FrontPage). 
+In order to build a library you have to run build.bat file first. pjsip4net uses UpperCut project to run builds. If you want to know more about how it works, please refer to UpperCut documentation (http://uppercut.pbworks.com/w/page/9022442/FrontPage).  
+One can also find numerous examples here: https://gist.github.com/siniypin
 
 Debugging
 -----------
