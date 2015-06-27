@@ -31,6 +31,19 @@ Things to come in order of importance:
   * mono support
   * x64 build
 
+Installation
+-----------
+To install pjsip4net via NuGet package manager execute a following command in the Package Manager Console: 
+```
+Install-Package pjsip4net
+```
+pjsip4net carries several native libraries that can not be automatically referenced from your managed projects. The package includes .targets file that copies these native libraries to the build output folder.  
+Note: you may get a following warning after you included pjsip4net NuGet package:
+```
+Warning	103	There was a mismatch between the processor architecture of the project being built "MSIL" and the processor architecture of the reference "pjsip4net.Core, Version=0.2.0.20, Culture=neutral, processorArchitecture=x86", "x86". This mismatch may cause runtime failures. Please consider changing the targeted processor architecture of your project through the Configuration Manager so as to align the processor architectures between your project and references, or take a dependency on references with a processor architecture that matches the targeted processor architecture of your project.	ConsoleApplication1
+```
+The message is pretty self-explanatory. Make sure to change your project target to x86, otherwise you will get runtime failure running your app on x64 platform,
+
 Configuration
 -----------
 There are a number of things one should configure in order to tune pjsip within particular environment. These things include:
