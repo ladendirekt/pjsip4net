@@ -12,29 +12,40 @@ namespace pjsip4net.Core.Interfaces
         /// <summary>
         /// Registers <typeparamref name="T1"/> implementation of <typeparamref name="T"/> as transient service.
         /// </summary>
-        IContainer Register<T, T1>() where T1 : T;
+        IContainer Register<T, T1>() 
+            where T1 : T 
+            where T : class;
         /// <summary>
         /// Registers <typeparamref name="T1"/> implementation of <typeparamref name="T"/> as transient service with additional name.
         /// </summary>
-        IContainer Register<T, T1>(string name) where T1 : T;
+        IContainer Register<T, T1>(string name)
+            where T1 : T
+            where T : class;
         /// <summary>
         /// Registers <typeparamref name="T1"/> implementation of <typeparamref name="T"/> as singleton service.
         /// </summary>
-        IContainer RegisterAsSingleton<T, T1>() where T1 : T;
-        IContainer RegisterAsSingleton<T, T1, T2>()  where T2 : T, T1 where T1 : class;
+        IContainer RegisterAsSingleton<T, T1>() 
+            where T1 : T
+            where T : class;
+        IContainer RegisterAsSingleton<T, T1, T2>() 
+            where T2 : T, T1 
+            where T1 : class
+            where T : class;
         /// <summary>
         /// Registers <typeparamref name="T1"/> implementation of <typeparamref name="T"/> as singleton service with additional name.
         /// </summary>
-        IContainer RegisterAsSingleton<T, T1>(string name) where T1 : T;
+        IContainer RegisterAsSingleton<T, T1>(string name) 
+            where T1 : T
+            where T : class;
 
         /// <summary>
         /// Registers <typeparamref name="T"/> instance as singleton service.
         /// </summary>
-        IContainer RegisterAsSingleton<T>(T instance);
+        IContainer RegisterAsSingleton<T>(T instance) where T : class;
         /// <summary>
         /// Registers <typeparamref name="T"/> instance as singleton service with additional name.
         /// </summary>
-        IContainer RegisterAsSingleton<T>(T instance, string name);
+        IContainer RegisterAsSingleton<T>(T instance, string name) where T : class;
 
         /// <summary>
         /// Resolves service.

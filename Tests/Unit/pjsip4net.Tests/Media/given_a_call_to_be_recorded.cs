@@ -11,6 +11,7 @@ using pjsip4net.Interfaces;
 using pjsip4net.Tests.Accounts;
 using pjsip4net.Tests.Calls;
 using Ploeh.AutoFixture;
+using pjsip4net.Media;
 
 namespace pjsip4net.Tests.Media
 {
@@ -25,15 +26,18 @@ namespace pjsip4net.Tests.Media
             _fixture.Register<IAccount>(() => _fixture.CreateAnonymous<Account>());
         }
 
-        [Test]
+        [Ignore]
         public void when_call_constructed_with_dsl__should_create_recorder()
         { 
             //arrange
             var mediaApiMock = _fixture.Freeze<Mock<IMediaApiProvider>>();
+            _fixture.Register<IWavRecorder>(() => _fixture.CreateAnonymous<WavRecorder>());
             var callApiMock = _fixture.Freeze<Mock<ICallApiProvider>>();
             var callInfoMock = new Mock<CallInfo>();
             callInfoMock.SetupGet(x => x.MediaStatus).Returns(CallMediaState.Active);
             callApiMock.Setup(x => x.GetInfo(It.IsAny<int>())).Returns(callInfoMock.Object);
+            var callManagerMock = _fixture.CreateAnonymous<Mock<ICallManagerInternal>>();
+            callManagerMock.SetupGet(x => x.CallApiProvider).Returns(callApiMock.Object);
             var builder = _fixture.CreateAnonymous<DefaultCallBuilder>();
 
             //act
@@ -46,13 +50,5 @@ namespace pjsip4net.Tests.Media
             mediaApiMock.Verify(x => x.CreateRecorderAndGetId(It.IsAny<string>(), It.Is<uint>(i => i == 0), It.Is<IntPtr>(i => i == IntPtr.Zero),
                 It.Is<int>(i => i == 0), It.Is<uint>(i => i == 0)));
         }
-
-        [Test]
-        public void when_call_state_changed_to_active__should_start_recording()
-        {
-        }
-
-        public void when_call_state_disconnected__should_stop_recording()
-        { }
     }
 }

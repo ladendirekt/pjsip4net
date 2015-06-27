@@ -29,12 +29,14 @@ namespace pjsip4net.Core.Container
         #region Implementation of IContainer
 
         public IContainer Register<T, T1>() where T1 : T
+            where T : class
         {
             AddToTransientRegistry(typeof(T), typeof(T1));
             return this;
         }
 
         public IContainer Register<T, T1>(string name) where T1 : T
+            where T : class
         {
             Invariant(!_namedRegistry.ContainsKey(name));
             _namedRegistry.Add(name, typeof(T1));
@@ -42,6 +44,7 @@ namespace pjsip4net.Core.Container
         }
 
         public IContainer RegisterAsSingleton<T, T1>() where T1 : T
+            where T : class
         {
             AddToSingletonRegistry(typeof (T),
                                    Activator.CreateInstance(typeof (T1), DetermineConstructorArgs(typeof (T1))));
@@ -49,6 +52,7 @@ namespace pjsip4net.Core.Container
         }
 
         public IContainer RegisterAsSingleton<T, T1, T2>() where T2 : T, T1 where T1 : class
+            where T : class
         {
             var instance = RegisterAsSingleton<T, T2>().Get<T>().As<T1>();
             RegisterAsSingleton(instance);
@@ -56,6 +60,7 @@ namespace pjsip4net.Core.Container
         }
 
         public IContainer RegisterAsSingleton<T, T1>(string name) where T1 : T
+            where T : class
         {
             Invariant(!_namedRegistry.ContainsKey(name));
             _namedRegistry.Add(name, Activator.CreateInstance(typeof (T1), DetermineConstructorArgs(typeof (T1))));
@@ -63,12 +68,14 @@ namespace pjsip4net.Core.Container
         }
 
         public IContainer RegisterAsSingleton<T>(T instance)
+             where T : class
         {
             AddToSingletonRegistry(typeof(T), instance);
             return this;
         }
 
         public IContainer RegisterAsSingleton<T>(T instance, string name)
+             where T : class
         {
             Invariant(!_namedRegistry.ContainsKey(name));
             _namedRegistry.Add(name, instance);
@@ -189,6 +196,5 @@ namespace pjsip4net.Core.Container
 
             return args.ToArray();
         }
-
     }
 }

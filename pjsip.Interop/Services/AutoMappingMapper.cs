@@ -19,16 +19,9 @@ namespace pjsip.Interop.Services
         {
             Helper.GuardNotNull(engine);
             Helper.GuardNotNull(container);
-            //sigh! shouldn't you write a naming convention, buddy?
 
-            //todo: need two profiles one for pjsua->pjsip4net & the other for pjsip4net->pjsua
             _engine = engine;
             _container = container;
-            //Mapper.Initialize(c =>
-            //                      {
-            //                          c.AddProfile(new Pjsip4net2PjsuaProfile());
-            //                          c.AddProfile(new Pjsua2Pjsip4netProfile());
-            //                      });
             Mapper.CreateMap<UaConfig, pjsua_config>()//.WithProfile("pjsip4net2pjsua")
                 .ForMember(x => x.cb, cx => cx.Ignore())
                 .ForMember(x => x.cred_info, cx => cx.MapFrom(x => x.Credentials
@@ -218,7 +211,7 @@ namespace pjsip.Interop.Services
                 .ForMember(x => x.DefaultSamplesPerSec, cx => cx.MapFrom(x => x.default_samples_per_sec));
                 //.ConvertUsing<SoundDeviceInfoConverter>();
             Mapper.CreateMap<pjsua_codec_info, CodecInfo>()//.WithProfile("pjsua2pjsip4net")
-                .ConstructUsing(pci => _container.Get<CodecInfo>())
+                .ConstructUsing((Func<pjsua_codec_info, CodecInfo>)(x => _container.Get<CodecInfo>()))
                 .ForMember(x => x.CodecId, cx => cx.MapFrom(x => x.buf_))
                 .ForMember(x => x.Priority, cx => cx.MapFrom(x => x.priority));
             Mapper.CreateMap<pjsua_buddy_info, BuddyInfo>()//.WithProfile("pjsua2pjsip4net")

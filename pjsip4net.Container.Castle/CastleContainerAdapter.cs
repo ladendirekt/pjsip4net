@@ -71,43 +71,49 @@ namespace pjsip4net.Container.Castle
 
         #region Implementation of IContainer
 
-        public IContainer Register<T, T1>() where T1 : T
+        public IContainer Register<T, T1>() where T1 : T 
+            where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().ImplementedBy<T1>().LifeStyle.Transient));
             return this;
         }
 
         public IContainer Register<T, T1>(string name) where T1 : T
+            where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().ImplementedBy<T1>().LifeStyle.Transient.Named(name)));
             return this;
         }
 
         public IContainer RegisterAsSingleton<T, T1>() where T1 : T
+            where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().ImplementedBy<T1>()));
             return this;
         }
 
-        public IContainer RegisterAsSingleton<T, T1, T2>() where T1 : class where T2 : T, T1
+        public IContainer RegisterAsSingleton<T, T1, T2>() where T1 : class 
+            where T2 : T, T1
+            where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().ImplementedBy<T2>().Forward<T1>()));
             return this;
         }
 
         public IContainer RegisterAsSingleton<T, T1>(string name) where T1 : T
+            where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().ImplementedBy<T1>().Named(name)));
             return this;
         }
 
-        public IContainer RegisterAsSingleton<T>(T instance)
+        public IContainer RegisterAsSingleton<T>(T instance) where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().Instance(instance)));
             return this;
         }
 
-        public IContainer RegisterAsSingleton<T>(T instance, string name)
+        public IContainer RegisterAsSingleton<T>(T instance, string name) where T : class
         {
             Wrap(() => _windsorContainer.Register(Component.For<T>().Instance(instance).Named(name)));
             return this;
