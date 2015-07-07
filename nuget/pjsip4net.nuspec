@@ -5,13 +5,13 @@
     <version>DO_NOT_EDIT</version>
     <authors>Boris Tveritnev</authors>
     <owners>Boris Tveritnev</owners>
-    <summary>A high-level SIP phone API</summary>
-    <description>A high-level SIP phone API backed by pjsip low-footprint library</description>
+    <summary>A high-level SIP phone API for .Net</summary>
+    <description>A high-level SIP phone API for .Net powered by pjsip project</description>
     <projectUrl>https://github.com/siniypin/pjsip4net</projectUrl>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <!--<requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <tags>space delimited</tags>
     <iconUrl>32x32.png</iconUrl>-->
+    <tags>pjsip4net pjsip sip voip</tags>
     <dependencies>
       <dependency id="AutoMapper" version="3.3.1" />
       <dependency id="Common.Logging" version="3.1.0" />
