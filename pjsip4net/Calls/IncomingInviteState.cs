@@ -14,7 +14,7 @@ namespace pjsip4net.Calls
         {
             LogManager.GetLogger<IncomingInviteState>()
                 .DebugFormat("Call {0} {1}", _context.Call.Id, GetType().Name);
-            //SingletonHolder<ICallManagerImpl>.Instance.RaiseRingEvent(_owner.Call, true);
+            _context.CallManager.RaiseRingEvent(_context.Call, false);
             _context.IsRinging = true;
             _context.InviteState = InviteState.Incoming;
         }

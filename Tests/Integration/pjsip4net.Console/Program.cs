@@ -29,6 +29,7 @@ namespace pjsip4net.Console
             ua.CallManager.IncomingDtmfDigit += IncomingDtmfDigit;
             ua.ImManager.NatDetected += OnNatDetected;
             ua.CallManager.IncomingCall += CallManager_IncomingCall;
+            ua.CallManager.Ring += CallManager_Ring;
             ua.CallManager.CallStateChanged += CallManager_CallStateChanged;
             var factory = new CommandFactory(ua, cfg.Container);
             factory.Create("?").Execute();
@@ -53,6 +54,14 @@ namespace pjsip4net.Console
                 }
             }
             ua.Destroy();
+        }
+
+        static void CallManager_Ring(object sender, RingEventArgs e)
+        {
+            System.Console.WriteLine("Call {0} ring event.", e.CallId);
+            var action = e.RingOn ? "turn on" : "switch off";
+            var toneType = e.IsRingback ? "a ringback tone" : "a ring sound";
+            System.Console.WriteLine("========>>> {0} {1}", action, toneType);
         }
 
         static void CallManager_CallStateChanged(object sender, CallStateChangedEventArgs e)

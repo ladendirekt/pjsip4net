@@ -11,7 +11,7 @@ namespace pjsip4net.Calls
             Helper.GuardNotNull(call);
             Helper.GuardPositiveInt(call.Id);
             RingOn = ringOn;
-            IsRingback = call.IsIncoming;
+            IsRingback = !call.IsIncoming;
             CallId = call.Id;
         }
 
