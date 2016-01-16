@@ -1,7 +1,6 @@
 pjsip4net
 =========
-A pjsip (http://www.pjsip.org/) user agent .Net wrapper.
-pjsip4net is a projection of procedural pjsua high level API into convenient and easy to use OOP form. 
+A [pjsip](http://www.pjsip.org/) high-level user agent API wrapper for .Net. 
 
 License
 -----------
@@ -28,8 +27,6 @@ Roadmap
 Things to come in order of importance:
   * pjsip 1.latest support
   * pjsip 2.x line support
-  * mono support
-  * x64 build
 
 Installation
 -----------
