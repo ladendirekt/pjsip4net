@@ -20,7 +20,7 @@ limitations under the License.
 
 Pjsip version supported
 -----------
-Currently only old 1.x branch version is supported. The code is distributed with custom built pjsip 1.4 dll file. No other versions were tested, however one can develop his own interop code version and plug it into the application. If you do, please, send me a pull request.
+Currently only old 1.x branch version is supported. The code is distributed with custom built pjsip 1.4 dll file. No other versions were tested, however one can develop their own interop code version and plug it into the library. If you do, please, send me a pull request.
 
 Roadmap
 -----------
@@ -34,12 +34,12 @@ To install pjsip4net via NuGet package manager execute a following command in th
 ```
 Install-Package pjsip4net
 ```
-pjsip4net carries several native libraries that can not be automatically referenced from your managed projects. The package includes .targets file that copies these native libraries to the build output folder. That means, that if you would like these libraries to be copied to several project build folders (say, an integration test project), then you would need to include this package in every of those projects.  
+pjsip4net carries several native libraries that can not be automatically referenced from your managed projects. The package includes .targets file that copies these native libraries to the build output folder. That means, that if you would like these libraries to be copied to several project build folders (say, an integration test project), than you would need to include this package in every project you want to get binaries to.  
 Note: you may get a following warning after you included pjsip4net NuGet package:
 ```
 Warning	103	There was a mismatch between the processor architecture of the project being built "MSIL" and the processor architecture of the reference "pjsip4net.Core, Version=0.2.0.20, Culture=neutral, processorArchitecture=x86", "x86". This mismatch may cause runtime failures. Please consider changing the targeted processor architecture of your project through the Configuration Manager so as to align the processor architectures between your project and references, or take a dependency on references with a processor architecture that matches the targeted processor architecture of your project.	ConsoleApplication1
 ```
-The message is pretty self-explanatory. Make sure to change your project target to x86, otherwise you will get runtime failure running your app on x64 platform.  
+The message is pretty self-explanatory. Make sure to change your project target to x86, otherwise you will get runtime error running your app on x64 platform.  
 Thanks to @amccool for making a first version of this package and pushing me to complete the work.  
 
 Configuration
