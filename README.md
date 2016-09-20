@@ -45,7 +45,7 @@ Thanks to @amccool for making a first version of this package and pushing me to 
 Configuration
 -----------
 There are a number of things one should configure in order to tune pjsip within particular environment. These things include:
-  * Signaling transport - you can choose which transport to send SIP packets over (UDP, TCP or TLS), to which port to bind to;
+  * Signaling transport - you can choose which transport to send SIP packets either over (UDP, TCP or TLS), to which port to bind to, etc. Please note, that you can only register one SIP transport for one client at a time. This is a limitation, or as I prefer to put - a design feature of pjsip4net;
   * Media - enable or disable SRTP, specify capture and playback devices, enable or disable VAD;
   * Network settings - enable or disable NAT traversal protocols, specify proxies, DNS servers;
   * Accounts - specify accounts you want your user agent to register automatically upon startup. You can always register accounts dynamically with your application code;
