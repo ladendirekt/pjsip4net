@@ -75,7 +75,7 @@ namespace pjsip4net
             Container.RegisterAsSingleton(localRegistry.SipTransport);
 
             var mediaApiProvider = Container.Get<IMediaApiProvider>();
-            mediaApiProvider.CreateMediaTransport(localRegistry.RtpTransport.Config);
+            mediaApiProvider.CreateMediaTransport(localRegistry.SipTransport.Config);
 
             var basicApiProvider = Container.Get<IBasicApiProvider>();
             basicApiProvider.Start();

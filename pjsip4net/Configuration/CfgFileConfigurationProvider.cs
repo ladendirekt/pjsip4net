@@ -29,7 +29,10 @@ namespace pjsip4net.Configuration
                     context.RegisterTransport(
                         new Core.Utils.Tuple<TransportType, TransportConfig>(
                             (TransportType) Enum.Parse(typeof (TransportType), _section.Transport.TransportType, true),
-                            new TransportConfig(){Port = (uint) _section.Transport.Port}));
+                            new TransportConfig(){Port = (uint) _section.Transport.Port,
+                                BoundAddress = _section.Transport.BoundAddress,
+                                PublicAddress = _section.Transport.PublicAddress
+                            }));
 
                     config.UseSrtp = _section.SecureMedia;
                     config.SecureSignalling = _section.SecureSignaling;
