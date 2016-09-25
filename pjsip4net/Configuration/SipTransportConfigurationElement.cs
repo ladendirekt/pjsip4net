@@ -18,12 +18,24 @@ namespace pjsip4net.Configuration
                                           ValidateTransportType),
                                       ConfigurationPropertyOptions.IsRequired);
 
+        private readonly ConfigurationProperty _boundAddressProp =
+           new ConfigurationProperty("boundAddress", typeof(string), null, null,
+                                     new RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"),
+                                     ConfigurationPropertyOptions.None);
+
+        private readonly ConfigurationProperty _publicAddressProp =
+           new ConfigurationProperty("publicAddress", typeof(string), null, null,
+                                     new RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"),
+                                     ConfigurationPropertyOptions.None);
+
         public SipTransportConfigurationElement()
         {
             _properties = new ConfigurationPropertyCollection
                               {
                                   _ttypeProp,
-                                  _portProp
+                                  _portProp,
+                                  _boundAddressProp,
+                                  _publicAddressProp
                               };
         }
 
@@ -41,6 +53,22 @@ namespace pjsip4net.Configuration
         {
             get { return (int) base[_portProp]; }
             set { base[_portProp] = value; }
+        }
+
+        [ConfigurationProperty("boundAddress", DefaultValue = null)]
+        [RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")]
+        public string BoundAddress
+        {
+            get { return base[_boundAddressProp].ToString(); }
+            set { base[_boundAddressProp] = value; }
+        }
+
+        [ConfigurationProperty("publicAddress", DefaultValue = null)]
+        [RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")]
+        public string PublicAddress
+        {
+            get { return base[_publicAddressProp].ToString(); }
+            set { base[_publicAddressProp] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties

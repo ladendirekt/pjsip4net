@@ -68,10 +68,20 @@ namespace pjsip4net
             localRegistry.SipTransport.SetId(
                 tptApiProvider.CreateTransportAndGetId(localRegistry.SipTransport.TransportType,
                                                        localRegistry.SipTransport.Config));
+
             localRegistry.RtpTransport =
-                transportFactory.CreateTransport(TransportType.Udp).As<VoIPTransport>();
+                transportFactory
+                .CreateTransport(TransportType.Udp,
+                                 new TransportConfig()
+                                 {
+                                    BoundAddress = localRegistry.SipTransport.Config.BoundAddress,
+                                    PublicAddress = localRegistry.SipTransport.Config.PublicAddress
+                                 })
+                .As<VoIPTransport>();
+
             using (localRegistry.RtpTransport.InitializationScope())
                 localRegistry.RtpTransport.Config.Port = 4000;
+
             Container.RegisterAsSingleton(localRegistry.SipTransport);
 
             var mediaApiProvider = Container.Get<IMediaApiProvider>();
