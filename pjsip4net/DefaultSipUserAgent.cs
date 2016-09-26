@@ -72,15 +72,15 @@ namespace pjsip4net
             localRegistry.RtpTransport =
                 transportFactory
                 .CreateTransport(TransportType.Udp,
-                                 new TransportConfig()
-                                 {
-                                    BoundAddress = localRegistry.SipTransport.Config.BoundAddress,
-                                    PublicAddress = localRegistry.SipTransport.Config.PublicAddress
-                                 })
+                                 new TransportConfig())
                 .As<VoIPTransport>();
 
             using (localRegistry.RtpTransport.InitializationScope())
+            {
                 localRegistry.RtpTransport.Config.Port = 4000;
+                localRegistry.RtpTransport.Config.BoundAddress = localRegistry.SipTransport.Config.BoundAddress;
+                localRegistry.RtpTransport.Config.PublicAddress = localRegistry.SipTransport.Config.PublicAddress;
+            }
 
             Container.RegisterAsSingleton(localRegistry.SipTransport);
 
