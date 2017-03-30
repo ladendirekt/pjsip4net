@@ -277,7 +277,7 @@ namespace pjsip4net.Calls
             GuardDisposed();
             Helper.GuardNotNullStr(destinationUri);
             Helper.GuardIsTrue(new SipUriParser(destinationUri).IsValid);
-            if (_mediaSession.IsActive)
+            if (_mediaSession.IsActive || this._mediaSession.MediaState == CallMediaState.None)
                 _callManager.CallApiProvider.TransferCall(Id, destinationUri);
         }
 
