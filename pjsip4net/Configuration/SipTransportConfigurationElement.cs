@@ -19,12 +19,12 @@ namespace pjsip4net.Configuration
                                       ConfigurationPropertyOptions.IsRequired);
 
         private readonly ConfigurationProperty _boundAddressProp =
-           new ConfigurationProperty("boundAddress", typeof(string), null, null,
+           new ConfigurationProperty("boundAddress", typeof(string), "0.0.0.0", null,
                                      new RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"),
                                      ConfigurationPropertyOptions.None);
 
         private readonly ConfigurationProperty _publicAddressProp =
-           new ConfigurationProperty("publicAddress", typeof(string), null, null,
+           new ConfigurationProperty("publicAddress", typeof(string), "0.0.0.0", null,
                                      new RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"),
                                      ConfigurationPropertyOptions.None);
 
@@ -55,7 +55,7 @@ namespace pjsip4net.Configuration
             set { base[_portProp] = value; }
         }
 
-        [ConfigurationProperty("boundAddress", DefaultValue = null)]
+        [ConfigurationProperty("boundAddress", DefaultValue = "0.0.0.0")]
         [RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")]
         public string BoundAddress
         {
@@ -63,7 +63,7 @@ namespace pjsip4net.Configuration
             set { base[_boundAddressProp] = value; }
         }
 
-        [ConfigurationProperty("publicAddress", DefaultValue = null)]
+        [ConfigurationProperty("publicAddress", DefaultValue = "0.0.0.0")]
         [RegexStringValidator(@"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")]
         public string PublicAddress
         {
