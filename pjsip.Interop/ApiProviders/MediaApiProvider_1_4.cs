@@ -168,8 +168,6 @@ namespace pjsip.Interop.ApiProviders
 
         public void SetCurrentSoundDevices(pjsip4net.Core.Utils.Tuple<int, int> deviceIds)
         {
-            Helper.GuardPositiveInt(deviceIds.Part1);
-            Helper.GuardPositiveInt(deviceIds.Part2);
             Helper.GuardError(PJSUA_DLL.Media.pjsua_set_snd_dev(deviceIds.Part1, deviceIds.Part2));
         }
 
