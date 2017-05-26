@@ -143,7 +143,7 @@ namespace pjsip4net.Media
                 _mediaApi.SetCurrentSoundDevices(new Tuple<int, int>(_curCapture.Id, _curPlayback.Id));
             else if (_curCapture == null && _curPlayback != null)
                 _mediaApi.SetCurrentSoundDevices(new Tuple<int, int>(-1, _curPlayback.Id));
-			else if (_curCapture != null && _curPlayback == null)
+	    else if (_curCapture != null && _curPlayback == null)
                 _mediaApi.SetCurrentSoundDevices(new Tuple<int, int>(_curCapture.Id, -1));
             else
                 _mediaApi.SetCurrentSoundDevicesToNull();
