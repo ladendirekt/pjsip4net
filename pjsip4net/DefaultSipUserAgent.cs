@@ -30,7 +30,6 @@ namespace pjsip4net
             _basicApi = basicApi;
             _loggingConfig = loggingConfig;
             _container = container;
-            _loggingConfig = loggingConfig;
 
             eventsProvider.Subscribe<LogRequested>(OnLog);
         }
