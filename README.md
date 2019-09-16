@@ -67,6 +67,10 @@ pjsip4net leverages the dependency injection principle by means of pluggable DI-
 If no container is provided, the library will use its own simple container internally. Currently the only external container supported out of the box is Castle Windsor (http://docs.castleproject.org/Windsor.MainPage.ashx). 
 To plug your own container instance into library you have to tell it to use it startup phase (https://gist.github.com/siniypin/7860556)
 
+Thread safety
+-----------
+pjsip4net is NOT a thread safe library and users have to be careful using this library with frameworks that require synchronization with their main thread (think UI libraries). In order to not lock your UI use SynchronizationContext to dispatch data from pjsip4net events up to your presentation layer (https://gist.github.com/siniypin/5f403be8dc6e5b2f802e926c1b7855d3).
+
 Logging
 -----------
 pjsip4net doesn't impose any restrictions upon logging framework, well, almost. To be precise it leverages the Apache Commons Logging facade (http://netcommon.sourceforge.net/) to hide a specific framework utilized by application, thus there is a restriction on frameworks supported by Common.Logging. Currently supported libraries are:
