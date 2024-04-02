@@ -42,6 +42,11 @@ Warning	103	There was a mismatch between the processor architecture of the proje
 The message is pretty self-explanatory. Make sure to change your project target to x86, otherwise you will get runtime error running your app on x64 platform.  
 Thanks to @amccool for making a first version of this package and pushing me to complete the work.  
 
+Building
+-----------
+pjsip4net uses UpperCut build system to run builds. In order to build a library you have to run build.bat file first. If you want to know more about how it works, please refer to UpperCut documentation (http://uppercut.pbworks.com/w/page/9022442/FrontPage).  
+One can also find numerous examples here: https://gist.github.com/siniypin
+
 Configuration
 -----------
 There are a number of things one should configure in order to tune pjsip within particular environment. These things include:
@@ -83,8 +88,6 @@ It is an application developers' responsibility to configure their favorite logg
 Examples
 -----------
 The library comes with console application one can use to test if configuration options specified are correct within particular environment or to study application code. Almost every scenario is covered within this small application: registering accounts, issuing calls, sending instant messages, adding buddies, specifying codecs and media devices. 
-In order to build a library you have to run build.bat file first. pjsip4net uses UpperCut project to run builds. If you want to know more about how it works, please refer to UpperCut documentation (http://uppercut.pbworks.com/w/page/9022442/FrontPage).  
-One can also find numerous examples here: https://gist.github.com/siniypin
 
 Debugging
 -----------
